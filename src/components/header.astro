@@ -1,0 +1,290 @@
+---
+import slides from "../data/data.json";
+import { goToSlide } from "../lib/sliderController";
+
+---
+
+<header class="header">
+    <div class="container">
+        <div class="content">
+            <a href="/" class="boxLogo">
+                <img class="imgLogo" src="/logo.svg" alt="Логотип АЦР" />
+            </a>
+
+            <button class="menu" id="burger">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- OVERLAY -->
+<div class="overlay" id="overlay"></div>
+
+<!-- MENU PANEL -->
+<aside class="sideMenu" id="sideMenu">
+    <div class="menuHeader">
+        <h2 class="menuTitle">Слайды</h2>
+    </div>
+    <div class="menuContent">
+        {
+            slides.map((item, index) => (
+                <div class=`slide ${index==0 && "active"}`>
+                    <span class="id">{item.id}</span>
+                    <div class="imgWrap">
+                        <img src={item.img} alt={item.name} />
+                    </div>
+                    <div class="title">
+                        <span>{item.name}</span>
+                    </div>
+                </div>
+            ))
+        }
+    </div>
+</aside>
+
+<script>
+ 
+</script>
+
+<style>
+    .header {
+        top: 40px;
+        left: 0;
+        position: fixed;
+        width: 100%;
+        z-index: 1000;
+    }
+
+    .content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 60px;
+    }
+
+    /* ================= BURGER ================= */
+
+    .menu {
+        width: 60px;
+        height: 60px;
+        position: relative;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+    }
+
+    .menu span {
+        position: absolute;
+        left: 10px;
+        width: 40px;
+        height: 2px;
+        background: white;
+        transition: all 0.3s ease;
+    }
+    .menuTitle {
+        height: 100px;
+
+        display: flex;
+        align-items: center;
+        padding: 75px 40px;
+
+        font-family: var(--font-family);
+        font-weight: 700;
+        font-size: 35px;
+        line-height: 110%;
+        color: var(--temnyy);
+    }
+    .menu span:nth-child(1) {
+        top: 24px;
+    }
+
+    .menu span:nth-child(2) {
+        top: 34px;
+    }
+
+    /* hover эффект */
+    .menu:hover span:nth-child(1) {
+        transform: translateX(6px);
+    }
+
+    .menu:hover span:nth-child(2) {
+        transform: translateX(-6px);
+    }
+
+    /* active -> крест */
+    .menu.active span:nth-child(1) {
+        transform: rotate(45deg);
+        top: 30px;
+    }
+
+    .menu.active span:nth-child(2) {
+        transform: rotate(-45deg);
+        top: 30px;
+    }
+    .menu.active span {
+        background: black;
+    }
+
+    /* hover эффект для крестика */
+    .menu.active:hover span:nth-child(1) {
+        transform: rotate(45deg) scaleX(1.2);
+    }
+
+    .menu.active:hover span:nth-child(2) {
+        transform: rotate(-45deg) scaleX(1.2);
+    }
+
+    /* лёгкое свечение */
+    .menu.active:hover span {
+        opacity: 0.7;
+    }
+    /* ================= OVERLAY ================= */
+
+    .overlay {
+        position: fixed;
+        inset: 0;
+        backdrop-filter: blur(0px);
+        background: rgba(0, 0, 0, 0);
+        transition: 0.4s;
+        pointer-events: none;
+        z-index: 900;
+    }
+
+    .overlay.show {
+        backdrop-filter: blur(8px);
+        background: rgba(0, 0, 0, 0.2);
+        pointer-events: all;
+    }
+
+    /* ================= MENU ================= */
+
+    .sideMenu {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 50%;
+        height: 100vh;
+        background: white;
+        transform: translateX(100%);
+        transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+        z-index: 950;
+        display: flex;
+        flex-direction: column;
+
+        padding-right: 45px;
+        padding-bottom: 30px;
+    }
+
+    .sideMenu.open {
+        transform: translateX(0);
+    }
+
+    .menuContent {
+        padding: 30px 40px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        background: var(--svetlyy);
+    }
+
+    /* скролл */
+    .menuContent::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .menuContent::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 10px;
+    }
+
+    .menuContent::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    /* ================= SLIDES ================= */
+
+    .slide {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        color: black;
+        transition: 0.3s;
+
+        position: relative;
+        padding: 22px 30px;
+
+        cursor: pointer;
+    }
+
+    .slide.active {
+        background: var(--zelenyy-3);
+    }
+
+    .slide:not(:last-child)::after {
+        content: "";
+
+        position: absolute;
+        background: var(--temnyy);
+        height: 0.5px;
+        left: 0;
+        bottom: 0;
+        width: 90%;
+        opacity: 0.7;
+    }
+
+    .imgWrap {
+        overflow: hidden;
+        width: 200px;
+        height: 115px;
+
+        border-radius: 3px;
+    }
+
+    .imgWrap img {
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+        display: block;
+        transition: transform 0.4s ease;
+    }
+
+    .slide:hover img {
+        transform: scale(1.05);
+    }
+
+    .title {
+        display: flex;
+        gap: 10px;
+        font-weight: 800;
+        font-size: 16px;
+        line-height: 110%;
+        color: var(--temnyy);
+        align-items: center;
+    }
+
+    .id {
+        font-weight: 800;
+        font-size: 16px;
+        line-height: 110%;
+        color: var(--temnyy);
+    }
+
+    /* ================= BODY LOCK ================= */
+
+    body.lock {
+        overflow: hidden;
+    }
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 768px) {
+        .sideMenu {
+            width: 100%;
+        }
+    }
+</style>

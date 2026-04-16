@@ -1,0 +1,399 @@
+@font-face {
+    font-family: 'Unbounded';
+    src: url('/font/Unbounded/Unbounded-Regular.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Если нужны отдельные начертания (необязательно, т.к. есть переменный) */
+@font-face {
+    font-family: 'Unbounded';
+    src: url('/font/Unbounded/Unbounded-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Unbounded';
+    src: url('/font/Unbounded/Unbounded-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Unbounded';
+    src: url('/font/Unbounded/Unbounded-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/font/Inter/Inter-Thin.otf') format('opentype');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/font/Inter/Inter-ThinItalic.otf') format('opentype');
+    font-weight: 100;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/font/Inter/Inter-ExtraLight.otf') format('opentype');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/font/Inter/Inter-ExtraLightItalic.otf') format('opentype');
+    font-weight: 200;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/font/Inter/Inter-Light.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/font/Inter/Inter-LightItalic.otf') format('opentype');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/font/Inter/Inter-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/font/Inter/Inter-Italic.otf') format('opentype');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/font/Inter/Inter-Medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/font/Inter/Inter-MediumItalic.otf') format('opentype');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/font/Inter/Inter-SemiBold.otf') format('opentype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/font/Inter/Inter-SemiBoldItalic.otf') format('opentype');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/font/Inter/Inter-Bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/font/Inter/Inter-BoldItalic.otf') format('opentype');
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/font/Inter/Inter-ExtraBold.otf') format('opentype');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/font/Inter/Inter-ExtraBoldItalic.otf') format('opentype');
+    font-weight: 800;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/font/Inter/Inter-Black.otf') format('opentype');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/font/Inter/Inter-BlackItalic.otf') format('opentype');
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/font/Inter/Inter-V.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --belyy: #fff;
+    --svetlyy: #f5f5f5;
+    --svetlo-seryy: #d9d9d9;
+    --seryy: #787878;
+    --temnyy: #282631;
+    --siniy: #0870f3;
+    --svetlo-siniy: #1e80fb;
+    --zelenyy-1: #e5ff8b;
+    --zelenyy-2-osnovnoy: #dcff5c;
+    --zelenyy-3: #d4f853;
+    --zelenyy-4: #cbf13c;
+    --zelenyy-5: #bfef0a;
+    --zelenyy-6: #a8d307;
+    --belyy-100: rgba(255, 255, 255, 0.1);
+    --belyy-300: rgba(255, 255, 255, 0.3);
+    --temnyy-300: rgba(40, 38, 49, 0.1);
+
+    --br: 10px;
+}
+
+
+:root {
+    --font-family: "Unbounded", sans-serif;
+    --second-family: "Inter", sans-serif;
+    --third-family: "SF Pro Text", sans-serif;
+    --font3: "RF Dewi Expanded", sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+
+    font-family: var(--second-family);
+}
+
+
+.container {
+    width: 100%;
+
+    padding: 0 clamp(15px, 10vh, 70px);
+}
+
+.container2 {
+    padding: 130px clamp(15px, 10vh, 75px) 60px;
+
+}
+
+.slide {
+    height: 100vh;
+    background: var(--svetlyy);
+}
+
+.h1 {
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: clamp(2.25rem, 1.104rem + 5.73vw, 5rem);
+    line-height: 1.1;
+    text-transform: uppercase;
+    color: var(--belyy);
+}
+
+.h2 {
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: clamp(1.75rem, 1.177rem + 2.86vw, 3.125rem);
+    line-height: 1.1;
+    text-transform: uppercase;
+    color: var(--temnyy);
+}
+
+.gr2 {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    height: 100vh;
+}
+
+
+
+.t16 {
+    font-family: var(--second-family);
+    font-weight: 400;
+    font-size: clamp(0.875rem, 0.5rem + 1.25vw, 1.125rem);
+    line-height: 1.2;
+}
+
+.t20 {
+    font-family: var(--second-family);
+    font-weight: 500;
+    font-size: clamp(1rem, 0.885rem + 0.57vw, 1.25rem);
+    line-height: 1.3;
+    color: var(--temnyy);
+}
+
+.t25 {
+    font-family: var(--second-family);
+    font-weight: 500;
+    font-size: clamp(1.125rem, 0.953rem + 0.86vw, 1.5625rem);
+    line-height: 1.3;
+    color: var(--temnyy);
+}
+
+.t28 {
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: clamp(1.25rem, 1.021rem + 1.15vw, 1.75rem);
+    line-height: 1.1;
+    text-transform: uppercase;
+    color: var(--temnyy);
+}
+
+.ulSin {
+    padding-left: 20px;
+}
+
+.ulSin li {
+    color: var(--siniy);
+    list-style: decimal;
+}
+
+.t30 {
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: clamp(1.375rem, 1.146rem + 1.15vw, 1.875rem);
+    line-height: 1.1;
+}
+
+.tit {
+    font-family: var(--font-family);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.siniy {
+    color: var(--siniy);
+}
+
+.grey {
+    color: var(--seryy);
+}
+
+.group {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.tGradient {
+    background: linear-gradient(159deg, #3890ff 0%, #0870f3 33.07%, #05418d 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.sliderRoot {
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+.cursorProgress {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    pointer-events: none;
+    z-index: 2000;
+    transform: translate(-50%, -50%);
+}
+
+circle {
+    fill: none;
+    stroke-width: 4;
+}
+
+.bg {
+    stroke: rgba(255, 255, 255, 0.2);
+}
+
+.slideSection {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.slideSection.active {
+    z-index: 2;
+}
+
+/* курсор */
+.cursorProgress {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    pointer-events: none;
+    z-index: 2000;
+    transform: translate(-50%, -50%);
+}
+
+.progress {
+    stroke-dasharray: 283;
+    stroke-dashoffset: 283;
+}

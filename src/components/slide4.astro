@@ -1,0 +1,220 @@
+---
+
+---
+
+<section id="slide04" class="slide">
+    <div class="gr2">
+        <div class="elGrid ">
+            <div class="container2 left" >
+                <div class="group title">
+                    <h2 class="h2 tGradient">Умные чат-боты</h2>
+                    <p class="t20 grey">
+                        Внедрение умных помощников на базе искусственного
+                        интеллекта, которые консультируют клиентов, собирают
+                        заявки, записывают в CRM и принимают оплату
+                    </p>
+                </div>
+                <div class="group">
+                    <h3 class="t30">Что вы получите:</h3>
+                    <p class="t20">
+                        Снижения затрат на 40-60% и ускорения времени ответа на
+                        90%. Искусственный интеллект берет на себя рутину: он
+                        обучается на прошлых диалогах, отвечает на частые
+                        вопросы и снимает нагрузку с ваших сотрудников, а также
+                        автоматизирует сбор информации
+                    </p>
+
+                    <ul class="ulSin">
+                        <li>Круглосуточное привлечение клиентов (24/7)</li>
+                        <li>
+                            Автоматическое оформление заказов и бронирование
+                        </li>
+                        <li>Эквайринг плюс удобная оплата</li>
+                        <li>Экономию до 30% вашего бюджета</li>
+                    </ul>
+                </div>
+                <div class="group">
+                    <h3 class="t30">Что получат ваши клиент:</h3>
+                    <p class="t20">
+                        Клиенты получают мгновенный сервис, в котором нейросеть
+                        быстро проверит статус заявки, оплаты, доставки , а
+                        также запишет на прием и окажет консультацию и
+                        техническую поддержку
+                    </p>
+                </div>
+
+                <div class="bottom">
+                    <div class="group info">
+                        <p class="t16 grey">Сроки:</p>
+                        <span class="t20 siniy"> от 2 дней </span>
+                    </div>
+                    <div class="group info">
+                        <p class="t16 grey">Стоимость:</p>
+                        <span class="t20 siniy"> от 20 000 ₽</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="elGrid right">
+            <img class="composits" src="/img/4.png" alt="Умные чат-боты">
+
+        </div>
+    </div>
+</section>
+
+<style>
+   /* Базовые стили (десктоп) */
+.info {
+    gap: 12px;
+}
+
+.title {
+    margin-bottom: 50px;
+}
+
+.bottom {
+    display: flex;
+    gap: 90px;
+    align-items: center;
+    margin-top: auto;
+}
+
+.elGrid {
+    width: 100%;
+    height: 100%;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    gap: 40px;
+}
+
+.right {
+    background: url(/img/fon02.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.right .composits {
+    width: 100%;
+    object-fit: contain;
+}
+
+/* Убедитесь, что gr2 — это grid */
+.gr2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    height: 100%;
+}
+
+/* ===== АДАПТАЦИЯ ===== */
+
+/* Планшеты (768px - 1024px) */
+@media (max-width: 1024px) {
+    .gr2 {
+        gap: 24px;
+    }
+
+    .title {
+        margin-bottom: 32px;
+    }
+
+    .left {
+        gap: 28px;
+    }
+
+    .bottom {
+        gap: 40px;
+    }
+}
+
+/* Мобильные (до 768px) */
+@media (max-width: 768px) {
+    .gr2 {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .left {
+        gap: 24px;
+    }
+
+    .title {
+        margin-bottom: 20px;
+    }
+
+    .bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        margin-top: 24px;
+    }
+
+    .info {
+        gap: 8px;
+        flex-direction: row;
+        align-items: baseline;
+    }
+
+    .right {
+        min-height: 300px;
+        order: -1; /* Картинка уходит наверх, если нужно */
+    }
+
+    .right .composits {
+        max-height: 280px;
+        width: auto;
+        margin: 0 auto;
+    }
+}
+
+/* Маленькие телефоны (до 480px) */
+@media (max-width: 480px) {
+    .container2 {
+        padding: 16px;
+    }
+
+    .title {
+        margin-bottom: 16px;
+    }
+
+    .left {
+        gap: 20px;
+    }
+
+    .ulSin {
+        padding-left: 20px;
+    }
+
+    .ulSin li {
+        margin-bottom: 8px;
+    }
+
+    .right {
+        min-height: 220px;
+    }
+
+    .right .composits {
+        max-height: 200px;
+    }
+
+    .bottom {
+        width: 100%;
+    }
+
+    .info {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+</style>

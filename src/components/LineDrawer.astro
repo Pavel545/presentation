@@ -1,0 +1,119 @@
+---
+export interface Props {
+  svg?: string;
+  selector?: string;
+  duration?: number;
+  delay?: number;
+  ease?: string;
+  containerClass?: string;
+  containerStyle?: string;
+  autoplay?: boolean;
+  scrollTrigger?: boolean;
+}
+
+const { 
+  svg, 
+  selector,
+  duration = 2, 
+  delay = 0, 
+  ease = "power2.inOut",
+  containerClass = "line-drawer-container",
+  containerStyle = "",
+  autoplay = true,
+  scrollTrigger = false
+} = Astro.props;
+
+const uniqueId = `drawer-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div 
+  id={uniqueId}
+  class={containerClass} 
+  style={containerStyle}
+  data-autoplay={String(autoplay)}
+  data-scroll-trigger={String(scrollTrigger)}
+  data-duration={duration}
+  data-delay={delay}
+  data-ease={ease}
+>
+  {
+    svg ? (
+      <Fragment set:html={svg} />
+    ) : (
+      <slot />
+    )
+  }
+</div>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  
+  gsap.registerPlugin(ScrollTrigger);
+
+  const container = document.getElementById('{uniqueId}') as HTMLElement;
+  if (!container) throw new Error('Container not found');
+
+  const autoplay = container.dataset.autoplay === 'true';
+  const useScroll = container.dataset.scrollTrigger === 'true';
+  const duration = parseFloat(container.dataset.duration || '2');
+  const delay = parseFloat(container.dataset.delay || '0');
+  const ease = container.dataset.ease || 'power2.inOut';
+
+  const paths = container.querySelectorAll('path, line, polyline, circle, rect');
+  
+  const animations = Array.from(paths).map(element => {
+    const path = element as SVGPathElement;
+    const length = path.getTotalLength();
+    
+    gsap.set(path, {
+      strokeDasharray: length,
+      strokeDashoffset: length,
+      visibility: 'visible',
+      opacity: 1
+    });
+    
+    const tween = gsap.to(path, {
+      strokeDashoffset: 0,
+      duration,
+      delay,
+      ease,
+      paused: !autoplay
+    });
+    
+    if (useScroll) {
+      ScrollTrigger.create({
+        trigger: container,
+        start: 'top 80%',
+        end: 'bottom 20%',
+        animation: tween,
+        scrub: 1
+      });
+    }
+    
+    return tween;
+  });
+
+  (window as any).__lineDrawers = (window as any).__lineDrawers || {};
+  (window as any).__lineDrawers['{uniqueId}'] = {
+    play: () => animations.forEach(a => a.play()),
+    pause: () => animations.forEach(a => a.pause()),
+    reverse: () => animations.forEach(a => a.reverse()),
+    restart: () => animations.forEach(a => a.restart())
+  };
+</script>
+
+<style is:global>
+  .line-drawer-container svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .line-drawer-container path,
+  .line-drawer-container line,
+  .line-drawer-container polyline,
+  .line-drawer-container circle,
+  .line-drawer-container rect {
+    visibility: hidden;
+  }
+</style>

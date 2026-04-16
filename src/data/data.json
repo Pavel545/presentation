@@ -1,0 +1,67 @@
+[
+    {
+        "id": "01",
+        "name": "Разработка цифровых решений ",
+        "img": "/img/slide/1.jpg"
+    },
+    {
+        "id": "02",
+        "name": "Почему выбирают нас",
+        "img": "/img/slide/2.jpg"
+    },
+    {
+        "id": "03",
+        "name": "Наши услуги",
+        "img": "/img/slide/3.jpg"
+    },
+    {
+        "id": "04",
+        "name": "Умный чат-бот",
+        "img": "/img/slide/4.jpg"
+    },
+    {
+        "id": "05",
+        "name": "Мобильное приложение",
+        "img": "/img/slide/5.jpg"
+    },
+    {
+        "id": "06",
+        "name": "Аудит",
+        "img": "/img/slide/6.jpg"
+    },
+    {
+        "id": "07",
+        "name": "Политика сайта",
+        "img": "/img/slide/7.jpg"
+    },
+    {
+        "id": "08",
+        "name": "Лендинг",
+        "img": "/img/slide/8.jpg"
+    },
+    {
+        "id": "09",
+        "name": "Интернет магазин",
+        "img": "/img/slide/9.jpg"
+    },
+    {
+        "id": "10",
+        "name": "Корпоративный сайт",
+        "img": "/img/slide/10.jpg"
+    },
+    {
+        "id": "11",
+        "name": "МАРКЕТИНГ",
+        "img": "/img/slide/11.jpg"
+    },
+    {
+        "id": "12",
+        "name": "Дизайн",
+        "img": "/img/slide/12.jpg"
+    },
+    {
+        "id": "13",
+        "name": "Контакты",
+        "img": "/img/slide/13.jpg"
+    }
+]

@@ -1,0 +1,225 @@
+---
+
+---
+
+<section id="slide02" class="slide ">
+    <div class="gr2">
+        <div class="elGrid left">
+            <div class="container2">
+                <h2 class="h2">Почему <br /> выбирают <br /> нас</h2>
+            </div>
+
+            <div class="text">
+                <p class="t25">
+                    Мы предлагаем комплексные цифровые решения, разработанные с
+                    учетом особенностей вашего бизнеса. Наши услуги помогают
+                    ускорить рост компании, повысить эффективность процессов и
+                    укрепить позиции на рынке.
+                </p>
+                <p class="t25">
+                    Создавая индивидуальные стратегии и современные технологии,
+                    мы обеспечиваем стабильное развитие и конкурентные
+                    преимущества
+                </p>
+            </div>
+        </div>
+
+        <div class="container2 elGrid right">
+            <h3 class="rTitle">
+                Мы гарантия успешных <br />и инновационных решений!
+            </h3>
+
+            <div class="rContent">
+                <div class="rItem">
+                    <h4 class="rItemTitle">Креативность</h4>
+                    <p class="rItemText">
+                        Мы мыслим современно <br />и следим за всеми трендами в
+                        дизайне и IT направлении
+                    </p>
+                    <div class="decor">
+                        <span class="d1"> </span>
+                        <span class="d2"> </span>
+                    </div>
+                </div>
+                <div class="rItem">
+                    <h4 class="rItemTitle">Компетентность</h4>
+                    <p class="rItemText">
+                        Создаем и интегрируем кроссплатформенные системы для
+                        задач любой сложности
+                    </p>
+                     <div class="decor">
+                        <span class="d1"> </span>
+                        <span class="d2"> </span>
+                    </div>
+                </div>
+                <div class="rItem">
+                    <h4 class="rItemTitle">Надежность</h4>
+                    <p class="rItemText">
+                        Мы обеспечим надежную техническую поддержку Вашего сайта
+                        и IT проекта
+                    </p>
+                     <div class="decor">
+                        <span class="d1"> </span>
+                        <span class="d2"> </span>
+                    </div>
+                </div>
+                <div class="rItem">
+                    <h4 class="rItemTitle">эффективность</h4>
+                    <p class="rItemText">
+                        Мы создаем корпоративные ресурсы, которые работают на
+                        Ваш имидж и бизнес-цели 24/7
+                    </p>
+                     <div class="decor">
+                        <span class="d1"> </span>
+                        <span class="d2"> </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .decor {
+        position: absolute;
+        left: -11px;
+        top: -11px;
+        right: -11px;
+        bottom: -11px;
+
+        pointer-events: none;
+    }
+
+    .d1,
+    .d2 {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        pointer-events: none;
+    }
+    .d1::after,
+    .d1::before,
+    .d2::before,
+    .d2::after {
+        content: "";
+
+        display: block;
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        pointer-events: none;
+    }
+
+    .d1::before {
+        left: 0;
+        top: 0;
+        border-bottom: none;
+        border-right: none;
+    }
+    .d2::before {
+        bottom: 0;
+        left: 0;
+        border-top: none;
+        border-right: none;
+    }
+    .d2::after {
+        right: 0;
+        bottom: 0;
+
+        border-top: none;
+        border-left: none;
+    }
+    .d1::after {
+        right: 0;
+        top: 0;
+        border-bottom: none;
+        border-left: none;
+    }
+    .rItem {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+
+        padding: 40px;
+        gap: 20px;
+        background: rgba(255, 255, 255, 0.07);
+        backdrop-filter: blur(10px);
+        border-radius: 10px;
+    }
+    .rItemText {
+        font-family: var(--second-family);
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 110%;
+        color: var(--belyy);
+        opacity: 0.8;
+        max-width: 270px;
+    }
+    .rItemTitle {
+        font-family: var(--font-family);
+        font-weight: 600;
+        font-size: 25px;
+        line-height: 100%;
+        text-transform: uppercase;
+        color: var(--belyy);
+    }
+    .elGrid {
+        width: 100%;
+        height: 100%;
+    }
+    .left {
+        background: var(--svetlyy);
+        display: flex;
+        flex-direction: column;
+
+        justify-content: space-between;
+    }
+
+    .right {
+        background: url(/img/fon02.jpg);
+
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    .rTitle {
+        font-family: var(--font-family);
+        font-weight: 600;
+        font-size: 30px;
+        line-height: 100%;
+        color: var(--belyy);
+    }
+
+    .text {
+        height: 50%;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        border-top: 1px solid var(--seryy);
+        padding: 45px 70px;
+    }
+
+    .rContent {
+        padding: 11px;
+        /* background: url(/img/fon02D.png);
+
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center; */
+
+        display: grid;
+        grid-template-columns: repeat(2, 0.8fr);
+        grid-template-rows: repeat(2, 0.8fr);
+        gap: 21px;
+        height: 100%;
+        margin-top: 40px;
+    }
+</style>
