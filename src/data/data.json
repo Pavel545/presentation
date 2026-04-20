@@ -51,17 +51,25 @@
     },
     {
         "id": "11",
-        "name": "МАРКЕТИНГ",
+        "name": "Техническая поддержка",
         "img": "/img/slide/11.jpg"
     },
     {
         "id": "12",
-        "name": "Дизайн",
+        "name": "Внедрение ИИ",
         "img": "/img/slide/12.jpg"
+    },{
+        "id": "13",
+        "name": "Разработка VK App и MAX App",
+        "img": "/img/slide/13.jpg"
+    },{
+        "id": "14",
+        "name": "Разработка WEB VIEW ПРИЛОЖЕНИЯ",
+        "img": "/img/slide/14.jpg"
     },
     {
-        "id": "13",
+        "id": "15",
         "name": "Контакты",
-        "img": "/img/slide/13.jpg"
+        "img": "/img/slide/15.jpg"
     }
 ]

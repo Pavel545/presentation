@@ -1,0 +1,234 @@
+---
+
+---
+
+<section id="slide12" class="slide">
+    <div class="gr2">
+        <div class="elGrid">
+            <div class="container2 left">
+                <div class="group g2 ">
+                    <h2 class="h2 tGradient">
+                        Разработка WEB VIEW <br /> ПРИЛОЖЕНИЯ
+                    </h2>
+                    <p class="t16 grey">
+                        Web View — это быстрый и экономичный способ превратить
+                        ваш сайт <br />в полноценное мобильное приложение для
+                        App Store и Google Play и RU Store
+                    </p>
+                </div>
+                <div class="group g2">
+                    <h3 class="t30 tit">Что получит собственник бизнеса:</h3>
+                    <ul class="ulSin">
+                        <li>
+                            Приложение в сторах за минимальные сроки и бюджет
+                        </li>
+                        <li>
+                            Полностью актуальный контент — изменения на сайте
+                            мгновенно отражаются в приложении
+                        </li>
+                        <li>
+                            Доступ к push-уведомлениям и базовым функциям
+                            устройства
+                        </li>
+                        <li>
+                            Снижение затрат на разработку до 60 % по сравнению с
+                            нативным приложением
+                        </li>
+                        <li>Возможность быстро протестировать идею на рынке</li>
+                    </ul>
+                </div>
+                <div class="group g2">
+                    <h3 class="t30 tit">
+                        Что получит Руководитель / менеджер:
+                    </h3>
+                    <ul class="ulSin">
+                        <li>Единое управление контентом через сайт</li>
+                        <li>
+                            Быстрое внедрение новых функций без обновления в
+                            сторах
+                        </li>
+                        <li>
+                            Простой контроль и аналитику использования
+                            приложения
+                        </li>
+                        <li>Минимальную техническую нагрузку на команду</li>
+                    </ul>
+                </div>
+
+                <div class="group g2">
+                    <h3 class="t30 tit">Что получат клиенты:</h3>
+                    <p class="t20">
+                       Привычный интерфейс сайта, но в формате удобного мобильного приложения: быстрый запуск, работа оффлайн (частично), push-уведомления и доступ к камере/геолокации
+                    </p>
+                </div>
+
+                <div class="bottom">
+                      <div class="group info">
+                        <p class="t16 grey">Сроки:</p>
+                        <span class="t20 siniy">от 7 дней</span>
+                    </div>
+                    <div class="group info">
+                        <p class="t16 grey">Стоимость:</p>
+                        <span class="t20 siniy">от 80 000 ₽</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="elGrid right">
+            <img
+                class="composits"
+                src="/img/13.png"
+                alt="Разработка WebView, VK App и MAX App"
+            />
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Базовые стили (десктоп) */
+    .info {
+        gap: 12px;
+    }
+
+  
+
+    .bottom {
+        display: flex;
+        gap: 90px;
+        align-items: center;
+        margin-top: auto;
+    }
+
+    .g2{
+        gap: 1vh !important;
+    }
+
+    .elGrid {
+        width: 100%;
+        height: 100%;
+    }
+
+    .left {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        gap: 3vh;
+    }
+
+    .right {
+        background: url(/img/fon02.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .right .composits {
+        width: 100%;
+        object-fit: contain;
+        object-position: right;
+        height: 100%;
+    }
+
+    /* Убедитесь, что gr2 — это grid */
+    .gr2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        height: 100%;
+    }
+
+    /* ===== АДАПТАЦИЯ ===== */
+
+    /* Планшеты (768px - 1024px) */
+    @media (max-width: 1024px) {
+        .gr2 {
+            gap: 24px;
+        }
+
+        
+
+      
+
+        .bottom {
+            gap: 40px;
+        }
+    }
+
+    /* Мобильные (до 768px) */
+    @media (max-width: 768px) {
+        .gr2 {
+            grid-template-columns: 1fr;
+            gap: 32px;
+        }
+
+       
+
+       
+
+        .bottom {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .info {
+            gap: 8px;
+            flex-direction: row;
+            align-items: baseline;
+        }
+
+        .right {
+            min-height: 300px;
+            order: -1; /* Картинка уходит наверх, если нужно */
+        }
+
+        .right .composits {
+            max-height: 280px;
+            width: auto;
+            margin: 0 auto;
+        }
+    }
+
+    /* Маленькие телефоны (до 480px) */
+    @media (max-width: 480px) {
+        .container2 {
+            padding: 16px;
+        }
+
+    
+
+     
+
+        .ulSin {
+            padding-left: 20px;
+        }
+
+        .ulSin li {
+            margin-bottom: 8px;
+        }
+
+        .right {
+            min-height: 220px;
+        }
+
+        .right .composits {
+            max-height: 200px;
+        }
+
+        .bottom {
+            width: 100%;
+        }
+
+        .info {
+            width: 100%;
+            justify-content: space-between;
+        }
+    }
+</style>

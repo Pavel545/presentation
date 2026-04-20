@@ -1,0 +1,222 @@
+---
+
+---
+
+<section id="slide12" class="slide">
+    <div class="gr2">
+        <div class="elGrid">
+            <div class="container2 left">
+                <div class="group title">
+                    <h2 class="h2 tGradient">
+                        Разработка VK App <br /> и MAX App
+                    </h2>
+                </div>
+                <div class="group">
+                    <h3 class="t30 tit">мы Разрабатываем:</h3>
+                    <p class="t20">
+                        Современные, быстрые и удобные решений с интуитивным
+                        интерфейсом и глубокой интеграцией с вашими
+                        бизнес-процессами
+                    </p>
+
+                    <ul class="ulSin">
+                        <li>WebView-приложений</li>
+                        <li>VK App (мини-приложений для ВКонтакте)</li>
+                        <li>Макс App (мини-приложений в MAX)</li>
+                    </ul>
+                </div>
+                <div class="group">
+                    <h3 class="t30 tit">Для чего это вам:</h3>
+                    <p class="t20">
+                        Опередить конкурентов и предложить клиентам удобный
+                        инструмент для заказов, бронирования и общения с брендом
+                        прямо в смартфоне или внутри популярных российских
+                        платформ
+                    </p>
+                </div>
+
+                <div class="group">
+                    <h3 class="t30 tit">Результат:</h3>
+                    <p class="t20">
+                        Собственный мощный канал продаж и
+                        коммуникации,работающий при ограниченном интернете,
+                        когда основной сайт не работает
+                    </p>
+                </div>
+
+                <div class="bottom">
+                    <div class="group info">
+                        <p class="t16 grey">Стоимость:</p>
+                        <span class="t20 siniy"> от 100 000 ₽/мес.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="elGrid right">
+            <img
+                class="composits"
+                src="/img/12.png"
+                alt="Разработка WebView, VK App и MAX App"
+            />
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Базовые стили (десктоп) */
+    .info {
+        gap: 12px;
+    }
+
+    .title {
+        margin-bottom: 50px;
+    }
+
+    .bottom {
+        display: flex;
+        gap: 90px;
+        align-items: center;
+        margin-top: auto;
+    }
+
+    .elGrid {
+        width: 100%;
+        height: 100%;
+    }
+
+    .left {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        gap: 40px;
+    }
+
+    .right {
+        background: url(/img/fon02.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .right .composits {
+        width: 100%;
+        object-fit: contain;
+        object-position: right;
+        height: 100%;
+    }
+
+    /* Убедитесь, что gr2 — это grid */
+    .gr2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        height: 100%;
+    }
+
+    /* ===== АДАПТАЦИЯ ===== */
+
+    /* Планшеты (768px - 1024px) */
+    @media (max-width: 1024px) {
+        .gr2 {
+            gap: 24px;
+        }
+
+        .title {
+            margin-bottom: 32px;
+        }
+
+        .left {
+            gap: 28px;
+        }
+
+        .bottom {
+            gap: 40px;
+        }
+    }
+
+    /* Мобильные (до 768px) */
+    @media (max-width: 768px) {
+        .gr2 {
+            grid-template-columns: 1fr;
+            gap: 32px;
+        }
+
+        .left {
+            gap: 24px;
+        }
+
+        .title {
+            margin-bottom: 20px;
+        }
+
+        .bottom {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .info {
+            gap: 8px;
+            flex-direction: row;
+            align-items: baseline;
+        }
+
+        .right {
+            min-height: 300px;
+            order: -1; /* Картинка уходит наверх, если нужно */
+        }
+
+        .right .composits {
+            max-height: 280px;
+            width: auto;
+            margin: 0 auto;
+        }
+    }
+
+    /* Маленькие телефоны (до 480px) */
+    @media (max-width: 480px) {
+        .container2 {
+            padding: 16px;
+        }
+
+        .title {
+            margin-bottom: 16px;
+        }
+
+        .left {
+            gap: 20px;
+        }
+
+        .ulSin {
+            padding-left: 20px;
+        }
+
+        .ulSin li {
+            margin-bottom: 8px;
+        }
+
+        .right {
+            min-height: 220px;
+        }
+
+        .right .composits {
+            max-height: 200px;
+        }
+
+        .bottom {
+            width: 100%;
+        }
+
+        .info {
+            width: 100%;
+            justify-content: space-between;
+        }
+    }
+</style>

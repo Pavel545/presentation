@@ -229,7 +229,7 @@
 }
 
 .container2 {
-    padding: 130px clamp(15px, 10vh, 75px) 60px;
+    padding: clamp(90px, 10vh, 130px) clamp(15px, 10vh, 75px) 60px;
 
 }
 
@@ -254,6 +254,8 @@
     line-height: 1.1;
     text-transform: uppercase;
     color: var(--temnyy);
+
+    width: fit-content;
 }
 
 .gr2 {
@@ -298,11 +300,13 @@
 
 .ulSin {
     padding-left: 20px;
+    margin-top: 0.9rem;
 }
 
 .ulSin li {
     color: var(--siniy);
     list-style: decimal;
+    padding-bottom: 0.5rem;
 }
 
 .t30 {
@@ -324,6 +328,31 @@
 
 .grey {
     color: var(--seryy);
+}
+
+a {
+    text-decoration: none;
+}
+
+.but {
+    border-radius: 5px;
+    padding: 16px 42px;
+    background: var(--belyy);
+
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: clamp(0.875rem, 0.5rem + 1.25vw, 1.125rem);
+    line-height: 110%;
+    text-transform: uppercase;
+    color: var(--temnyy);
+    width: fit-content;
+    transition: 300ms;
+
+}
+
+.but:hover {
+    background: var(--siniy);
+    color: var(--belyy);
 }
 
 .group {
@@ -370,6 +399,11 @@ circle {
     stroke: rgba(255, 255, 255, 0.2);
 }
 
+.slideSection:first-child {
+    z-index: 2;
+
+}
+
 .slideSection {
     position: absolute;
     width: 100%;
@@ -377,10 +411,12 @@ circle {
     top: 0;
     left: 0;
     z-index: 1;
+    background: var(--f1);
+
 }
 
 .slideSection.active {
-    z-index: 2;
+    z-index: 4;
 }
 
 /* курсор */

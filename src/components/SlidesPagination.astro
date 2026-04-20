@@ -1,6 +1,5 @@
 ---
 import slides from "../data/data.json";
-import { goToSlide } from "../lib/sliderController";
 ---
 
 <div class="pagination">
@@ -8,7 +7,7 @@ import { goToSlide } from "../lib/sliderController";
         <div class="track">
             {
                 slides.map((item, index) => (
-                    <div  class=`item ${index==0 && "active"}`>
+                    <div class={`item ${index == 0 ? "active" : ""}`}>
                         <div class="rect">
                             <div class="id">{item.id}</div>
                         </div>
@@ -34,7 +33,7 @@ import { goToSlide } from "../lib/sliderController";
 
     .track {
         display: grid;
-        grid-template-columns: repeat(13, 1fr);
+        grid-template-columns: repeat(15, 1fr);
         gap: 5px;
         justify-content: center;
 

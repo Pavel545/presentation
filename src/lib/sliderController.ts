@@ -1,6 +1,21 @@
 import { gsap } from "gsap";
 import { sliderState } from "./sliderState";
 
+// Функция обновления логотипа
+const updateLogo = () => {
+    const logoImg = document.querySelector<HTMLImageElement>('#logoImage');
+    
+    if (logoImg) {
+        if (sliderState.current === 0) {
+            logoImg.src = "/logo.svg";
+            logoImg.alt = "Логотип АЦР";
+        } else {
+            logoImg.src = "/logoB.svg";
+            logoImg.alt = "Логотип АЦР (темный)";
+        }
+    }
+};
+
 export const goToSlide = (index: number) => {
     const slides = document.querySelectorAll<HTMLElement>(".slideSection");
     console.log(index);
@@ -33,6 +48,7 @@ export const goToSlide = (index: number) => {
                 sliderState.current = index;
                 sliderState.isAnimating = false;
                 updatePagination();
+                updateLogo();
             },
         }
     );

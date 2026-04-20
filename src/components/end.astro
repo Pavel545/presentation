@@ -1,0 +1,224 @@
+---
+
+---
+
+<section id="end" class="slide">
+    <div class="gr2">
+        <div class="elGrid">
+            <div class="container2 left">
+                <h2 class="h2">
+                    время цифрового <br /> ускорения <br />
+                    <span class="siniy2">для вашего бизнеса!</span>
+                </h2>
+
+                <div class="group list">
+                    <a class="t30 link" href="tel:+79093587042"
+                        >+7 (909) 358-70-42</a
+                    >
+                    <a
+                        class="t30 link"
+                        href="https://acr-agency.ru/"
+                        target="_blank"
+                        rel="noopener noreferrer">acr-agency.ru</a
+                    >
+                    <a class="t30 link" href="mailto:acr-agency@yandex.ru"
+                        >acr-agency@yandex.ru</a
+                    >
+                </div>
+
+                <a
+                    class="but"
+                    href="http://"
+                    target="_blank"
+                    rel="noopener noreferrer">Скачать презентацию</a
+                >
+            </div>
+
+            <div class="text">
+                <div class="group">
+                    <h3 class="t30">Наши Mini App</h3>
+
+                    <nav class="linkBox">
+                        <a
+                            href="http://"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <img
+                                src="/src/assets/tg.svg"
+                                alt="Mini App в Телеграм"
+                            />
+                        </a>
+                        <a
+                            href="http://"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <img
+                                src="/src/assets/vk.svg"
+                                alt="Mini App в Вконтакте"
+                            />
+                        </a>
+                        <a
+                            href="http://"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <img
+                                src="/src/assets/max.svg"
+                                alt="Mini App в MAX"
+                            />
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div class="elGrid right">
+            <img
+                class="qr"
+                src="/img/qr.png"
+                alt="Сайт Аналитический центр развитие"
+            />
+            <p class="post">
+                ООО «Аналитический Центр Развитие»<br /> ИНН 7325112704, КПП 732601001,
+                Р/с 40702810129280002066 в ФИЛИАЛ «НИЖЕГОРОДСКИЙ» АО «АЛЬФА-БАНК»,
+                <br /> ОГРН 1127325002573, ОКПО 97638790, ОКВЭД: 62.01
+            </p>
+        </div>
+    </div>
+</section>
+
+<style>
+    .qr {
+        width: 613px;
+        height: 613px;
+    }
+    .linkBox {
+        display: flex;
+        gap: 10px;
+    }
+
+    .post {
+        font-family: var(--second-family);
+        font-weight: 400;
+        font-size: clamp(1rem, 0.885rem + 0.57vw, 1.25rem);
+        line-height: 1.1;
+        color: var(--svetlo-seryy);
+        opacity: 0.5;
+        transition: 300ms;
+        margin-top: 30px;
+        max-width: 613px;
+    }
+
+    .post:hover {
+        opacity: 1;
+    }
+    .decor {
+        position: absolute;
+        left: -11px;
+        top: -11px;
+        right: -11px;
+        bottom: -11px;
+
+        pointer-events: none;
+    }
+
+    .siniy2 {
+        all: unset;
+
+        color: var(--siniy);
+    }
+
+    .link {
+        font-family: var(--second-family);
+        font-weight: 500;
+        line-height: 110%;
+        color: var(--temnyy);
+        transition: 300ms;
+        width: fit-content;
+    }
+
+    .link:hover {
+        color: var(--siniy);
+    }
+
+    .list {
+        gap: 15px;
+    }
+
+    .elGrid {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-rows: 70% 30%;
+    }
+    .left {
+        background: var(--svetlyy);
+        display: flex;
+        flex-direction: column;
+
+        justify-content: space-between;
+        height: 100%;
+    }
+
+    .right {
+        background: url(/img/fon02.jpg);
+
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .rTitle {
+        font-family: var(--font-family);
+        font-weight: 600;
+        font-size: 30px;
+        line-height: 100%;
+        color: var(--belyy);
+    }
+
+    .text {
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        gap: 30px;
+        border-top: 1px solid var(--seryy);
+        padding: 45px 70px;
+    }
+
+    .text .t30 {
+        font-family: var(--second-family);
+        font-weight: 500;
+        line-height: 110%;
+        color: var(--temnyy);
+    }
+
+    .rContent {
+        padding: 11px;
+        /* background: url(/img/fon02D.png);
+
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center; */
+
+        display: grid;
+        grid-template-columns: repeat(2, 0.8fr);
+        grid-template-rows: repeat(2, 0.8fr);
+        gap: 21px;
+        height: 100%;
+        margin-top: 40px;
+    }
+    .linkBox a {
+        transition: 300ms;
+    }
+
+    .linkBox a:hover {
+        transform: scale(1.1);
+    }
+</style>

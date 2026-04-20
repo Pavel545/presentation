@@ -1,14 +1,19 @@
 ---
 import slides from "../data/data.json";
-import { goToSlide } from "../lib/sliderController";
-
+import { sliderState } from "../lib/sliderState";
+console.log(sliderState.current);
 ---
 
 <header class="header">
     <div class="container">
         <div class="content">
             <a href="/" class="boxLogo">
-                <img class="imgLogo" src="/logo.svg" alt="Логотип АЦР" />
+                <img
+                    class="imgLogo"
+                    src="/logo.svg"
+                    alt="Логотип АЦР"
+                    id="logoImage"
+                />
             </a>
 
             <button class="menu" id="burger">
@@ -30,7 +35,7 @@ import { goToSlide } from "../lib/sliderController";
     <div class="menuContent">
         {
             slides.map((item, index) => (
-                <div class=`slide ${index==0 && "active"}`>
+                <div class={`slide ${index == 0 ? "active" : ""}`}>
                     <span class="id">{item.id}</span>
                     <div class="imgWrap">
                         <img src={item.img} alt={item.name} />
@@ -44,9 +49,7 @@ import { goToSlide } from "../lib/sliderController";
     </div>
 </aside>
 
-<script>
- 
-</script>
+
 
 <style>
     .header {
