@@ -2,7 +2,6 @@
 import Welcome from "../components/Welcome.astro";
 import Layout from "../layouts/Layout.astro";
 import Slide2 from "../components/slide2.astro";
-import "./glob.css";
 import Slide3 from "../components/slide3.astro";
 import Slide4 from "../components/slide4.astro";
 import Slide5 from "../components/slide5.astro";
@@ -13,58 +12,92 @@ import Slide9 from "../components/slide9.astro";
 import Slide10 from "../components/slide10.astro";
 import Slide11 from "../components/slide11.astro";
 import Slide12 from "../components/slide12.astro";
-import End from "../components/end.astro";
 import Slide13 from "../components/slide13.astro";
 import Slide14 from "../components/slide14.astro";
+import End from "../components/end.astro";
+
+import "swiper/css";           // Основные стили Swiper
+import "swiper/css/pagination"; // Стили для пагинации (если используете)
+import "./glob.css";          // ваши глобальные стили
 ---
 
 <Layout>
-	<div class="slideSection">
-		<Welcome />
-	</div>
+  <div class="slider-container">
+    <div class="swiper">
+      <div class="swiper-wrapper">
 
-	<div class="slideSection">
-		<Slide2 />
-	</div>
-	<div class="slideSection">
-		<Slide3 />
-	</div>
-	<div class="slideSection">
-		<Slide4 />
-	</div>
-	<div class="slideSection">
-		<Slide5 />
-	</div>
-	<div class="slideSection">
-		<Slide6 />
-	</div>
-	<div class="slideSection">
-		<Slide7 />
-	</div>
-	<div class="slideSection">
-		<Slide8 />
-	</div>
-	<div class="slideSection">
-		<Slide9 />
-	</div>
-	<div class="slideSection">
-		<Slide10 />
-	</div>
-	<div class="slideSection">
-		<Slide11 />
-	</div>
+        <div class="swiper-slide slideSection">
+          <Welcome />
+        </div>
 
-	<div class="slideSection">
-		<Slide12 />
-	</div>
-	<div class="slideSection">
-		<Slide13 />
-	</div>
-	<div class="slideSection">
-		<Slide14 />
-	</div>
+        <div class="swiper-slide slideSection">
+          <Slide2 />
+        </div>
 
-	<div class="slideSection">
-		<End />
-	</div>
+        <div class="swiper-slide slideSection">
+          <Slide3 />
+        </div>
+
+        <div class="swiper-slide slideSection">
+          <Slide4 />
+        </div>
+
+        <div class="swiper-slide slideSection">
+          <Slide5 />
+        </div>
+
+        <div class="swiper-slide slideSection">
+          <Slide6 />
+        </div>
+
+        <div class="swiper-slide slideSection">
+          <Slide7 />
+        </div>
+
+        <div class="swiper-slide slideSection">
+          <Slide8 />
+        </div>
+
+        <div class="swiper-slide slideSection">
+          <Slide9 />
+        </div>
+
+        <div class="swiper-slide slideSection">
+          <Slide10 />
+        </div>
+
+        <div class="swiper-slide slideSection">
+          <Slide11 />
+        </div>
+
+        <div class="swiper-slide slideSection">
+          <Slide12 />
+        </div>
+
+        <div class="swiper-slide slideSection">
+          <Slide13 />
+        </div>
+
+        <div class="swiper-slide slideSection">
+          <Slide14 />
+        </div>
+
+        <div class="swiper-slide slideSection">
+          <End />
+        </div>
+
+      </div>
+
+      <!-- Пагинация (рекомендуется добавить) -->
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
 </Layout>
+
+<!-- Инициализация Swiper + десктоп/мобильная логика -->
+<script>
+  import { initSlider } from "../lib/sliderInit";
+  document.addEventListener("DOMContentLoaded", () => {
+    initSlider();
+  });
+</script>

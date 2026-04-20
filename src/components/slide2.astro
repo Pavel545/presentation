@@ -1,8 +1,9 @@
 ---
-
+// src/components/slide2.astro
+import ReasonsSwiper from "./ReasonsSwiper.js";
 ---
 
-<section id="slide02" class="slide ">
+<section id="slide02" class="slide">
     <div class="gr2">
         <div class="elGrid left">
             <div class="container2">
@@ -29,7 +30,8 @@
                 Мы гарантия успешных <br />и инновационных решений!
             </h3>
 
-            <div class="rContent">
+            <!-- Десктопная версия -->
+            <div class="rContent desktop-only">
                 <div class="rItem">
                     <h4 class="rItemTitle">Креативность</h4>
                     <p class="rItemText">
@@ -37,8 +39,8 @@
                         дизайне и IT направлении
                     </p>
                     <div class="decor">
-                        <span class="d1"> </span>
-                        <span class="d2"> </span>
+                        <span class="d1"></span>
+                        <span class="d2"></span>
                     </div>
                 </div>
                 <div class="rItem">
@@ -47,9 +49,9 @@
                         Создаем и интегрируем кроссплатформенные системы для
                         задач любой сложности
                     </p>
-                     <div class="decor">
-                        <span class="d1"> </span>
-                        <span class="d2"> </span>
+                    <div class="decor">
+                        <span class="d1"></span>
+                        <span class="d2"></span>
                     </div>
                 </div>
                 <div class="rItem">
@@ -58,22 +60,27 @@
                         Мы обеспечим надежную техническую поддержку Вашего сайта
                         и IT проекта
                     </p>
-                     <div class="decor">
-                        <span class="d1"> </span>
-                        <span class="d2"> </span>
+                    <div class="decor">
+                        <span class="d1"></span>
+                        <span class="d2"></span>
                     </div>
                 </div>
                 <div class="rItem">
-                    <h4 class="rItemTitle">эффективность</h4>
+                    <h4 class="rItemTitle">Эффективность</h4>
                     <p class="rItemText">
                         Мы создаем корпоративные ресурсы, которые работают на
                         Ваш имидж и бизнес-цели 24/7
                     </p>
-                     <div class="decor">
-                        <span class="d1"> </span>
-                        <span class="d2"> </span>
+                    <div class="decor">
+                        <span class="d1"></span>
+                        <span class="d2"></span>
                     </div>
                 </div>
+            </div>
+
+            <!-- Мобильная версия с Swiper -->
+            <div class="mobile-only">
+                <ReasonsSwiper client:only="react" />
             </div>
         </div>
     </div>
@@ -86,12 +93,10 @@
         top: -11px;
         right: -11px;
         bottom: -11px;
-
         pointer-events: none;
     }
 
-    .d1,
-    .d2 {
+    .d1, .d2 {
         position: absolute;
         width: 100%;
         height: 100%;
@@ -99,12 +104,10 @@
         top: 0;
         pointer-events: none;
     }
-    .d1::after,
-    .d1::before,
-    .d2::before,
-    .d2::after {
-        content: "";
 
+    .d1::after, .d1::before,
+    .d2::before, .d2::after {
+        content: "";
         display: block;
         width: 50px;
         height: 50px;
@@ -113,43 +116,34 @@
         pointer-events: none;
     }
 
-    .d1::before {
-        left: 0;
-        top: 0;
-        border-bottom: none;
-        border-right: none;
-    }
-    .d2::before {
-        bottom: 0;
-        left: 0;
-        border-top: none;
-        border-right: none;
-    }
-    .d2::after {
-        right: 0;
-        bottom: 0;
+    .d1::before { left: 0; top: 0; border-bottom: none; border-right: none; }
+    .d2::before { bottom: 0; left: 0; border-top: none; border-right: none; }
+    .d2::after  { right: 0; bottom: 0; border-top: none; border-left: none; }
+    .d1::after  { right: 0; top: 0; border-bottom: none; border-left: none; }
 
-        border-top: none;
-        border-left: none;
-    }
-    .d1::after {
-        right: 0;
-        top: 0;
-        border-bottom: none;
-        border-left: none;
-    }
     .rItem {
         display: flex;
         flex-direction: column;
         justify-content: center;
         position: relative;
-
         padding: 40px;
         gap: 20px;
         background: rgba(255, 255, 255, 0.07);
         backdrop-filter: blur(10px);
         border-radius: 10px;
+        height: 100%;
+        width: 100%;
     }
+
+    .rItemTitle {
+        font-family: var(--font-family);
+        font-weight: 600;
+        font-size: 25px;
+        line-height: 100%;
+        text-transform: uppercase;
+        color: var(--belyy);
+    }
+
     .rItemText {
         font-family: var(--second-family);
         font-weight: 500;
@@ -159,35 +153,40 @@
         opacity: 0.8;
         max-width: 270px;
     }
-    .rItemTitle {
-        font-family: var(--font-family);
-        font-weight: 600;
-        font-size: 25px;
-        line-height: 100%;
-        text-transform: uppercase;
-        color: var(--belyy);
+
+    /* ==================== Swiper ==================== */
+    .reasons-swiper-container {
+        width: 100%;
+        height: 100%;
+        min-height: 420px;
     }
-    .elGrid {
+
+    .reasons-swiper {
         width: 100%;
         height: 100%;
     }
-    .left {
-        background: var(--svetlyy);
-        display: flex;
-        flex-direction: column;
 
-        justify-content: space-between;
+    .reasons-swiper .swiper-slide {
+        height: auto;
+        display: flex;
+        align-items: stretch;
     }
 
-    .right {
-        background: url(/img/fon02.jpg);
+    /* Пагинация */
+    .reasons-swiper .swiper-pagination {
+        position: relative;
+        margin-top: 25px;
+        bottom: auto !important;
+    }
 
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-
-        display: flex;
-        flex-direction: column;
+    /* Десктопный грид */
+    .rContent {
+        padding: 11px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 21px;
+        height: 100%;
+        margin-top: 40px;
     }
 
     .rTitle {
@@ -207,19 +206,88 @@
         padding: 45px 70px;
     }
 
-    .rContent {
-        padding: 11px;
-        /* background: url(/img/fon02D.png);
+    .elGrid {
+        width: 100%;
+        height: 100%;
+    }
 
+    .left {
+        background: var(--svetlyy);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .right {
+        background: url(/img/fon02.jpg);
         background-size: cover;
         background-repeat: no-repeat;
-        background-position: center; */
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+    }
 
-        display: grid;
-        grid-template-columns: repeat(2, 0.8fr);
-        grid-template-rows: repeat(2, 0.8fr);
-        gap: 21px;
-        height: 100%;
-        margin-top: 40px;
+    .mobile-only {
+        display: none;
+    }
+
+    .desktop-only {
+        display: block;
+    }
+
+    /* ==================== Адаптив ==================== */
+    @media (max-width: 1024px) {
+        .text { padding: 35px 40px; }
+        .rTitle { font-size: 26px; }
+        .rItem { padding: 30px; }
+        .rItemTitle { font-size: 22px; }
+        .rItemText { font-size: 18px; }
+    }
+
+    @media (max-width: 768px) {
+        .gr2 {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .left { min-height: auto; }
+        .text {
+            height: auto;
+            padding: 30px 20px;
+            gap: 20px;
+        }
+
+        .right { padding-bottom: 40px; }
+
+        .rTitle {
+            font-size: 22px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .desktop-only { display: none; }
+        .mobile-only { 
+            display: block; 
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .reasons-swiper-container {
+            min-height: 380px;
+        }
+
+        .rItem {
+            padding: 32px 24px;
+            min-height: 320px;
+        }
+
+        .container2 { padding: 20px; }
+    }
+
+    @media (max-width: 480px) {
+        .text { padding: 20px 16px; }
+        .rTitle { font-size: 20px; }
+        .container2 { padding: 16px; }
+        .reasons-swiper-container { min-height: 360px; }
     }
 </style>

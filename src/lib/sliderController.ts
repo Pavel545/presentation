@@ -1,23 +1,25 @@
 import { gsap } from "gsap";
 import { sliderState } from "./sliderState";
 
+// Определение мобильного устройства (оставлено для возможной условной логики)
+const isMobile = (): boolean => {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+        || window.innerWidth <= 768;
+};
+
 // Функция обновления логотипа
 const updateLogo = (newIndex: number) => {
     const logoImg = document.querySelector<HTMLImageElement>('#logoImage');
-    
+   
     if (!logoImg) return;
-    
-    // Определяем, какой логотип должен быть
+   
     const shouldBeLight = newIndex === 0;
     const currentIsLight = logoImg.src.includes('logo.svg') && !logoImg.src.includes('logoB');
-    
-    // Если логотип уже правильный - ничего не делаем
+   
     if (shouldBeLight === currentIsLight) return;
-    
-    // Иначе делаем анимацию перехода
+   
     const tl = gsap.timeline();
-    
-    // Анимация ухода текущего логотипа
+   
     tl.to(logoImg, {
         scale: 0.8,
         opacity: 0,
@@ -29,7 +31,6 @@ const updateLogo = (newIndex: number) => {
             logoImg.alt = shouldBeLight ? "Логотип АЦР" : "Логотип АЦР (темный)";
         }
     })
-    // Анимация появления нового логотипа
     .to(logoImg, {
         scale: 1,
         opacity: 1,
@@ -39,25 +40,27 @@ const updateLogo = (newIndex: number) => {
         clearProps: "rotation,scale"
     });
 };
+
 export const goToSlide = (index: number) => {
     const slides = document.querySelectorAll<HTMLElement>(".slideSection");
-    console.log(index);
-    
+   
     index = Math.max(0, Math.min(index, slides.length - 1));
-
+   
     if (sliderState.isAnimating || index === sliderState.current) return;
-
+   
     sliderState.isAnimating = true;
-
+   
     const currentEl = slides[sliderState.current];
     const nextEl = slides[index];
-
+   
+    // Анимация ухода текущего слайда
     gsap.to(currentEl, {
         x: index > sliderState.current ? "-100%" : "100%",
         duration: 0.8,
         ease: "power3.inOut",
     });
-
+   
+    // Анимация появления следующего слайда
     gsap.fromTo(
         nextEl,
         {
@@ -83,3 +86,29 @@ const updatePagination = () => {
         el.classList.toggle("active", i === sliderState.current);
     });
 };
+
+// Экспортируем инициализацию только для десктопа
+// (на мобильных устройствах этот скрипт не вызывается)
+export const initDesktopSlider = () => {
+    if (isMobile()) return; // дополнительная защита
+
+    // Если потребуется добавить обработку колесика мыши или клавиатуры — сюда
+    console.log('Desktop GSAP slider initialized');
+};
+
+// Полная очистка и перезапуск (на случай ресайза с мобильного на десктоп)
+let resizeTimeout: number | undefined;
+
+if (typeof window !== 'undefined') {
+    window.addEventListener('resize', () => {
+        if (resizeTimeout) {
+            clearTimeout(resizeTimeout);
+        }
+        resizeTimeout = window.setTimeout(() => {
+            if (!isMobile()) {
+                initDesktopSlider();
+            }
+            resizeTimeout = undefined;
+        }, 250);
+    });
+}

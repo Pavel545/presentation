@@ -2,7 +2,7 @@
 
 ---
 
-<section class="welcome slide " id="welcome">
+<section class="welcome slide" id="welcome">
     <div class="container">
         <div class="content">
             <h1 class="h1">
@@ -12,16 +12,14 @@
 
             <div class="servicesList">
                 <div class="servicesItem">Разработка сайта</div>
-                                <div class="servicesItem">Чат-боты</div>
+                <div class="servicesItem">Чат-боты</div>
 
                 <div class="servicesItem">Внедрение ИИ</div>
 
                 <div class="servicesItem">Мобильное приложение</div>
 
                 <div class="servicesItem">Дизайн</div>
-
             </div>
-           
         </div>
     </div>
 </section>
@@ -33,13 +31,21 @@
         background-position: center;
         background-repeat: no-repeat;
     }
+    
     .content {
         display: flex;
         flex-direction: column;
         align-items: start;
         justify-content: center;
         height: 100vh;
+        padding: 0 20px;
     }
+    
+    .h1 {
+        font-size: clamp(36px, 8vw, 80px);
+        line-height: 1.1;
+    }
+    
     .hPs {
         font-weight: 400;
         font-size: 40px;
@@ -51,7 +57,6 @@
     .servicesList {
         display: flex;
         flex-wrap: wrap;
-
         gap: 10px;
         margin-top: 115px;
         width: 100%;
@@ -62,7 +67,6 @@
         display: flex;
         align-items: center;
         gap: 10px;
-
         font-weight: 500;
         font-size: 25px;
         line-height: 110%;
@@ -71,12 +75,12 @@
         overflow: hidden;
         border-radius: 5px;
         padding: 10px 30px;
-
         background: rgba(255, 255, 255, 0.1);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     }
+    
     .servicesItem::after {
         content: "";
         position: absolute;
@@ -106,5 +110,86 @@
         height: 10px;
         border-radius: 50px;
         background: var(--zelenyy-2-osnovnoy);
+    }
+
+    /* Планшеты (768px - 1024px) */
+    @media (max-width: 1024px) {
+        .hPs {
+            font-size: 32px;
+        }
+        
+        .servicesList {
+            margin-top: 80px;
+            max-width: 700px;
+        }
+        
+        .servicesItem {
+            font-size: 22px;
+            padding: 8px 24px;
+        }
+    }
+
+    /* Мобильные устройства (до 768px) */
+    @media (max-width: 768px) {
+
+        .welcome{
+        background: url(/fonHeroMob.jpg);
+
+        }
+        .content {
+            height: auto;
+            min-height: 100vh;
+            padding: 100px 16px 60px;
+        }
+        
+        .h1 {
+            font-size: 36px;
+        }
+        
+        .hPs {
+            font-size: 24px;
+            margin-top: 12px;
+        }
+        
+        .servicesList {
+            margin-top: 50px;
+            gap: 8px;
+        }
+        
+        .servicesItem {
+            font-size: 18px;
+            padding: 8px 16px;
+        }
+        
+        .servicesItem::before {
+            width: 8px;
+            height: 8px;
+        }
+    }
+
+    /* Маленькие мобильные (до 480px) */
+    @media (max-width: 480px) {
+        .content {
+            padding: 80px 12px 40px;
+        }
+        
+        .h1 {
+            font-size: 28px;
+        }
+        
+        .hPs {
+            font-size: 18px;
+        }
+        
+        .servicesList {
+            margin-top: 40px;
+            max-width: 100%;
+        }
+        
+        .servicesItem {
+            font-size: 16px;
+            padding: 10px 16px;
+            justify-content: center;
+        }
     }
 </style>
