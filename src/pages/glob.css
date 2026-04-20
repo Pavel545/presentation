@@ -1,32 +1,11 @@
-@font-face {
-    font-family: 'Unbounded';
-    src: url('/font/Unbounded/Unbounded-Regular.ttf') format('truetype');
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
-}
 
-/* Если нужны отдельные начертания (необязательно, т.к. есть переменный) */
-@font-face {
-    font-family: 'Unbounded';
-    src: url('/font/Unbounded/Unbounded-Regular.ttf') format('truetype');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-}
+
+
 
 @font-face {
     font-family: 'Unbounded';
     src: url('/font/Unbounded/Unbounded-Bold.ttf') format('truetype');
     font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Unbounded';
-    src: url('/font/Unbounded/Unbounded-Light.ttf') format('truetype');
-    font-weight: 300;
     font-style: normal;
     font-display: swap;
 }
@@ -55,13 +34,7 @@
     font-display: swap;
 }
 
-@font-face {
-    font-family: 'Inter';
-    src: url('/font/Inter/Inter-ExtraLightItalic.otf') format('opentype');
-    font-weight: 200;
-    font-style: italic;
-    font-display: swap;
-}
+
 
 @font-face {
     font-family: 'Inter';
@@ -87,13 +60,6 @@
     font-display: swap;
 }
 
-@font-face {
-    font-family: 'Inter';
-    src: url('/font/Inter/Inter-Italic.otf') format('opentype');
-    font-weight: 400;
-    font-style: italic;
-    font-display: swap;
-}
 
 @font-face {
     font-family: 'Inter';
@@ -103,13 +69,6 @@
     font-display: swap;
 }
 
-@font-face {
-    font-family: 'Inter';
-    src: url('/font/Inter/Inter-MediumItalic.otf') format('opentype');
-    font-weight: 500;
-    font-style: italic;
-    font-display: swap;
-}
 
 @font-face {
     font-family: 'Inter';
@@ -119,13 +78,7 @@
     font-display: swap;
 }
 
-@font-face {
-    font-family: 'Inter';
-    src: url('/font/Inter/Inter-SemiBoldItalic.otf') format('opentype');
-    font-weight: 600;
-    font-style: italic;
-    font-display: swap;
-}
+
 
 @font-face {
     font-family: 'Inter';
@@ -137,27 +90,13 @@
 
 @font-face {
     font-family: 'Inter';
-    src: url('/font/Inter/Inter-BoldItalic.otf') format('opentype');
-    font-weight: 700;
-    font-style: italic;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Inter';
     src: url('/font/Inter/Inter-ExtraBold.otf') format('opentype');
     font-weight: 800;
     font-style: normal;
     font-display: swap;
 }
 
-@font-face {
-    font-family: 'Inter';
-    src: url('/font/Inter/Inter-ExtraBoldItalic.otf') format('opentype');
-    font-weight: 800;
-    font-style: italic;
-    font-display: swap;
-}
+
 
 @font-face {
     font-family: 'Inter';
@@ -167,21 +106,7 @@
     font-display: swap;
 }
 
-@font-face {
-    font-family: 'Inter';
-    src: url('/font/Inter/Inter-BlackItalic.otf') format('opentype');
-    font-weight: 900;
-    font-style: italic;
-    font-display: swap;
-}
 
-@font-face {
-    font-family: 'Inter';
-    src: url('/font/Inter/Inter-V.ttf') format('truetype');
-    font-weight: 100 900;
-    font-style: normal;
-    font-display: swap;
-}
 
 :root {
     --belyy: #fff;

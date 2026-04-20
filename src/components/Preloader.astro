@@ -1,0 +1,362 @@
+---
+// src/components/Preloader.astro
+---
+
+<div id="preloader" class="preloader">
+    <div class="preloader__content">
+        <div class="preloader__shapes" id="preloaderShapes">
+            <!-- SVG будут вставлены через JS -->
+        </div>
+        <div class="preloader__progress">
+            <div class="preloader__bar" id="preloaderBar"></div>
+        </div>
+        <div class="preloader__counter">
+            <span id="preloaderPercent">0</span>%
+        </div>
+    </div>
+</div>
+
+<style is:global>
+    .preloader {
+        position: fixed;
+        inset: 0;
+        background: #0a0a0a;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+    }
+
+    .preloader__content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+        width: 300px;
+    }
+
+    .preloader__shapes {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .preloader__shapes svg {
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        opacity: 0;
+        filter: blur(4px);
+    }
+
+    .preloader__progress {
+        width: 100%;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 1px;
+        overflow: hidden;
+    }
+
+    .preloader__bar {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #a8d307, #e5ff8b, #bfef0a);
+        border-radius: 1px;
+        transition: width 0.1s ease;
+    }
+
+    .preloader__counter {
+        color: #e5ff8b;
+        font-family: monospace;
+        font-size: 14px;
+        letter-spacing: 2px;
+    }
+
+    /* Анимация ухода прелоадера */
+    .preloader.hide {
+        animation: preloaderHide 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+        pointer-events: none;
+    }
+
+    @keyframes preloaderHide {
+        0% {
+            opacity: 1;
+            backdrop-filter: blur(0);
+        }
+        100% {
+            opacity: 0;
+            backdrop-filter: blur(10px);
+            visibility: hidden;
+        }
+    }
+</style>
+
+<script>
+    import { gsap } from "gsap";
+
+    // Ваши SVG как строки (можно вынести в отдельный файл)
+    const shapes = [
+        `<svg width="94" height="94" viewBox="0 0 94 94" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_3789_9675)">
+<path d="M40.6481 34.4131L64.5518 48.0752L71.6094 7.83304L40.6481 34.4131Z" fill="#E5FF8B"/>
+<path d="M64.5518 48.0752L69.4401 58.9271L71.6094 7.83304L64.5518 48.0752Z" fill="#BFEF0A"/>
+<path d="M69.4401 58.9271L64.5518 48.0752L26.7036 86.4018L69.4401 58.9271Z" fill="#A8D307"/>
+<path d="M64.5518 48.0752L40.6481 34.4131L26.7036 86.4018L64.5518 48.0752Z" fill="#DCFF5C"/>
+<path d="M40.6481 34.4131L28.3597 35.4477L26.7036 86.4018L40.6481 34.4131Z" fill="#CBF13C"/>
+<path d="M28.3597 35.4477L40.6481 34.4131L71.6094 7.83304L28.3597 35.4477Z" fill="#D4F853"/>
+</g>
+<defs>
+<clipPath id="clip0_3789_9675">
+<rect width="94" height="94" fill="white"/>
+</clipPath>
+</defs>
+</svg>`,
+        `<svg width="94" height="94" viewBox="0 0 94 94" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M51.0524 68.7515L80.8889 59.1517L63.5204 32.6138L51.0524 68.7515Z" fill="#A8D307"/>
+<path d="M51.0524 68.7515L53.9732 82.1824L80.8889 59.1517L51.0524 68.7515Z" fill="#9FC900"/>
+<path d="M20.1054 70.053L53.9732 82.1824L51.0524 68.7515L20.1054 70.053Z" fill="#B6E212"/>
+<path d="M26.3842 40.028L20.1054 70.053L51.0524 68.7515L26.3842 40.028Z" fill="#D4F853"/>
+<path d="M26.3842 40.028L51.0524 68.7515L63.5204 32.6138L26.3842 40.028Z" fill="#BFEF0A"/>
+<path d="M20.1054 70.053L26.3842 40.028L13 35.4445L20.1054 70.053Z" fill="#E5FF8B"/>
+<path d="M26.3842 40.028L40.5478 12L13 35.4445L26.3842 40.028Z" fill="#F2FFC3"/>
+<path d="M40.5478 12L26.3842 40.028L63.5204 32.6138L40.5478 12Z" fill="#E5FF8B"/>
+<path d="M74.705 23.4888L40.5478 12L63.5204 32.6138L74.705 23.4888Z" fill="#D4F853"/>
+<path d="M80.8889 59.1517L74.705 23.4888L63.5204 32.6138L80.8889 59.1517Z" fill="#BFEF0A"/>
+</svg>
+`,
+        `<svg width="94" height="94" viewBox="0 0 94 94" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M63.041 75.8819L52.3276 69.533L52.2853 89L63.041 82.5811V75.8819Z" fill="#A8D307"/>
+<path d="M30.8383 76.1725L52.2853 89L52.3276 69.533L47.2331 66.5065L30.8383 76.1725Z" fill="#BFEF0A"/>
+<path d="M63.041 75.8819V63.2847L41.3128 50.3981V62.9952L47.2331 66.5065L52.3276 69.533L63.041 75.8819Z" fill="#D4F853"/>
+<path d="M63.041 75.8819L85 63.4442V50.2092L63.041 63.2847V75.8819Z" fill="#A8D307"/>
+<path d="M63.041 63.2847L85 50.2092L79.7017 47.1026L63.1163 37.3782L63.1648 43.8603L52.3691 50.3981L47.052 47.0494L41.3128 50.3981L63.041 63.2847Z" fill="#E5FF8B"/>
+<path d="M79.5245 21.3542L68.3962 28.0458L63.0698 31.17L63.1163 37.3782L79.7017 47.1026L79.5245 21.3542Z" fill="#A8D307"/>
+<path d="M68.3962 28.0458L79.5245 21.3542L68.305 15.1002L62.9726 18.1876L63.0698 31.17L68.3962 28.0458Z" fill="#DCFF5C"/>
+<path d="M62.97 17.8401L52.4253 24.5049L52.3691 50.3981L63.1648 43.8603L63.1163 37.3782L63.0698 31.17L62.9726 18.1876L62.97 17.8401Z" fill="#BFEF0A"/>
+<path d="M62.97 17.8401L41.5018 5L30.3342 11.6648L52.4253 24.5049L62.97 17.8401Z" fill="#E5FF8B"/>
+<path d="M52.4253 24.5049L30.3342 11.6648L30.5277 37.5014L35.8389 34.3519L47.052 40.5653V47.0494L52.3691 50.3981L52.4253 24.5049Z" fill="#D4F853"/>
+<path d="M14.2988 47.1247L25.2069 53.3786L30.6228 50.2019L47.052 40.5653L35.8389 34.3519L30.5277 37.5014L25.0472 40.7512L14.6066 46.9423L14.2988 47.1247Z" fill="#DCFF5C"/>
+<path d="M25.2069 53.3786L25.3858 79.3872L30.8383 76.1725L47.2331 66.5065L41.3128 62.9952V50.3981L47.052 47.0494V40.5653L30.6228 50.2019L25.2069 53.3786Z" fill="#A8D307"/>
+<path d="M14.2988 47.1247L14.4777 72.8144L25.3858 79.3872L25.2069 53.3786L14.2988 47.1247Z" fill="#BFEF0A"/>
+<path d="M9 31.2338V43.8309L14.6066 46.9423L25.0472 40.7512L9 31.2338Z" fill="#BFEF0A"/>
+<path d="M30.3827 18.1488L9 31.2338L25.0472 40.7512L30.5277 37.5014L30.3827 18.1488Z" fill="#E5FF8B"/>
+</svg>`,
+    ];
+
+    class Preloader {
+        private container: HTMLElement;
+        private shapesContainer: HTMLElement;
+        private bar: HTMLElement;
+        private percent: HTMLElement;
+        private progress: number = 0;
+        private shapesElements: SVGElement[] = [];
+
+        constructor() {
+            this.container = document.getElementById("preloader")!;
+            this.shapesContainer = document.getElementById("preloaderShapes")!;
+            this.bar = document.getElementById("preloaderBar")!;
+            this.percent = document.getElementById("preloaderPercent")!;
+
+            this.init();
+        }
+
+        private init() {
+            // Вставляем SVG
+            shapes.forEach((shapeStr, i) => {
+                const div = document.createElement("div");
+                div.innerHTML = shapeStr;
+                const svg = div.firstElementChild as SVGElement;
+                svg.style.animationDelay = `${i * 0.1}s`;
+                this.shapesContainer.appendChild(svg);
+                this.shapesElements.push(svg);
+            });
+
+            this.startAnimation();
+            this.trackLoading();
+        }
+
+        private startAnimation() {
+            const radius = 80;
+
+            // Анимация "дыхания" всей композиции
+            const masterTimeline = gsap.timeline({
+                repeat: -1,
+                repeatDelay: 0.2,
+            });
+
+            this.shapesElements.forEach((shape, i) => {
+                const angle = (i / this.shapesElements.length) * Math.PI * 2;
+
+                // Начальная позиция - все в центре
+                gsap.set(shape, {
+                    x: 0,
+                    y: 0,
+                    scale: 0,
+                    opacity: 0,
+                    rotation: 0,
+                });
+
+                // Разлетаются по кругу
+                masterTimeline.to(
+                    shape,
+                    {
+                        x: Math.cos(angle) * radius,
+                        y: Math.sin(angle) * radius,
+                        scale: 1,
+                        opacity: 0.8,
+                        rotation: 180,
+                        duration: 1.2,
+                        ease: "elastic.out(1, 0.3)",
+                    },
+                    i * 0.05,
+                );
+
+                // Крутятся на месте
+                masterTimeline.to(
+                    shape,
+                    {
+                        rotation: "+=360",
+                        duration: 3,
+                        repeat: -1,
+                        ease: "none",
+                    },
+                    ">",
+                );
+
+                // Пульсируют
+                gsap.to(shape, {
+                    scale: 1.3,
+                    opacity: 1,
+                    duration: 1,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: "sine.inOut",
+                    delay: i * 0.1,
+                });
+            });
+
+            // Собираются обратно в центр
+            masterTimeline.to(
+                this.shapesElements,
+                {
+                    x: 0,
+                    y: 0,
+                    scale: 0.8,
+                    rotation: 0,
+                    duration: 1,
+                    ease: "back.in(2)",
+                    stagger: 0.03,
+                },
+                "+=2",
+            );
+        }
+
+        private trackLoading() {
+            // Отслеживаем загрузку ресурсов
+            const resources = [
+                ...Array.from(document.images),
+                ...Array.from(
+                    document.querySelectorAll('link[rel="stylesheet"]'),
+                ),
+                ...Array.from(document.querySelectorAll("script")),
+            ];
+
+            let loaded = 0;
+            const total = resources.length || 20; // fallback
+
+            const updateProgress = () => {
+                loaded++;
+                this.progress = Math.min((loaded / total) * 100, 100);
+                this.updateUI();
+            };
+
+            resources.forEach((res) => {
+                if (res instanceof HTMLImageElement) {
+                    if (res.complete) {
+                        updateProgress();
+                    } else {
+                        res.addEventListener("load", updateProgress);
+                        res.addEventListener("error", updateProgress);
+                    }
+                } else {
+                    updateProgress(); // для скриптов и стилей считаем сразу
+                }
+            });
+
+            // Fallback: если что-то пошло не так
+            setTimeout(() => {
+                const interval = setInterval(() => {
+                    if (this.progress < 100) {
+                        this.progress = Math.min(this.progress + 5, 100);
+                        this.updateUI();
+
+                        if (this.progress >= 100) {
+                            clearInterval(interval);
+                            setTimeout(() => this.hide(), 300);
+                        }
+                    }
+                }, 100);
+            }, 500);
+        }
+
+        private updateUI() {
+            this.bar.style.width = `${this.progress}%`;
+            this.percent.textContent = Math.round(this.progress).toString();
+        }
+
+        public hide() {
+            // Останавливаем все анимации
+            gsap.killTweensOf(this.shapesElements);
+
+            // Красиво убираем прелоадер
+            const tl = gsap.timeline({
+                onComplete: () => {
+                    this.container.remove();
+                },
+            });
+
+            // Фигуры разлетаются
+            this.shapesElements.forEach((shape, i) => {
+                const angle = (i / this.shapesElements.length) * Math.PI * 2;
+                tl.to(
+                    shape,
+                    {
+                        x: Math.cos(angle) * 200,
+                        y: Math.sin(angle) * 200,
+                        scale: 0,
+                        opacity: 0,
+                        rotation: "+=180",
+                        duration: 0.6,
+                        ease: "power2.in",
+                    },
+                    0,
+                );
+            });
+
+            // Затемнение и скрытие
+            tl.to(
+                this.container,
+                {
+                    opacity: 0,
+                    duration: 0.4,
+                    ease: "power2.in",
+                },
+                0.3,
+            );
+        }
+    }
+
+    // Ждем загрузки DOM
+    document.addEventListener("DOMContentLoaded", () => {
+        const preloader = new Preloader();
+
+        // Когда всё загружено
+        window.addEventListener("load", () => {
+            preloader.hide();
+        });
+    });
+</script>

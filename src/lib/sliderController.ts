@@ -2,20 +2,43 @@ import { gsap } from "gsap";
 import { sliderState } from "./sliderState";
 
 // Функция обновления логотипа
-const updateLogo = () => {
+const updateLogo = (newIndex: number) => {
     const logoImg = document.querySelector<HTMLImageElement>('#logoImage');
     
-    if (logoImg) {
-        if (sliderState.current === 0) {
-            logoImg.src = "/logo.svg";
-            logoImg.alt = "Логотип АЦР";
-        } else {
-            logoImg.src = "/logoB.svg";
-            logoImg.alt = "Логотип АЦР (темный)";
+    if (!logoImg) return;
+    
+    // Определяем, какой логотип должен быть
+    const shouldBeLight = newIndex === 0;
+    const currentIsLight = logoImg.src.includes('logo.svg') && !logoImg.src.includes('logoB');
+    
+    // Если логотип уже правильный - ничего не делаем
+    if (shouldBeLight === currentIsLight) return;
+    
+    // Иначе делаем анимацию перехода
+    const tl = gsap.timeline();
+    
+    // Анимация ухода текущего логотипа
+    tl.to(logoImg, {
+        scale: 0.8,
+        opacity: 0,
+        rotation: -5,
+        duration: 0.25,
+        ease: "power2.in",
+        onComplete: () => {
+            logoImg.src = shouldBeLight ? "/logo.svg" : "/logoB.svg";
+            logoImg.alt = shouldBeLight ? "Логотип АЦР" : "Логотип АЦР (темный)";
         }
-    }
+    })
+    // Анимация появления нового логотипа
+    .to(logoImg, {
+        scale: 1,
+        opacity: 1,
+        rotation: 0,
+        duration: 0.35,
+        ease: "back.out(1.2)",
+        clearProps: "rotation,scale"
+    });
 };
-
 export const goToSlide = (index: number) => {
     const slides = document.querySelectorAll<HTMLElement>(".slideSection");
     console.log(index);
@@ -48,7 +71,7 @@ export const goToSlide = (index: number) => {
                 sliderState.current = index;
                 sliderState.isAnimating = false;
                 updatePagination();
-                updateLogo();
+                updateLogo(index);
             },
         }
     );
