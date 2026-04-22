@@ -8,6 +8,11 @@
             <div class="container2 left">
                 <div class="group title">
                     <h2 class="h2 tGradient">Аудит</h2>
+                    <p class="t20 grey mobIts">
+                        Бесплатный глубокий аудит сайта по 120+ параметрам:
+                        скорость, SEO, юзабилити и безопасность. Получаете
+                        готовый план роста
+                    </p>
                 </div>
                 <div class="group">
                     <h3 class="t30">Что предлагаем:</h3>
@@ -55,11 +60,7 @@
         </div>
 
         <div class="elGrid right">
-            <img
-                class="composits"
-                src="/img/6.png"
-                alt="Аудит"
-            />
+            <img class="composits" src="/img/6.png" alt="Аудит" />
         </div>
     </div>
 </section>
@@ -69,7 +70,9 @@
     .info {
         gap: 12px;
     }
-
+    .mobIts {
+        display: none;
+    }
     .title {
         margin-bottom: 50px;
     }
@@ -157,7 +160,7 @@
         .bottom {
             flex-direction: column;
             align-items: flex-start;
-            gap: 16px;
+            gap: 0;
             margin-top: 24px;
         }
 
@@ -166,31 +169,45 @@
             flex-direction: row;
             align-items: baseline;
         }
-
-        .right {
-            min-height: 300px;
-            order: -1; /* Картинка уходит наверх, если нужно */
+        .title {
+            height: 110vh;
+            background: url(/img/mob/4.png);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            padding: 16px;
         }
 
-        .right .composits {
-            max-height: 280px;
-            width: auto;
-            margin: 0 auto;
+        .mobIts {
+            display: inline;
+        }
+
+        .title * {
+            color: white !important;
+
+            -webkit-text-fill-color: aliceblue;
+        }
+
+        .right {
+            display: none;
         }
     }
 
     /* Маленькие телефоны (до 480px) */
     @media (max-width: 480px) {
         .container2 {
-            padding: 16px;
+            padding: 0;
         }
 
+        .group {
+            padding: 15px;
+        }
         .title {
             margin-bottom: 16px;
+            padding-top: 70px;
         }
-
         .left {
-            gap: 20px;
+            gap: 10px;
         }
 
         .ulSin {
@@ -201,14 +218,6 @@
             margin-bottom: 8px;
         }
 
-        .right {
-            min-height: 220px;
-        }
-
-        .right .composits {
-            max-height: 200px;
-        }
-
         .bottom {
             width: 100%;
         }
@@ -216,6 +225,10 @@
         .info {
             width: 100%;
             justify-content: space-between;
+        }
+
+        .slide {
+            padding-bottom: 60px;
         }
     }
 </style>

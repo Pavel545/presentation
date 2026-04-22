@@ -1,5 +1,4 @@
 ---
-
 ---
 
 <section id="end" class="slide">
@@ -90,10 +89,18 @@
 </section>
 
 <style>
-    .qr {
-        width: 613px;
-        height: 613px;
+    .gr2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        height: 100vh;
     }
+
+    .qr {
+        width: 100%;
+        max-width: 613px;
+        height: auto;
+    }
+
     .linkBox {
         display: flex;
         gap: 10px;
@@ -114,19 +121,18 @@
     .post:hover {
         opacity: 1;
     }
+
     .decor {
         position: absolute;
         left: -11px;
         top: -11px;
         right: -11px;
         bottom: -11px;
-
         pointer-events: none;
     }
 
     .siniy2 {
         all: unset;
-
         color: var(--siniy);
     }
 
@@ -153,26 +159,26 @@
         display: grid;
         grid-template-rows: 70% 30%;
     }
+
     .left {
         background: var(--svetlyy);
         display: flex;
         flex-direction: column;
-
         justify-content: space-between;
         height: 100%;
+        padding: 70px;
     }
 
     .right {
         background: url(/img/fon02.jpg);
-
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
-
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        padding: 70px;
     }
 
     .rTitle {
@@ -201,12 +207,6 @@
 
     .rContent {
         padding: 11px;
-        /* background: url(/img/fon02D.png);
-
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center; */
-
         display: grid;
         grid-template-columns: repeat(2, 0.8fr);
         grid-template-rows: repeat(2, 0.8fr);
@@ -214,11 +214,111 @@
         height: 100%;
         margin-top: 40px;
     }
+
     .linkBox a {
         transition: 300ms;
     }
 
     .linkBox a:hover {
         transform: scale(1.1);
+    }
+
+    /* Адаптив */
+    @media (max-width: 1024px) {
+        .left {
+            padding: 40px;
+        }
+
+        .text {
+            padding: 30px 40px;
+        }
+
+        .right {
+            padding: 40px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .gr2 {
+            grid-template-columns: 1fr;
+            height: auto;
+            min-height: 100vh;
+        }
+
+        .elGrid {
+            grid-template-rows: auto auto;
+        }
+
+        .left {
+            padding: 80px 20px 40px;
+            min-height: auto;
+        }
+
+      
+
+        .list {
+            margin-bottom: 30px;
+        }
+
+        .but {
+            width: 100%;
+            text-align: center;
+        }
+
+        .text {
+            padding: 30px 20px;
+        }
+
+        .right {
+            padding: 40px 20px;
+            min-height: auto;
+        }
+
+        .qr {
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .post {
+            text-align: center;
+            font-size: 12px;
+            max-width: 100%;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .left {
+            padding: 70px 16px 30px;
+        }
+
+      
+
+        .link {
+            font-size: 16px;
+        }
+
+        .text {
+            padding: 20px 16px;
+        }
+
+
+        .right {
+            padding: 30px 16px;
+
+            padding-bottom: 90px;
+        }
+
+        .qr {
+            max-width: 250px;
+        }
+
+        .post {
+            font-size: 11px;
+            margin-top: 20px;
+        }
+
+        .linkBox {
+            justify-content: center;
+        }
     }
 </style>

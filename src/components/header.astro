@@ -2,12 +2,15 @@
 import slides from "../data/data.json";
 import { sliderState } from "../lib/sliderState";
 console.log(sliderState.current);
+
+import Brain from "../assets/brain.svg";
 ---
 
 <header class="header">
     <div class="container">
         <div class="content">
-            <a href="/" class="boxLogo">
+            <!-- Десктоп логотип -->
+            <a href="/" class="boxLogo desktop-logo">
                 <img
                     class="imgLogo"
                     src="/logo.svg"
@@ -15,6 +18,12 @@ console.log(sliderState.current);
                     id="logoImage"
                 />
             </a>
+
+            <!-- Мобильная кнопка ИИ-ассистента -->
+            <button class="ai-assistant-btn mobile-only" id="aiAssistantBtn">
+                <Brain />
+                <span>ИИ-ассистент</span>
+            </button>
 
             <button class="menu" id="burger">
                 <span></span>
@@ -49,8 +58,6 @@ console.log(sliderState.current);
     </div>
 </aside>
 
-
-
 <style>
     .header {
         top: 40px;
@@ -58,6 +65,7 @@ console.log(sliderState.current);
         position: fixed;
         width: 100%;
         z-index: 1000;
+        transition: all 0.3s ease;
     }
 
     .content {
@@ -65,6 +73,58 @@ console.log(sliderState.current);
         align-items: center;
         justify-content: space-between;
         height: 60px;
+    }
+
+    .boxLogo {
+        display: block;
+    }
+
+    .imgLogo {
+        height: 40px;
+        width: auto;
+        transition: all 0.3s ease;
+    }
+
+    /* ================= ИИ-АССИСТЕНТ (МОБИЛЬНАЯ КНОПКА) ================= */
+
+    .ai-assistant-btn {
+        display: none;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 16px;
+        background: var(--belyy-100);
+        backdrop-filter: blur(10px);
+        border: none;
+        border-radius: var(--br);
+        color: white;
+        font-family: var(--font-family);
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 110%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        white-space: nowrap;
+    }
+
+    .ai-assistant-btn svg {
+        width: 20px;
+        height: 20px;
+        transition: transform 0.3s ease;
+    }
+
+    .ai-assistant-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .ai-assistant-btn:hover svg {
+        transform: rotate(15deg);
+    }
+
+    .ai-assistant-btn:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
     /* ================= BURGER ================= */
@@ -86,19 +146,19 @@ console.log(sliderState.current);
         background: white;
         transition: all 0.3s ease;
     }
+
     .menuTitle {
         height: 100px;
-
         display: flex;
         align-items: center;
         padding: 75px 40px;
-
         font-family: var(--font-family);
         font-weight: 700;
         font-size: 35px;
         line-height: 110%;
         color: var(--temnyy);
     }
+
     .menu span:nth-child(1) {
         top: 24px;
     }
@@ -126,6 +186,7 @@ console.log(sliderState.current);
         transform: rotate(-45deg);
         top: 30px;
     }
+
     .menu.active span {
         background: black;
     }
@@ -143,6 +204,7 @@ console.log(sliderState.current);
     .menu.active:hover span {
         opacity: 0.7;
     }
+
     /* ================= OVERLAY ================= */
 
     .overlay {
@@ -175,7 +237,6 @@ console.log(sliderState.current);
         z-index: 950;
         display: flex;
         flex-direction: column;
-
         padding-right: 45px;
         padding-bottom: 30px;
     }
@@ -216,10 +277,8 @@ console.log(sliderState.current);
         text-decoration: none;
         color: black;
         transition: 0.3s;
-
         position: relative;
         padding: 22px 30px;
-
         cursor: pointer;
     }
 
@@ -229,7 +288,6 @@ console.log(sliderState.current);
 
     .slide:not(:last-child)::after {
         content: "";
-
         position: absolute;
         background: var(--temnyy);
         height: 0.5px;
@@ -243,14 +301,12 @@ console.log(sliderState.current);
         overflow: hidden;
         width: 200px;
         height: 115px;
-
         border-radius: 3px;
     }
 
     .imgWrap img {
         width: 100%;
         height: 100%;
-
         object-fit: cover;
         display: block;
         transition: transform 0.4s ease;
@@ -283,11 +339,165 @@ console.log(sliderState.current);
         overflow: hidden;
     }
 
-    /* ================= MOBILE ================= */
+    /* ================= АДАПТИВ ================= */
+
+    .mobile-only {
+        display: none;
+    }
 
     @media (max-width: 768px) {
+        .header {
+            top: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0.5) 0%,
+                transparent 100%
+            );
+            padding: 10px 0;
+        }
+
+        .desktop-logo {
+            display: none !important;
+        }
+
+        .mobile-only {
+            display: flex !important;
+        }
+
         .sideMenu {
             width: 100%;
+            padding-right: 0;
+        }
+
+        .menuTitle {
+            padding: 60px 20px 30px;
+            font-size: 28px;
+            height: auto;
+        }
+
+        .menuContent {
+            padding: 20px;
+            gap: 10px;
+        }
+
+        .slide {
+            padding: 15px 20px;
+        }
+
+        .imgWrap {
+            width: 120px;
+            height: 80px;
+        }
+
+        .title {
+            font-size: 14px;
+        }
+
+        .id {
+            font-size: 14px;
+        }
+
+        /* Адаптация бургера для мобилки */
+        .menu span {
+            background: white;
+        }
+
+        .menu.active span {
+            background: black;
+        }
+
+        /* Адаптация кнопки ИИ для мобилки */
+        .ai-assistant-btn {
+            padding: 8px 14px;
+            font-size: 13px;
+        }
+
+        .ai-assistant-btn span {
+            display: inline;
+        }
+
+        .ai-assistant-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+    }
+
+    /* Маленькие мобилки */
+    @media (max-width: 480px) {
+        .ai-assistant-btn span {
+            /* display: none; */
+        }
+
+        .ai-assistant-btn {
+            padding: 10px;
+        }
+
+        .ai-assistant-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .menuTitle {
+            padding: 50px 16px 20px;
+            font-size: 24px;
+        }
+
+        .menuContent {
+            padding: 16px;
+            gap: 16px;
+        }
+
+        .slide {
+            padding: 12px 16px;
+        }
+
+        .imgWrap {
+            width: 100px;
+            height: 70px;
+        }
+    }
+
+    /* Планшеты */
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .sideMenu {
+            width: 60%;
         }
     }
 </style>
+
+<script>
+    // Инициализация ИИ-ассистента
+    document.addEventListener("DOMContentLoaded", () => {
+        const aiBtn = document.getElementById("aiAssistantBtn");
+
+        if (aiBtn) {
+            aiBtn.addEventListener("click", () => {
+                // Здесь логика открытия ИИ-ассистента
+                console.log("Открыть ИИ-ассистент");
+
+                // Пример: можно открыть модальное окно или чат
+                // openAIAssistant();
+            });
+        }
+
+        // Адаптация цвета бургера в зависимости от слайда
+        const updateBurgerColor = () => {
+            const burger = document.getElementById("burger");
+            const isFirstSlide = (window as any).sliderState?.current === 0;
+
+            if (burger) {
+                const spans = burger.querySelectorAll("span");
+                const color = isFirstSlide ? "white" : "var(--temnyy)";
+
+                if (!burger.classList.contains("active")) {
+                    spans.forEach((span) => {
+                        span.style.background = color;
+                    });
+                }
+            }
+        };
+
+        // Слушаем изменения слайда
+        window.addEventListener("slideChanged", updateBurgerColor);
+    });
+</script>

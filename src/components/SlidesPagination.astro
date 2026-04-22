@@ -3,15 +3,18 @@ import slides from "../data/data.json";
 ---
 
 <div class="pagination">
-    <div class="container">
+    <!-- Десктопная версия (15 полосок) -->
+    <div class="container desktop-pagination">
         <div class="track">
             {
                 slides.map((item, index) => (
-                    <div class={`item ${index == 0 ? "active" : ""}`}>
+                    <div
+                        class={`item ${index == 0 ? "active" : ""}`}
+                        data-index={index}
+                    >
                         <div class="rect">
                             <div class="id">{item.id}</div>
                         </div>
-
                         <div class="preview">
                             <img src={item.img} alt={item.name} />
                             <span>{item.name}</span>
@@ -19,6 +22,45 @@ import slides from "../data/data.json";
                     </div>
                 ))
             }
+        </div>
+    </div>
+
+    <!-- Мобильная версия (3 кнопки) -->
+    <div class="container mobile-pagination">
+        <div class="mobile-controls">
+            <button class="nav-btn prev" aria-label="Предыдущий слайд">
+                <svg
+                    width="18"
+                    height="20"
+                    viewBox="0 0 18 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        fill="currentColor"
+                        d="M0.498975 10.6254C-0.16631 10.2403 -0.166307 9.27975 0.498978 8.89458L15.6231 0.138529C16.4314 -0.329468 17.3831 0.467878 17.0639 1.3457L14.1284 9.41827C14.0481 9.63902 14.0481 9.881 14.1284 10.1018L17.0639 18.1743C17.3831 19.0521 16.4314 19.8495 15.6231 19.3815L0.498975 10.6254Z"
+                    ></path>
+                </svg>
+            </button>
+
+            <button class="nav-btn home" aria-label="Главный экран">
+                Хочу услугу
+            </button>
+
+            <button class="nav-btn next" aria-label="Следующий слайд">
+                <svg
+                    width="18"
+                    height="20"
+                    viewBox="0 0 18 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        fill="currentColor"
+                        d="M16.6282 10.6254C17.2935 10.2403 17.2935 9.27975 16.6282 8.89458L1.50413 0.138529C0.695766 -0.329468 -0.255911 0.467878 0.0632973 1.3457L2.99878 9.41827C3.07905 9.63902 3.07905 9.881 2.99878 10.1018L0.0632973 18.1743C-0.255911 19.0521 0.695768 19.8495 1.50413 19.3815L16.6282 10.6254Z"
+                    ></path>
+                </svg>
+            </button>
         </div>
     </div>
 </div>
@@ -29,6 +71,20 @@ import slides from "../data/data.json";
         position: fixed;
         bottom: 0;
         z-index: 1000;
+        pointer-events: none;
+    }
+
+    .container {
+        pointer-events: auto;
+    }
+
+    /* ================= ДЕСКТОП ================= */
+    .desktop-pagination {
+        display: block;
+    }
+
+    .mobile-pagination {
+        display: none;
     }
 
     .track {
@@ -36,12 +92,10 @@ import slides from "../data/data.json";
         grid-template-columns: repeat(15, 1fr);
         gap: 5px;
         justify-content: center;
-
         padding: 30px 0 15px;
     }
 
-    /* ================= ITEM ================= */
-
+    /* ================= ITEM (десктоп) ================= */
     .item {
         position: relative;
         width: 100%;
@@ -58,24 +112,18 @@ import slides from "../data/data.json";
         width: 100%;
         height: 100%;
         background: #ddd;
-        border-radius: 6px;
+        border-radius: var(--br);
         transition: all 0.3s ease;
-
         display: flex;
         align-items: center;
         justify-content: center;
     }
 
-    /* ================= GROUP HOVER ================= */
-
     .track:hover .item {
         height: 20px;
     }
 
-    /* ================= ID ================= */
-
     .id {
-        /* position: absolute; */
         font-size: 12px;
         opacity: 0;
         transition: 0.3s;
@@ -85,8 +133,6 @@ import slides from "../data/data.json";
         opacity: 1;
     }
 
-    /* ================= ACTIVE HOVER ================= */
-
     .item:hover .rect {
         background: var(--zelenyy-3);
     }
@@ -95,8 +141,6 @@ import slides from "../data/data.json";
         opacity: 1;
     }
 
-    /* ================= PREVIEW ================= */
-
     .preview {
         position: absolute;
         bottom: 100%;
@@ -104,7 +148,7 @@ import slides from "../data/data.json";
         transform: translate(-50%, 10px);
         width: 140px;
         background: white;
-        border-radius: 10px;
+        border-radius: var(--br);
         overflow: hidden;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         opacity: 0;
@@ -127,5 +171,63 @@ import slides from "../data/data.json";
     .item:hover .preview {
         opacity: 1;
         transform: translate(-50%, -10px);
+    }
+
+    /* ================= МОБИЛЬНАЯ ВЕРСИЯ ================= */
+    @media (max-width: 768px) {
+        .desktop-pagination {
+            display: none;
+        }
+
+        .mobile-pagination {
+            display: block;
+            padding: 16px 20px 20px;
+            background: linear-gradient(
+                to top,
+                rgba(0, 0, 0, 0.4),
+                transparent
+            );
+        }
+
+        .mobile-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--br);
+            background: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .nav-btn.home {
+            width: 70%;
+        }
+
+        .slide-indicator {
+            text-align: center;
+            margin-top: 12px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .current-slide {
+            font-weight: 700;
+            font-size: 18px;
+        }
     }
 </style>

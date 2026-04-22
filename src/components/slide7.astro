@@ -58,10 +58,7 @@ import decorImage from "../assets/decor.svg";
                         <p class="t20 itemT">Проверка сбора данных</p>
                     </div>
                     <div class="item">
-                        <img
-                            src="/icons/s7/5.svg"
-                            alt="Публичная оферта"
-                        />
+                        <img src="/icons/s7/5.svg" alt="Публичная оферта" />
                         <p class="t20 itemT">Публичная оферта</p>
                     </div>
                 </div>
@@ -103,7 +100,7 @@ import decorImage from "../assets/decor.svg";
                 </div>
 
                 <div class="decor">
-                    <img class="decorImg" src={decorImage.src} alt="">
+                    <img class="decorImg" src={decorImage.src} alt="" />
                 </div>
             </div>
         </div>
@@ -135,12 +132,10 @@ import decorImage from "../assets/decor.svg";
     .right {
         padding: 70px 0 30px 30px;
         border-left: 1px solid var(--svetlo-seryy);
-
         display: flex;
         justify-content: space-between;
         flex-direction: column;
         gap: 40px;
-
         overflow: hidden;
     }
 
@@ -153,7 +148,7 @@ import decorImage from "../assets/decor.svg";
         right: 0;
     }
 
-    .decorImg{
+    .decorImg {
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -163,6 +158,7 @@ import decorImage from "../assets/decor.svg";
     .rightList {
         padding-left: 20px;
     }
+
     .rightList li {
         list-style: decimal;
         padding-bottom: 10px;
@@ -170,7 +166,6 @@ import decorImage from "../assets/decor.svg";
 
     .leftContent {
         margin: 30px 0;
-
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         grid-template-rows: 1fr 1fr;
@@ -180,14 +175,11 @@ import decorImage from "../assets/decor.svg";
     .item {
         background: var(--belyy);
         border-radius: var(--br);
-
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-
         gap: 20px;
-
         padding: 50px 40px;
     }
 
@@ -196,5 +188,125 @@ import decorImage from "../assets/decor.svg";
         font-weight: 700;
         line-height: 1.2;
         text-align: center;
+    }
+
+    /* Адаптация для мобильных устройств */
+    @media (max-width: 768px) {
+        .content {
+            grid-template-columns: 1fr !important;
+            gap: 10px;
+        }
+         .slide{
+            padding-top: 60px;
+        }
+        .left {
+            margin-right: 0;
+            margin-top: 30px;
+        }
+
+        .right {
+            padding: 30px 0 0 0;
+            border-left: none;
+            border-top: 1px solid var(--svetlo-seryy);
+            gap: 25px;
+            position: relative;
+        }
+
+        .leftContent {
+            grid-template-columns: repeat(2, 1fr) !important;
+            grid-template-rows: auto !important;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .item {
+            padding: 25px 15px;
+            gap: 15px;
+        }
+
+        .item img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .itemT {
+            font-size: 16px;
+        }
+
+        .rightList {
+            padding-left: 20px;
+        }
+
+        .rightList li {
+            font-size: 15px;
+            padding-bottom: 8px;
+        }
+
+        .ps {
+            font-size: 18px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .group {
+            gap: 15px;
+        }
+
+        .grup2 {
+            gap: 8px;
+        }
+
+        .decor {
+            width: 100%;
+            height: 40%;
+            opacity: 0.6;
+        }
+    }
+
+    /* Для очень маленьких экранов */
+    @media (max-width: 480px) {
+        .leftContent {
+            grid-template-columns: 1fr 1fr !important;
+            gap: 10px;
+        }
+        .item {
+            padding: 10px 5px;
+            gap: 15px;
+        }
+
+        .item img {
+            width: 35px;
+            height: 35px;
+        }
+
+        .itemT {
+            font-size: 15px;
+        }
+
+        .rightList li {
+            font-size: 12px;
+        }
+
+        .ps {
+            font-size: 16px;
+        }
+
+        .decor {
+            width: 100%;
+            height: 35%;
+            opacity: 0.5;
+        }
+
+        .group {
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .grup2 {
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+       
     }
 </style>

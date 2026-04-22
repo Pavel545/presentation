@@ -249,6 +249,148 @@
         margin-top: 30px;
     }
 
-    .list li {
+    /* Адаптация для мобильных устройств */
+    @media (max-width: 768px) {
+        .cont {
+            height: auto;
+        }
+        .group2 {
+            width: 100%;
+        }
+        .slide {
+            padding-top: 60px;
+        }
+        .content {
+            grid-template-columns: 1fr !important;
+            gap: 30px;
+        }
+
+        .left {
+            margin-right: 0;
+            margin-top: 30px;
+            gap: 30px;
+            max-width: 100%;
+        }
+
+        .right {
+            grid-template-columns: 1fr !important;
+            grid-template-rows: auto !important;
+            gap: 15px;
+            padding-top: 0;
+        }
+
+        .item {
+            grid-column: auto !important;
+            grid-row: auto !important;
+            padding: 25px 20px;
+            min-height: auto;
+        }
+
+        .item.active {
+            order: -1; /* Поднимаем активный элемент наверх */
+            flex-direction: column;
+        }
+
+        .row {
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .list {
+            margin-top: 15px;
+        }
+
+        .list li {
+            font-size: 15px;
+            padding-bottom: 5px;
+        }
+
+        .decor {
+            width: 100%;
+            height: 50%;
+            opacity: 0.4;
+            bottom: auto;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .grup2 {
+            gap: 8px;
+        }
+
+        .ps {
+            font-size: 14px;
+        }
+
+        h2 br {
+            display: none;
+        }
+    }
+
+    /* Для очень маленьких экранов */
+    @media (max-width: 480px) {
+        .left {
+            margin-top: 20px;
+            gap: 25px;
+        }
+
+        .right {
+            gap: 12px;
+        }
+
+        .item {
+            padding: 20px 15px;
+        }
+
+        .list {
+            padding-left: 18px;
+            margin-top: 12px;
+        }
+
+        .list li {
+            font-size: 14px;
+        }
+
+        .decor {
+            height: 40%;
+            opacity: 0.3;
+        }
+
+        .group {
+            gap: 10px;
+        }
+
+        .grup2 {
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
+        }
+    }
+
+    /* Для планшетов в портретной ориентации */
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .content {
+            grid-template-columns: 1fr 1fr !important;
+            gap: 10px;
+        }
+
+        .left {
+            margin-right: 20px;
+            gap: 40px;
+        }
+
+        .right {
+            grid-template-columns: 1fr !important;
+            grid-template-rows: auto !important;
+        }
+
+        .item {
+            grid-column: auto !important;
+            grid-row: auto !important;
+        }
+
+        .row {
+            gap: 30px;
+        }
     }
 </style>

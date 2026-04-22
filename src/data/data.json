@@ -2,74 +2,74 @@
     {
         "id": "01",
         "name": "Разработка цифровых решений ",
-        "img": "/img/slide/1.jpg"
+        "img": "/img/slide/1.webp"
     },
     {
         "id": "02",
         "name": "Почему выбирают нас",
-        "img": "/img/slide/2.jpg"
+        "img": "/img/slide/2.webp"
     },
     {
         "id": "03",
         "name": "Наши услуги",
-        "img": "/img/slide/3.jpg"
+        "img": "/img/slide/3.webp"
     },
     {
         "id": "04",
         "name": "Умный чат-бот",
-        "img": "/img/slide/4.jpg"
+        "img": "/img/slide/4.webp"
     },
     {
         "id": "05",
         "name": "Мобильное приложение",
-        "img": "/img/slide/5.jpg"
+        "img": "/img/slide/5.webp"
     },
     {
         "id": "06",
         "name": "Аудит",
-        "img": "/img/slide/6.jpg"
+        "img": "/img/slide/6.webp"
     },
     {
         "id": "07",
         "name": "Политика сайта",
-        "img": "/img/slide/7.jpg"
+        "img": "/img/slide/7.webp"
     },
     {
         "id": "08",
         "name": "Лендинг",
-        "img": "/img/slide/8.jpg"
+        "img": "/img/slide/8.webp"
     },
     {
         "id": "09",
         "name": "Интернет магазин",
-        "img": "/img/slide/9.jpg"
+        "img": "/img/slide/9.webp"
     },
     {
         "id": "10",
         "name": "Корпоративный сайт",
-        "img": "/img/slide/10.jpg"
+        "img": "/img/slide/10.webp"
     },
     {
         "id": "11",
         "name": "Техническая поддержка",
-        "img": "/img/slide/11.jpg"
+        "img": "/img/slide/11.webp"
     },
     {
         "id": "12",
         "name": "Внедрение ИИ",
-        "img": "/img/slide/12.jpg"
+        "img": "/img/slide/12.webp"
     },{
         "id": "13",
         "name": "Разработка VK App и MAX App",
-        "img": "/img/slide/13.jpg"
+        "img": "/img/slide/13.webp"
     },{
         "id": "14",
         "name": "Разработка WEB VIEW ПРИЛОЖЕНИЯ",
-        "img": "/img/slide/14.jpg"
+        "img": "/img/slide/14.webp"
     },
     {
         "id": "15",
         "name": "Контакты",
-        "img": "/img/slide/15.jpg"
+        "img": "/img/slide/15.webp"
     }
 ]
