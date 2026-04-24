@@ -16,16 +16,15 @@ import Slide13 from "../components/slide13.astro";
 import Slide14 from "../components/slide14.astro";
 import End from "../components/end.astro";
 
-import "swiper/css";           // Основные стили Swiper
+import "swiper/css"; // Основные стили Swiper
 import "swiper/css/pagination"; // Стили для пагинации (если используете)
-import "./glob.css";          // ваши глобальные стили
+import "./glob.css"; // ваши глобальные стили
 ---
 
 <Layout>
   <div class="slider-container">
     <div class="swiper">
       <div class="swiper-wrapper">
-
         <div class="swiper-slide slideSection">
           <Welcome />
         </div>
@@ -39,19 +38,7 @@ import "./glob.css";          // ваши глобальные стили
         </div>
 
         <div class="swiper-slide slideSection">
-          <Slide4 />
-        </div>
-
-        <div class="swiper-slide slideSection">
-          <Slide5 />
-        </div>
-
-        <div class="swiper-slide slideSection">
           <Slide6 />
-        </div>
-
-        <div class="swiper-slide slideSection">
-          <Slide7 />
         </div>
 
         <div class="swiper-slide slideSection">
@@ -65,15 +52,13 @@ import "./glob.css";          // ваши глобальные стили
         <div class="swiper-slide slideSection">
           <Slide10 />
         </div>
-
         <div class="swiper-slide slideSection">
-          <Slide11 />
+          <Slide4 />
         </div>
 
         <div class="swiper-slide slideSection">
-          <Slide12 />
+          <Slide5 />
         </div>
-
         <div class="swiper-slide slideSection">
           <Slide13 />
         </div>
@@ -81,11 +66,21 @@ import "./glob.css";          // ваши глобальные стили
         <div class="swiper-slide slideSection">
           <Slide14 />
         </div>
+        <div class="swiper-slide slideSection">
+          <Slide12 />
+        </div>
+
+        <div class="swiper-slide slideSection">
+          <Slide7 />
+        </div>
+
+        <div class="swiper-slide slideSection">
+          <Slide11 />
+        </div>
 
         <div class="swiper-slide slideSection">
           <End />
         </div>
-
       </div>
 
       <!-- Пагинация (рекомендуется добавить) -->

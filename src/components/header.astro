@@ -4,6 +4,7 @@ import { sliderState } from "../lib/sliderState";
 console.log(sliderState.current);
 
 import Brain from "../assets/brain.svg";
+import AIChatWrapper from "./chat/AIChatWrapper";
 ---
 
 <header class="header">
@@ -19,16 +20,28 @@ import Brain from "../assets/brain.svg";
                 />
             </a>
 
-            <!-- Мобильная кнопка ИИ-ассистента -->
-            <button class="ai-assistant-btn mobile-only" id="aiAssistantBtn">
-                <Brain />
-                <span>ИИ-ассистент</span>
-            </button>
-
-            <button class="menu" id="burger">
-                <span></span>
-                <span></span>
-            </button>
+            <div class="group row">
+                <!-- <button
+                    class="ai-assistant-btn mobile-only"
+                    id="aiAssistantBtn"
+                >
+                    <Brain />
+                    <span>ИИ-ассистент</span>
+                </button> -->
+                <AIChatWrapper
+                    client:load
+                    welcomeMessage="👋 Здравствуйте! Я AI ассистент. Чем могу помочь?"
+                    suggestedQuestions={[
+                        "Расскажите о продуктах",
+                        "Какие у вас цены?",
+                        "Как связаться с поддержкой?",
+                    ]}
+                />
+                <button class="menu" id="burger">
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
         </div>
     </div>
 </header>
@@ -64,7 +77,7 @@ import Brain from "../assets/brain.svg";
         left: 0;
         position: fixed;
         width: 100%;
-        z-index: 1000;
+        z-index: 1001;
         transition: all 0.3s ease;
     }
 
@@ -84,47 +97,9 @@ import Brain from "../assets/brain.svg";
         width: auto;
         transition: all 0.3s ease;
     }
-
-    /* ================= ИИ-АССИСТЕНТ (МОБИЛЬНАЯ КНОПКА) ================= */
-
-    .ai-assistant-btn {
-        display: none;
+    .row {
+        flex-direction: row;
         align-items: center;
-        gap: 8px;
-        padding: 10px 16px;
-        background: var(--belyy-100);
-        backdrop-filter: blur(10px);
-        border: none;
-        border-radius: var(--br);
-        color: white;
-        font-family: var(--font-family);
-        font-weight: 600;
-        font-size: 14px;
-        line-height: 110%;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        white-space: nowrap;
-    }
-
-    .ai-assistant-btn svg {
-        width: 20px;
-        height: 20px;
-        transition: transform 0.3s ease;
-    }
-
-    .ai-assistant-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-    }
-
-    .ai-assistant-btn:hover svg {
-        transform: rotate(15deg);
-    }
-
-    .ai-assistant-btn:active {
-        transform: translateY(0);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
     /* ================= BURGER ================= */
@@ -341,9 +316,9 @@ import Brain from "../assets/brain.svg";
 
     /* ================= АДАПТИВ ================= */
 
-    .mobile-only {
+    /* .mobile-only {
         display: none;
-    }
+    } */
 
     @media (max-width: 768px) {
         .header {
@@ -363,7 +338,10 @@ import Brain from "../assets/brain.svg";
         .mobile-only {
             display: flex !important;
         }
-
+        .row {
+            width: 100%;
+            justify-content: space-between;
+        }
         .sideMenu {
             width: 100%;
             padding-right: 0;
@@ -405,38 +383,10 @@ import Brain from "../assets/brain.svg";
         .menu.active span {
             background: black;
         }
-
-        /* Адаптация кнопки ИИ для мобилки */
-        .ai-assistant-btn {
-            padding: 8px 14px;
-            font-size: 13px;
-        }
-
-        .ai-assistant-btn span {
-            display: inline;
-        }
-
-        .ai-assistant-btn svg {
-            width: 18px;
-            height: 18px;
-        }
     }
 
     /* Маленькие мобилки */
     @media (max-width: 480px) {
-        .ai-assistant-btn span {
-            /* display: none; */
-        }
-
-        .ai-assistant-btn {
-            padding: 10px;
-        }
-
-        .ai-assistant-btn svg {
-            width: 20px;
-            height: 20px;
-        }
-
         .menuTitle {
             padding: 50px 16px 20px;
             font-size: 24px;

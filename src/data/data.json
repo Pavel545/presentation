@@ -16,56 +16,58 @@
     },
     {
         "id": "04",
-        "name": "Умный чат-бот",
-        "img": "/img/slide/4.webp"
-    },
-    {
-        "id": "05",
-        "name": "Мобильное приложение",
-        "img": "/img/slide/5.webp"
-    },
-    {
-        "id": "06",
         "name": "Аудит",
         "img": "/img/slide/6.webp"
     },
     {
-        "id": "07",
-        "name": "Политика сайта",
-        "img": "/img/slide/7.webp"
-    },
-    {
-        "id": "08",
+        "id": "05",
         "name": "Лендинг",
         "img": "/img/slide/8.webp"
     },
     {
-        "id": "09",
+        "id": "06",
         "name": "Интернет магазин",
         "img": "/img/slide/9.webp"
     },
     {
-        "id": "10",
+        "id": "07",
         "name": "Корпоративный сайт",
         "img": "/img/slide/10.webp"
     },
     {
+        "id": "08",
+        "name": "Умный чат-бот",
+        "img": "/img/slide/4.webp"
+    },
+    {
+        "id": "09",
+        "name": "Мобильное приложение",
+        "img": "/img/slide/5.webp"
+    },
+    {
+        "id": "10",
+        "name": "Разработка VK App и MAX App",
+        "img": "/img/slide/13.webp"
+    },
+    {
         "id": "11",
-        "name": "Техническая поддержка",
-        "img": "/img/slide/11.webp"
+        "name": "Разработка WEB VIEW ПРИЛОЖЕНИЯ",
+        "img": "/img/slide/14.webp"
     },
     {
         "id": "12",
         "name": "Внедрение ИИ",
         "img": "/img/slide/12.webp"
-    },{
+    },
+    {
         "id": "13",
-        "name": "Разработка VK App и MAX App",
-        "img": "/img/slide/13.webp"
-    },{
+        "name": "Политика сайта",
+        "img": "/img/slide/7.webp"
+    },
+    {
         "id": "14",
-        "name": "Разработка WEB VIEW ПРИЛОЖЕНИЯ",
-        "img": "/img/slide/14.webp"
+        "name": "Техническая поддержка",
+        "img": "/img/slide/11.webp"
     },
     {
         "id": "15",

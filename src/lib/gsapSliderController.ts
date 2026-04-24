@@ -78,6 +78,8 @@ export const goToSlide = (index: number) => {
 
 // ==================== ДЕСКТОП ИНИЦИАЛИЗАЦИЯ ====================
 export const initDesktopSlider = () => {
+
+    scaleContentForDesktop();
     const slides = document.querySelectorAll<HTMLElement>(".slideSection");
     sliderState.total = slides.length;
 
@@ -169,5 +171,41 @@ const initPaginationMenu = () => {
             goToSlide(i);
             toggleMenu();
         });
+    });
+};
+
+
+
+/**
+ * Масштабирует контент презентации под разные размеры десктопных экранов.
+ * Вызывается до инициализации десктопного слайдера.
+ */
+export const scaleContentForDesktop = () => {
+    // Базовые размеры (например, для 1920px)
+    const baseWidth = 1920;
+    const currentWidth = window.innerWidth;
+
+    // Масштабный коэффициент (например, 0.8 для 1536px)
+    const scaleFactor = currentWidth / baseWidth;
+
+    // Масштабируем все элементы внутри слайдера
+    const slides = document.querySelectorAll<HTMLElement>(".slideSection");
+    slides.forEach((slide) => {
+        slide.style.transform = `scale(${scaleFactor})`;
+        slide.style.transformOrigin = "top left";
+    });
+
+    // Масштабируем текст внутри слайдов
+    const textElements = document.querySelectorAll<HTMLElement>(".slideSection p, .slideSection h1, .slideSection h2, .slideSection h3");
+    textElements.forEach((el) => {
+        const baseFontSize = parseFloat(getComputedStyle(el).fontSize);
+        el.style.fontSize = `${baseFontSize * scaleFactor}px`;
+    });
+
+    // Масштабируем изображения (если нужно)
+    const images = document.querySelectorAll<HTMLImageElement>(".slideSection img");
+    images.forEach((img) => {
+        const baseWidth = parseFloat(getComputedStyle(img).width);
+        img.style.width = `${baseWidth * scaleFactor}px`;
     });
 };
