@@ -57,6 +57,24 @@
                         <p class="t16 grey">Стоимость:</p>
                         <span class="t20 siniy"> от 200 000 ₽</span>
                     </div>
+
+                    <div class="group">
+                        <p
+                            style="font-style: italic; color:var(--siniy)"
+                            class="t20"
+                        >
+                            <span>
+                                Бесплатный дизайн главного экрана приложения</span
+                            >
+                        </p>
+                        <button
+                            class="but"
+                            data-popup
+                            data-popup-title="Бесплатный дизайн главного экрана приложения"
+                        >
+                            <b>Получить</b> бесплатно
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -78,12 +96,12 @@
     }
 
     .title {
-        margin-bottom: 50px;
+        margin-bottom: 0.5rem;
     }
 
     .bottom {
         display: flex;
-        gap: 90px;
+        gap: 2rem;
         align-items: center;
         margin-top: auto;
     }
@@ -121,17 +139,14 @@
     .gr2 {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 40px;
         height: 100%;
     }
 
-  /* ===== АДАПТАЦИЯ ===== */
+    /* ===== АДАПТАЦИЯ ===== */
 
     /* Планшеты (768px - 1024px) */
     @media (max-width: 1024px) {
-        .gr2 {
-            gap: 24px;
-        }
+        
 
         .title {
             margin-bottom: 32px;
@@ -141,16 +156,14 @@
             gap: 28px;
         }
 
-        .bottom {
-            gap: 40px;
-        }
+      
     }
 
     /* Мобильные (до 768px) */
     @media (max-width: 768px) {
         .gr2 {
             grid-template-columns: 1fr;
-            gap: 32px;
+            gap: 2rem;
         }
 
         .left {

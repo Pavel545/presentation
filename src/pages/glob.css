@@ -146,8 +146,8 @@
 .container {
     width: 100%;
 
-    padding-right: max(16px, 2vw);
-    padding-left: max(16px, 2vw);
+    padding-right: max(16px, 2rem);
+    padding-left: max(16px, 2rem);
 }
 
 @media (min-width: 1920px) {
@@ -158,7 +158,7 @@
 }
 
 .container2 {
-    padding: clamp(30px, 10vw, 130px) clamp(15px, 5vw, 75px) 60px;
+    padding: clamp(30px, 10vw, 130px) clamp(15px, 2rem, 75px) 60px;
 
 }
 
@@ -281,6 +281,12 @@ a {
     width: fit-content;
     transition: 300ms;
 
+    border: none;
+    cursor: pointer;
+
+    width: 100%;
+
+    text-align: center;
 }
 
 .but:hover {
@@ -323,10 +329,6 @@ body {
     transform: translate(-50%, -50%);
 }
 
-circle {
-    fill: none;
-    stroke-width: 4;
-}
 
 .bg {
     stroke: rgba(255, 255, 255, 0.2);
@@ -441,6 +443,14 @@ body {
     .decor {
         display: none !important;
     }
+
+    .container {
+    width: 100%;
+
+    padding-right: max(16px, 1rem);
+    padding-left: max(16px, 1rem);
+}
+
 
 }
 

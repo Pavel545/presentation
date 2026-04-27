@@ -1,0 +1,742 @@
+---
+// components/PopupForm.astro
+export interface Props {
+    id?: string;
+    defaultTitle?: string;
+}
+
+const { id = "popup-form", defaultTitle = "Бесплатный аудит" } = Astro.props;
+---
+
+<div
+    id={id}
+    class="popup-overlay"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+>
+    <div class="popup-container">
+        <button class="popup-close" aria-label="Закрыть окно">
+            <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+            >
+                <path d="M18 6L6 18M6 6l12 12"></path>
+            </svg>
+        </button>
+
+        <div class="form-card">
+            <h2 class="title" id="popup-title">{defaultTitle}</h2>
+
+            <form id="popupOrderForm" class="form">
+                <input type="hidden" name="form_title" value={defaultTitle} />
+
+                <div class="input-wrapper">
+                    <input type="text" name="name" placeholder="Ваше имя" />
+                    <span class="error-message"></span>
+                </div>
+
+                <div class="input-wrapper">
+                    <input type="email" name="email" placeholder="E-mail" />
+                    <span class="error-message"></span>
+                </div>
+
+                <div class="input-wrapper">
+                    <input
+                        type="tel"
+                        name="phone"
+                        placeholder="+7 (___) ___-__-__"
+                        required
+                    />
+                    <span class="error-message"></span>
+                </div>
+
+                <textarea name="service" placeholder="Комментарий к обращению"
+                ></textarea>
+
+                <button type="submit">ОТПРАВИТЬ</button>
+
+                <label class="checkbox">
+                    <input type="checkbox" name="privacy_policy" />
+                    <span>
+                        Нажимая кнопку "Отправить", Вы подтверждаете что
+                        ознакомились с
+                        <a href="#">Правилами обработки персональных данных</a>
+                    </span>
+                </label>
+                <span class="error-message privacy-error"></span>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .popup-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(4px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+            opacity 0.3s ease,
+            visibility 0.3s ease;
+        padding: 16px;
+    }
+
+    .popup-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .popup-container {
+        position: relative;
+        width: 100%;
+        max-width: 520px;
+        animation: slideUp 0.3s ease;
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .popup-close {
+        position: absolute;
+        top: -40px;
+        right: 0;
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        padding: 4px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.2s;
+    }
+
+    .popup-close:hover {
+        opacity: 0.7;
+    }
+
+    .form-card {
+        background: #f5f5f5;
+        border-radius: 12px;
+        padding: 24px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .title {
+        font-size: 36px;
+        font-weight: 800;
+        margin-bottom: 20px;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .input-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    input,
+    textarea {
+        padding: 16px;
+        border-radius: 10px;
+        border: 2px solid transparent;
+        background: #e5e5e5;
+        font-size: 16px;
+        transition: border-color 0.2s;
+    }
+
+    input:focus,
+    textarea:focus {
+        outline: none;
+        border-color: #c7f046;
+        background: #fff;
+    }
+
+    input.error,
+    textarea.error {
+        border-color: #ef4444;
+        background: #fef2f2;
+    }
+
+    .error-message {
+        font-size: 12px;
+        color: #ef4444;
+        min-height: 16px;
+        padding-left: 4px;
+    }
+
+    .privacy-error {
+        margin-top: -12px;
+    }
+
+    textarea {
+        min-height: 120px;
+        resize: none;
+    }
+
+    button[type="submit"] {
+        background: #c7f046;
+        border: none;
+        padding: 16px;
+        font-weight: 700;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: opacity 0.2s;
+    }
+
+    button[type="submit"]:hover {
+        opacity: 0.9;
+    }
+
+    button[type="submit"]:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .checkbox {
+        display: flex;
+        gap: 10px;
+        font-size: 14px;
+        color: #6b7280;
+        align-items: flex-start;
+    }
+
+    .checkbox input {
+        width: 18px;
+        height: 18px;
+        margin-top: 2px;
+    }
+
+    .checkbox.error-text {
+        color: #ef4444;
+    }
+
+    @media (max-width: 480px) {
+        .title {
+            font-size: 28px;
+        }
+        .form-card {
+            padding: 16px;
+        }
+        .popup-close {
+            top: -36px;
+        }
+    }
+</style>
+
+<script>
+    class PopupForm {
+        private overlay: HTMLElement;
+        private form: HTMLFormElement | null;
+        private titleElement: HTMLElement | null;
+        private formTitleInput: HTMLInputElement | null;
+        private closeBtn: HTMLElement | null;
+        private submitBtn: HTMLButtonElement | null;
+        private nameInput: HTMLInputElement | null;
+        private phoneInput: HTMLInputElement | null;
+        private emailInput: HTMLInputElement | null;
+        private serviceInput: HTMLTextAreaElement | null;
+        private privacyInput: HTMLInputElement | null;
+        private privacyError: HTMLElement | null;
+        private endpoint: string;
+
+        constructor(popupElement: HTMLElement) {
+            this.overlay = popupElement;
+            this.form = popupElement.querySelector("#popupOrderForm");
+            this.titleElement = popupElement.querySelector("#popup-title");
+            this.formTitleInput =
+                this.form?.querySelector('input[name="form_title"]') || null;
+            this.closeBtn = popupElement.querySelector(".popup-close");
+            this.privacyError =
+                this.form?.querySelector(".privacy-error") || null;
+
+            this.submitBtn =
+                this.form?.querySelector('button[type="submit"]') || null;
+            this.nameInput =
+                this.form?.querySelector('input[name="name"]') || null;
+            this.phoneInput =
+                this.form?.querySelector('input[name="phone"]') || null;
+            this.emailInput =
+                this.form?.querySelector('input[name="email"]') || null;
+            this.serviceInput =
+                this.form?.querySelector('textarea[name="service"]') || null;
+            this.privacyInput =
+                this.form?.querySelector('input[name="privacy_policy"]') ||
+                null;
+
+            this.endpoint =
+                "https://bravo.acr-agency.ru/api/send-form-universal";
+
+            this.init();
+        }
+
+        private init(): void {
+            this.bindEvents();
+            this.setupGlobalListeners();
+            this.setupMask();
+        }
+
+        private bindEvents(): void {
+            this.closeBtn?.addEventListener("click", () => this.close());
+
+            this.overlay.addEventListener("click", (e: MouseEvent) => {
+                if (e.target === this.overlay) {
+                    this.close();
+                }
+            });
+
+            document.addEventListener("keydown", (e: KeyboardEvent) => {
+                if (e.key === "Escape" && this.isOpen()) {
+                    this.close();
+                }
+            });
+
+            this.overlay.addEventListener("transitionend", () => {
+                document.body.style.overflow = this.isOpen() ? "hidden" : "";
+            });
+
+            // Валидация полей при вводе
+            const inputs = [
+                this.nameInput,
+                this.phoneInput,
+                this.emailInput,
+            ].filter(Boolean) as HTMLInputElement[];
+            inputs.forEach((input) => {
+                input.addEventListener("input", () => this.clearError(input));
+                input.addEventListener("blur", () => this.validateField(input));
+            });
+
+            if (this.privacyInput) {
+                this.privacyInput.addEventListener("change", () => {
+                    this.validatePrivacyCheckbox();
+                });
+            }
+
+            this.form?.addEventListener("submit", (e: Event) =>
+                this.handleSubmit(e),
+            );
+        }
+
+        private setupGlobalListeners(): void {
+            document.addEventListener("open-popup", (e: Event) => {
+                const customEvent = e as CustomEvent;
+                const { title, service } = customEvent.detail || {};
+                this.open(title, service);
+            });
+
+            document.addEventListener("click", (e: MouseEvent) => {
+                const trigger = (e.target as HTMLElement).closest(
+                    "[data-popup]",
+                ) as HTMLElement;
+                if (!trigger) return;
+
+                const title =
+                    trigger.dataset.popupTitle ||
+                    trigger.getAttribute("title") ||
+                    "";
+                const service = trigger.dataset.popupService || "";
+
+                this.open(title, service);
+            });
+        }
+
+        private setupMask(): void {
+            if (!this.phoneInput) return;
+
+            this.phoneInput.addEventListener("input", (e: Event) => {
+                const input = e.target as HTMLInputElement;
+                let value = input.value.replace(/\D/g, "");
+
+                if (!value) {
+                    input.value = "";
+                    return;
+                }
+
+                // Оставляем только первые 11 цифр (код страны + номер)
+                if (value.length > 11) {
+                    value = value.slice(0, 11);
+                }
+
+                let formatted = "+7";
+                if (value.length > 1) formatted += " (" + value.slice(1, 4);
+                if (value.length >= 4) formatted += ") " + value.slice(4, 7);
+                if (value.length >= 7) formatted += "-" + value.slice(7, 9);
+                if (value.length >= 9) formatted += "-" + value.slice(9, 11);
+
+                input.value = formatted;
+            });
+
+            this.phoneInput.addEventListener("focus", () => {
+                if (this.phoneInput && !this.phoneInput.value) {
+                    this.phoneInput.value = "+7 (";
+                }
+            });
+        }
+
+        private getErrorMessage(fieldName: string, type: string): string {
+            const messages: Record<string, Record<string, string>> = {
+                name: {
+                    required: "Введите ваше имя",
+                    minLength: "Имя должно содержать минимум 2 символа",
+                    invalid: "Имя должно содержать только буквы",
+                },
+                phone: {
+                    required: "Введите номер телефона",
+                    incomplete: "Введите номер телефона полностью",
+                },
+                email: {
+                    invalid: "Введите корректный email",
+                },
+                privacy: {
+                    required: "Необходимо согласие на обработку данных",
+                },
+            };
+
+            return messages[fieldName]?.[type] || "Поле заполнено некорректно";
+        }
+
+        private validateName(value: string): {
+            valid: boolean;
+            error?: string;
+        } {
+            if (!value.trim()) {
+                return {
+                    valid: false,
+                    error: this.getErrorMessage("name", "required"),
+                };
+            }
+            if (value.trim().length < 2) {
+                return {
+                    valid: false,
+                    error: this.getErrorMessage("name", "minLength"),
+                };
+            }
+            // Проверяем, что имя содержит только буквы, пробелы и дефисы
+            if (!/^[a-zA-Zа-яА-ЯёЁ\s\-]+$/.test(value.trim())) {
+                return {
+                    valid: false,
+                    error: this.getErrorMessage("name", "invalid"),
+                };
+            }
+            return { valid: true };
+        }
+
+        private validatePhone(value: string): {
+            valid: boolean;
+            error?: string;
+        } {
+            if (!value.trim()) {
+                return {
+                    valid: false,
+                    error: this.getErrorMessage("phone", "required"),
+                };
+            }
+            const digits = value.replace(/\D/g, "");
+            if (digits.length < 11) {
+                return {
+                    valid: false,
+                    error: this.getErrorMessage("phone", "incomplete"),
+                };
+            }
+            return { valid: true };
+        }
+
+        private validateEmail(value: string): {
+            valid: boolean;
+            error?: string;
+        } {
+            if (!value) return { valid: true }; // Email не обязателен
+
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())) {
+                return {
+                    valid: false,
+                    error: this.getErrorMessage("email", "invalid"),
+                };
+            }
+            return { valid: true };
+        }
+
+        private showFieldError(input: HTMLElement, message: string): void {
+            const wrapper = input.closest(".input-wrapper");
+            const errorSpan = wrapper?.querySelector(".error-message");
+
+            input.classList.add("error");
+            if (errorSpan) {
+                errorSpan.textContent = message;
+            }
+        }
+
+        private clearError(input: HTMLElement): void {
+            const wrapper = input.closest(".input-wrapper");
+            const errorSpan = wrapper?.querySelector(".error-message");
+
+            input.classList.remove("error");
+            if (errorSpan) {
+                errorSpan.textContent = "";
+            }
+        }
+
+        private validatePrivacyCheckbox(): boolean {
+            const isChecked = this.privacyInput?.checked || false;
+            const checkboxLabel = this.privacyInput?.closest(".checkbox");
+
+            if (!isChecked && this.privacyError) {
+                this.privacyError.textContent = this.getErrorMessage(
+                    "privacy",
+                    "required",
+                );
+                checkboxLabel?.classList.add("error-text");
+                return false;
+            } else {
+                if (this.privacyError) {
+                    this.privacyError.textContent = "";
+                }
+                checkboxLabel?.classList.remove("error-text");
+                return true;
+            }
+        }
+
+        private validateField(input: HTMLElement): boolean {
+            if (!input) return true;
+
+            let result: { valid: boolean; error?: string } = { valid: true };
+
+            if (input === this.nameInput) {
+                result = this.validateName((input as HTMLInputElement).value);
+            } else if (input === this.phoneInput) {
+                result = this.validatePhone((input as HTMLInputElement).value);
+            } else if (input === this.emailInput) {
+                result = this.validateEmail((input as HTMLInputElement).value);
+            } else if (input === this.privacyInput) {
+                return this.validatePrivacyCheckbox();
+            }
+
+            if (!result.valid && result.error) {
+                this.showFieldError(input, result.error);
+                return false;
+            } else {
+                this.clearError(input);
+                return true;
+            }
+        }
+
+        private validateForm(): boolean {
+            const nameValid = this.nameInput
+                ? this.validateField(this.nameInput)
+                : true;
+            const phoneValid = this.phoneInput
+                ? this.validateField(this.phoneInput)
+                : true;
+            const emailValid = this.emailInput
+                ? this.validateField(this.emailInput)
+                : true;
+            const privacyValid = this.validatePrivacyCheckbox();
+
+            return [nameValid, phoneValid, emailValid, privacyValid].every(
+                Boolean,
+            );
+        }
+
+        private showThankYou(): void {
+            const card = this.form?.closest(".form-card");
+            if (!card) return;
+
+            card.innerHTML = `
+                <div style="text-align:center;padding:40px 20px;">
+                    <div style="font-size:64px;">✅</div>
+                    <h2>Спасибо за заявку!</h2>
+                    <p>Мы свяжемся с вами в ближайшее время</p>
+                </div>
+            `;
+        }
+
+        private resetForm(title?: string): void {
+            const card = this.form?.closest(".form-card");
+            if (!card) return;
+
+            const currentTitle =
+                title || this.titleElement?.textContent || "Бесплатный аудит";
+
+            card.innerHTML = `
+                <h2 class="title" id="popup-title">${currentTitle}</h2>
+                <form id="popupOrderForm" class="form">
+                    <input type="hidden" name="form_title" value="${currentTitle}" />
+                    
+                    <div class="input-wrapper">
+                        <input type="text" name="name" placeholder="Ваше имя" />
+                        <span class="error-message"></span>
+                    </div>
+                    
+                    <div class="input-wrapper">
+                        <input type="email" name="email" placeholder="E-mail" />
+                        <span class="error-message"></span>
+                    </div>
+                    
+                    <div class="input-wrapper">
+                        <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required />
+                        <span class="error-message"></span>
+                    </div>
+                    
+                    <textarea name="service" placeholder="Комментарий к обращению"></textarea>
+                    
+                    <button type="submit">ОТПРАВИТЬ</button>
+                    
+                    <label class="checkbox">
+                        <input type="checkbox" name="privacy_policy" />
+                        <span>
+                            Нажимая кнопку "Отправить", Вы подтверждаете что ознакомились с
+                            <a href="#">Правилами обработки персональных данных</a>
+                        </span>
+                    </label>
+                    <span class="error-message privacy-error"></span>
+                </form>
+            `;
+
+            // Переинициализация ссылок на элементы
+            this.form = document.querySelector("#popupOrderForm");
+            this.formTitleInput =
+                this.form?.querySelector('input[name="form_title"]') || null;
+            this.submitBtn =
+                this.form?.querySelector('button[type="submit"]') || null;
+            this.nameInput =
+                this.form?.querySelector('input[name="name"]') || null;
+            this.phoneInput =
+                this.form?.querySelector('input[name="phone"]') || null;
+            this.emailInput =
+                this.form?.querySelector('input[name="email"]') || null;
+            this.serviceInput =
+                this.form?.querySelector('textarea[name="service"]') || null;
+            this.privacyInput =
+                this.form?.querySelector('input[name="privacy_policy"]') ||
+                null;
+            this.privacyError =
+                this.form?.querySelector(".privacy-error") || null;
+            this.titleElement = document.querySelector("#popup-title");
+
+            this.form?.addEventListener("submit", (e: Event) =>
+                this.handleSubmit(e),
+            );
+            this.setupMask();
+        }
+
+        private async handleSubmit(event: Event): Promise<void> {
+            event.preventDefault();
+
+            if (!this.validateForm()) return;
+
+            if (this.submitBtn) {
+                this.submitBtn.disabled = true;
+                this.submitBtn.textContent = "Отправка...";
+            }
+
+            try {
+                const formData = new FormData(this.form!);
+                const data: Record<string, any> = {};
+
+                formData.forEach((value, key) => {
+                    data[key] = value;
+                });
+
+                const response = await fetch(this.endpoint, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                if (!response.ok) throw new Error("Ошибка отправки");
+
+                const currentTitle = this.titleElement?.textContent || "";
+                this.showThankYou();
+
+                setTimeout(() => {
+                    this.close();
+                    setTimeout(() => this.resetForm(currentTitle), 300);
+                }, 2000);
+            } catch (error) {
+                alert("Ошибка отправки. Попробуйте позже");
+            } finally {
+                if (this.submitBtn) {
+                    this.submitBtn.textContent = "ОТПРАВИТЬ";
+                    this.submitBtn.disabled = false;
+                }
+            }
+        }
+
+        public open(title: string = "", service: string = ""): void {
+            if (title) {
+                if (this.titleElement) {
+                    this.titleElement.textContent = title;
+                }
+                if (this.formTitleInput) {
+                    this.formTitleInput.value = title;
+                }
+            }
+
+            if (service && this.serviceInput) {
+                this.serviceInput.value = service;
+            }
+
+            this.overlay.classList.add("active");
+            this.overlay.setAttribute("aria-hidden", "false");
+
+            setTimeout(() => {
+                this.nameInput?.focus();
+            }, 300);
+        }
+
+        public close(): void {
+            this.overlay.classList.remove("active");
+            this.overlay.setAttribute("aria-hidden", "true");
+        }
+
+        public isOpen(): boolean {
+            return this.overlay.classList.contains("active");
+        }
+    }
+
+    // Инициализация
+    document.addEventListener("DOMContentLoaded", () => {
+        const popupElement = document.getElementById("popup-form");
+        if (popupElement) {
+            (window as any).popupForm = new PopupForm(popupElement);
+        }
+    });
+</script>
+
+<script is:inline>
+    // Экспорт глобального API для вызова из любого места
+    window.openPopup = function (title, service) {
+        document.dispatchEvent(
+            new CustomEvent("open-popup", {
+                detail: { title, service },
+            }),
+        );
+    };
+</script>

@@ -1,38 +1,7 @@
 import { gsap } from "gsap";
 import { sliderState } from "./sliderState";
 
-// ==================== ЛОГОТИП ====================
-const updateLogo = (newIndex: number) => {
-    const logoImg = document.querySelector<HTMLImageElement>('#logoImage');
-    if (!logoImg) return;
 
-    const shouldBeLight = newIndex === 0;
-    const currentIsLight = logoImg.src.includes('logo.svg') && !logoImg.src.includes('logoB');
-
-    if (shouldBeLight === currentIsLight) return;
-
-    const tl = gsap.timeline();
-
-    tl.to(logoImg, {
-        scale: 0.8,
-        opacity: 0,
-        rotation: -5,
-        duration: 0.25,
-        ease: "power2.in",
-        onComplete: () => {
-            logoImg.src = shouldBeLight ? "/logo.svg" : "/logoB.svg";
-            logoImg.alt = shouldBeLight ? "Логотип АЦР" : "Логотип АЦР (темный)";
-        }
-    })
-        .to(logoImg, {
-            scale: 1,
-            opacity: 1,
-            rotation: 0,
-            duration: 0.35,
-            ease: "back.out(1.2)",
-            clearProps: "rotation,scale"
-        });
-};
 
 // ==================== ПАГИНАЦИЯ ====================
 const updatePagination = () => {
@@ -46,11 +15,11 @@ export const goToSlide = (index: number) => {
     const slides = document.querySelectorAll<HTMLElement>(".slideSection");
     if (index > 0 && index < 14) {
         document.querySelector('.menu')?.classList.add("go");
-        document.querySelector('.typing-placeholder')?.classList.add("go");
+        document.querySelector('.logoImg')?.classList.add("go");
 
     } else {
         document.querySelector('.menu')?.classList.remove("go");
-        document.querySelector('.typing-placeholder')?.classList.remove("go");
+        document.querySelector('.logoImg')?.classList.remove("go");
     }
     index = Math.max(0, Math.min(index, slides.length - 1));
     if (sliderState.isAnimating || index === sliderState.current) return;
@@ -77,7 +46,6 @@ export const goToSlide = (index: number) => {
                 sliderState.current = index;
                 sliderState.isAnimating = false;
                 updatePagination();
-                updateLogo(index);
             },
         }
     );

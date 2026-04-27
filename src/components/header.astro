@@ -1,10 +1,10 @@
 ---
 import slides from "../data/data.json";
-import { sliderState } from "../lib/sliderState";
-console.log(sliderState.current);
 
-import Brain from "../assets/brain.svg";
 import AIChatWrapper from "./chat/AIChatWrapper";
+import "./logo.scss";
+import Logo from "../assets/logoAnim.svg";
+import MenuIcon from "../assets/menu.svg";
 ---
 
 <header class="header">
@@ -12,13 +12,8 @@ import AIChatWrapper from "./chat/AIChatWrapper";
         <div class="content">
             <!-- Десктоп логотип -->
             <div class="group row">
-                <a href="/" class="boxLogo desktop-logo">
-                    <img
-                        class="imgLogo"
-                        src="/logo.svg"
-                        alt="Логотип АЦР"
-                        id="logoImage"
-                    />
+                <a href="/" class="logo boxLogo desktop-logo">
+                    <Logo class="logoImg" id="logoImage" />
                 </a>
                 <AIChatWrapper
                     client:load
@@ -39,19 +34,14 @@ import AIChatWrapper from "./chat/AIChatWrapper";
                 </button> -->
 
             <button class="menu" id="burger">
-                <svg
-                    class="menu_decor"
-                    width="92"
-                    height="57"
-                    viewBox="0 0 92 57"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <path
-                        d="M91.9844 1C91.9844 0.447715 91.5367 0 90.9844 0H32.3183C32.0755 0 31.841 0.0883534 31.6585 0.248572L0.340197 27.7486C-0.113383 28.1469 -0.113382 28.8531 0.340198 29.2514L31.6585 56.7514C31.841 56.9116 32.0755 57 32.3183 57H90.9844C91.5367 57 91.9844 56.5523 91.9844 56V1Z"
-                        fill="#BFEF0A"></path>
-                </svg>
-                <span class="burgerText">Слайды</span>
+                <span class="menu-text">Меню</span>
+                <MenuIcon class="menu-icon" />
+
+
+                <svg class="bac" width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="14.4141" y="44" width="42" height="2" transform="rotate(-45 14.4141 44)" fill="#282631" />
+  <rect x="15.4141" y="14" width="42" height="2" transform="rotate(45 15.4141 14)" fill="#282631" />
+</svg>
             </button>
         </div>
     </div>
@@ -108,26 +98,29 @@ import AIChatWrapper from "./chat/AIChatWrapper";
         width: auto;
         transition: all 0.3s ease;
     }
+
     .row {
         flex-direction: row;
         align-items: center;
-        gap: 10vw;
+        gap: 1vw;
+        width: 100%;
     }
 
     /* ================= BURGER ================= */
 
+    /* ================= BURGER ================= */
+
     .menu {
-        width: 200px;
-        padding: 10px 15px;
-        position: absolute;
         bottom: 10px;
         right: 0;
+
+        border-radius: var(--br);
 
         background: transparent;
         border: none;
         cursor: pointer;
 
-        background: var(--zelenyy-5);
+        /* background: var(--belyy); */
         transition: 500ms;
 
         animation: In 3s;
@@ -138,28 +131,93 @@ import AIChatWrapper from "./chat/AIChatWrapper";
         font-size: 22px;
         line-height: 110%;
         color: var(--temnyy);
+
+        /* Для позиционирования иконки и текста */
+        display: flex;
+        align-items: center;
+        gap: 8px;
     }
 
-    .menu.go {
-        transform: translateX(160px);
+    /* Стили для SVG иконки */
+    .menu-icon {
+        width: 45px;
+        height: 45px;
+        transition: transform 0.3s ease;
+        z-index: 2;
+        position: relative;
     }
+
+    .menu-icon circle {
+        fill: var(--zelenyy-3) !important;
+        stroke-width: 4;
+    }
+
+    /* Текст "Меню" по умолчанию скрыт */
+    .menu-text {
+        display: inline-block;
+        position: relative;
+        z-index: 2;
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+   
+
 
     .menu:hover {
         transform: translateX(0);
     }
-    .menu span {
+
+    .menu  span{
         position: relative;
         z-index: 2;
+        width: 0;
+        overflow: hidden;
+        transition: 300ms;
+    }
+     .menu:hover span {
+       width: 100px;
+    }
+
+    .menu:hover {
+        background: var(--zelenyy-3);
+    }
+
+     .menu:hover :global([data-it])  {
+      fill: var(--zelenyy-3);
+    }
+
+      .menu:hover :global([data-it])  {
+      fill: var(--zelenyy-3);
+    }.menu :global([data-fon])  {
+      fill: #282631;
+    }
+
+     .menu:hover :global([data-fon])  {
+      fill: #282631;
     }
 
     .menu_decor {
         position: absolute;
         left: -40px;
         height: 100%;
-
         top: 0;
         z-index: 1;
     }
+    .bac{
+        display: none;
+    }
+
+    .menu.active .bac{
+        display: block;
+        cursor: pointer;
+        fill: var(--siniy);
+    }
+
+    .menu.active .menu-text, .menu.active .menu-icon{
+        display: none;
+    }
+
 
     .menuTitle {
         height: 100px;
@@ -183,40 +241,6 @@ import AIChatWrapper from "./chat/AIChatWrapper";
         left: 151px;
         transform: rotate(180deg);
     }
-
-    /* .menu:hover span:nth-child(1) {
-        transform: translateX(6px);
-    }
-
-    .menu:hover span:nth-child(2) {
-        transform: translateX(-6px);
-    }
-
-    .menu.active span:nth-child(1) {
-        transform: rotate(45deg);
-        top: 30px;
-    }
-
-    .menu.active span:nth-child(2) {
-        transform: rotate(-45deg);
-        top: 30px;
-    }
-
-    .menu.active span {
-        background: black;
-    }
-
-    .menu.active:hover span:nth-child(1) {
-        transform: rotate(45deg) scaleX(1.2);
-    }
-
-    .menu.active:hover span:nth-child(2) {
-        transform: rotate(-45deg) scaleX(1.2);
-    }
-
-    .menu.active:hover span {
-        opacity: 0.7;
-    } */
 
     /* ================= OVERLAY ================= */
 
@@ -367,7 +391,7 @@ import AIChatWrapper from "./chat/AIChatWrapper";
         .menu {
             display: none;
         }
-       
+
         .header {
             top: 0;
             background: linear-gradient(
@@ -438,6 +462,8 @@ import AIChatWrapper from "./chat/AIChatWrapper";
 
         .menuContent {
             padding: 16px;
+            padding-bottom: 50px;
+
             gap: 16px;
         }
 

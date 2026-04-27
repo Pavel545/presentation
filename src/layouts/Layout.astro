@@ -1,7 +1,6 @@
 ---
-// src/layouts/Layout.astro
-import Header from "../components/header.astro";
-import SlidesPagination from "../components/SlidesPagination.astro";
+
+import PopupForm from "../components/PopupForm.astro";
 import Preloader from "../components/Preloader.astro";
 ---
 
@@ -22,11 +21,12 @@ import Preloader from "../components/Preloader.astro";
 		<div class="sliderRoot">
 			<slot />
 		</div>
+		 <PopupForm id="popup-form" defaultTitle="Бесплатный аудит" />
 
 		<div class="cursorProgress">
 			<svg viewBox="0 0 100 100">
-				<circle class="bg" cx="50" cy="50" r="45"></circle>
-				<circle class="progress" cx="50" cy="50" r="45"></circle>
+				<circle fill="none" class="bg" cx="50" cy="50" r="45"></circle>
+				<circle fill="none" stroke-widht="4" class="progress" cx="50" cy="50" r="45"></circle>
 			</svg>
 		</div>
 	</body>

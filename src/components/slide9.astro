@@ -1,11 +1,10 @@
 ---
 import Decor from "../assets/decor3.svg";
-
 ---
 
 <section id="slide09" class="slide">
     <div class="container2 cont">
-        <h2 class="h2 tGradient">Интернет- <br />магазин</h2>
+        <h2 class="h2 tGradient">Интернет - магазин</h2>
 
         <div class="content">
             <div class="left">
@@ -41,20 +40,40 @@ import Decor from "../assets/decor3.svg";
                         масштабируется под рост нагрузки
                     </p>
                 </div>
+
+                <div class="group">
+                    <p
+                        style="font-style: italic; color:var(--siniy)"
+                        class="t20"
+                    >
+                        <span> Получите чек-лист запуска прибыльного интернет-магазина</span>
+                    </p>
+                    <button
+                        class="but"
+                        data-popup
+                        data-popup-title="Получите чек-лист запуска прибыльного интернет-магазина"
+                    >
+                        <b>Получить</b> бесплатно
+                    </button>
+                </div>
             </div>
 
             <div class="right">
                 <div
                     class="item active"
                     style="--colS:1; --colEnd:2; --rowS:2; --rowEnd:1;"
+                    data-popup
+                    data-popup-title="Интернет-
+магазин: БИЗНЕС"
                 >
                     <div class="group">
                         <div>
                             <h3 class="t30 tit">БИЗНЕС</h3>
 
-                        <p class="t16 ps">
-                            Для серьёзного масштаба и конкурентного преимущества
-                        </p>
+                            <p class="t16 ps">
+                                Для серьёзного масштаба и конкурентного
+                                преимущества
+                            </p>
                         </div>
 
                         <ul class="list">
@@ -79,12 +98,15 @@ import Decor from "../assets/decor3.svg";
                 <div
                     class="item"
                     style="--colS:1; --colEnd:1; --rowS:1; --rowEnd:1;"
+                    data-popup
+                    data-popup-title="Интернет-
+магазин: ЭКОНОМ"
                 >
                     <div class="group">
                         <div>
                             <h3 class="t30 tit">ЭКОНОМ</h3>
 
-                        <p class="t16 ps">Быстрый запуск магазина</p>
+                            <p class="t16 ps">Быстрый запуск магазина</p>
                         </div>
 
                         <ul class="list">
@@ -109,12 +131,15 @@ import Decor from "../assets/decor3.svg";
                 <div
                     class="item"
                     style="--colS:2; --colEnd:1; --rowS:1; --rowEnd:1;"
+                    data-popup
+                    data-popup-title="Интернет-
+магазин: СТАНДАРТ"
                 >
                     <div class="group">
                         <div>
                             <h3 class="t30 tit">СТАНДАРТ</h3>
 
-                        <p class="t16 ps">Комфортный рост продаж</p>
+                            <p class="t16 ps">Комфортный рост продаж</p>
                         </div>
 
                         <ul class="list">
@@ -136,11 +161,7 @@ import Decor from "../assets/decor3.svg";
                     </div>
                 </div>
                 <div class="decor">
-                    <img
-                        class="decorImg"
-                        src={Decor.src}
-                        alt="Декор"
-                    />
+                    <img class="decorImg" src={Decor.src} alt="Декор" />
                 </div>
             </div>
         </div>
@@ -155,7 +176,7 @@ import Decor from "../assets/decor3.svg";
         height: 100%;
     }
     .cont {
-        height:100%;
+        height: 100%;
     }
 
     .grup2 {
@@ -185,7 +206,7 @@ import Decor from "../assets/decor3.svg";
         max-width: 583px;
     }
 
-      .right {
+    .right {
         display: grid;
         grid-template-rows: 30vh 30vh;
         gap: 12px;
@@ -225,6 +246,45 @@ import Decor from "../assets/decor3.svg";
 
         grid-column: var(--colS) / span var(--colEnd);
         grid-row: var(--rowS) / span var(--rowEnd);
+
+        cursor: pointer;
+    }
+
+    .item.active::after {
+        content: "";
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 30px;
+        height: 30px;
+        background-color: var(--zelenyy-2-osnovnoy);
+        mask-image: url(../assets/link.svg);
+        mask-repeat: no-repeat;
+        mask-size: contain;
+        -webkit-mask-image: url(../assets/link.svg);
+        -webkit-mask-repeat: no-repeat;
+        -webkit-mask-size: contain;
+
+        transition: 300ms;
+    }
+    .item::after {
+        content: "";
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 30px;
+        height: 30px;
+        background-color: var(--siniy);
+        mask-image: url(../assets/link.svg);
+        mask-repeat: no-repeat;
+        mask-size: contain;
+        -webkit-mask-image: url(../assets/link.svg);
+        -webkit-mask-repeat: no-repeat;
+        -webkit-mask-size: contain;
+        transition: 300ms;
+    }
+    .item:hover::after {
+        transform: scale(0.9);
     }
 
     .item.active {
@@ -234,9 +294,9 @@ import Decor from "../assets/decor3.svg";
         background-position: center;
 
         flex-direction: row;
-        align-items: center
+        align-items: center;
     }
-    .tit{
+    .tit {
         margin-bottom: 10px;
     }
     .item.active .tit {
@@ -259,7 +319,7 @@ import Decor from "../assets/decor3.svg";
         margin-top: auto;
         padding-left: 20px;
     }
-   /* Адаптация для мобильных устройств */
+    /* Адаптация для мобильных устройств */
     @media (max-width: 768px) {
         .cont {
             height: auto;
@@ -324,7 +384,6 @@ import Decor from "../assets/decor3.svg";
             transform: translateY(-50%);
         }
 
-
         .grup2 {
             gap: 8px;
         }
@@ -362,9 +421,6 @@ import Decor from "../assets/decor3.svg";
             font-size: 14px;
         }
 
-      
-
-   
         .decor {
             height: 40%;
             opacity: 0.3;

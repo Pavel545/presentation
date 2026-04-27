@@ -5,7 +5,7 @@ import decorImage from "../assets/decor.svg";
 
 <section id="slide11" class="slide">
     <div class="container2">
-        <h2 class="h2 tGradient">Техническая <br> поддержка</h2>
+        <h2 class="h2 tGradient">Техническая  поддержка</h2>
 
         <div class="content">
             <div class="left">
@@ -97,16 +97,38 @@ import decorImage from "../assets/decor.svg";
                         <span class="t20 siniy"> от 5 000 ₽</span>
                     </div>
                 </div>
+                 <div class="group">
+                        <p
+                            style="font-style: italic; color:var(--siniy)"
+                            class="t20"
+                        >
+                            <span>
+                                Аудит работы сайта и отчёт по ошибкам</span
+                            >
+                        </p>
+                        <button
+                            class="but"
+                            data-popup
+                            data-popup-title="Аудит работы сайта и отчёт по ошибкам"
+                        >
+                            <b>Получить</b> бесплатно
+                        </button>
+                    </div>
 
-                <div class="decor">
-                    <img class="decorImg" src={decorImage.src} alt="">
-                </div>
+                
             </div>
         </div>
+        <div class="decor">
+                    <img class="decorImg" src={decorImage.src} alt="">
+                </div>
     </div>
 </section>
 
 <style>
+
+    .container2{
+        position: relative;
+    }
     .content {
         display: grid;
         grid-template-columns: 2fr 1fr;
@@ -136,11 +158,16 @@ import decorImage from "../assets/decor.svg";
         flex-direction: column;
         gap: 2vh;
         overflow: hidden;
+
+        position: relative;
+        z-index: 5;
     }
+
+  
 
     .decor {
         position: absolute;
-        z-index: 1;
+        z-index: 3;
         width: 50%;
         bottom: 0;
         height: 50%;

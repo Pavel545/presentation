@@ -1,8 +1,8 @@
-// swiperMobileSlider.ts
 import Swiper from 'swiper';
 import { Pagination } from 'swiper/modules';
 import { gsap } from "gsap";
 import { sliderState } from "./sliderState";
+import Sliders from "../data/data.json";
 
 let swiperInstance: Swiper | null = null;
 let updateControlsState: ((index: number) => void) | null = null;
@@ -12,42 +12,59 @@ const isMobile = (): boolean => {
         || window.innerWidth <= 768;
 };
 
-const updateLogo = (newIndex: number) => {
-    const logoImg = document.querySelector<HTMLImageElement>('#logoImage');
-    if (!logoImg) return;
-
-    const shouldBeLight = newIndex === 0;
-    const currentIsLight = logoImg.src.includes('logo.svg') && !logoImg.src.includes('logoB');
-
-    if (shouldBeLight === currentIsLight) return;
-
-    const tl = gsap.timeline();
-    tl.to(logoImg, { scale: 0.8, opacity: 0, rotation: -5, duration: 0.25, ease: "power2.in" })
-        .to(logoImg, {
-            scale: 1,
-            opacity: 1,
-            rotation: 0,
-            duration: 0.35,
-            ease: "back.out(1.2)",
-            clearProps: "rotation,scale",
-            onComplete: () => {
-                logoImg.src = shouldBeLight ? "/logo.svg" : "/logoB.svg";
-                logoImg.alt = shouldBeLight ? "Логотип АЦР" : "Логотип АЦР (темный)";
-            }
-        });
-};
 
 // Создание функции обновления контролов
 const createControlsUpdater = (swiper: Swiper): ((index: number) => void) => {
     const prevBtn = document.querySelector<HTMLButtonElement>(".mobile-pagination .prev");
     const nextBtn = document.querySelector<HTMLButtonElement>(".mobile-pagination .next");
     const currentSlideEl = document.querySelector<HTMLElement>(".current-slide");
+    const cube = document.querySelector<HTMLElement>(".cube");
+    const backFace = document.querySelector<HTMLElement>(".cube-face.back");
 
+    let flipTimer: ReturnType<typeof setTimeout> | null = null;
+    let lastFlippedIndex = 0;
     return (activeIndex: number): void => {
         // Обновление индикатора текущего слайда
         if (currentSlideEl) {
             currentSlideEl.textContent = String(activeIndex + 1);
         }
+
+
+        if (cube && backFace) {
+            // Очищаем предыдущий таймер
+            if (flipTimer) {
+                clearTimeout(flipTimer);
+                flipTimer = null;
+            }
+
+            // Всегда сбрасываем flipped перед новым переворотом
+            cube.classList.remove("flipped");
+
+            // Принудительный reflow для сброса анимации
+            void cube.offsetWidth;
+
+            if (activeIndex === 0) {
+                // Первый слайд — не переворачиваем, оставляем "Хочу услугу"
+                lastFlippedIndex = 0;
+            } else {
+                const slide = swiper.slides[activeIndex] as HTMLElement;
+                const slideName = Sliders[sliderState.current]?.name || `Слайд ${activeIndex + 1}`;
+
+                // Меняем текст на обратной стороне
+                backFace.textContent = slideName;
+
+                // Запускаем переворот
+                cube.classList.add("flipped");
+                lastFlippedIndex = activeIndex;
+
+                // Возвращаем через 2 секунды
+                flipTimer = setTimeout(() => {
+                    cube.classList.remove("flipped");
+                    flipTimer = null;
+                }, 2000);
+            }
+        }
+
 
         // Обновление состояния кнопок prev/next
         if (prevBtn) {
@@ -68,9 +85,11 @@ const createControlsUpdater = (swiper: Swiper): ((index: number) => void) => {
 
 // ==================== БУРГЕР МЕНЮ ====================
 const initBurgerMenu = (swiper: Swiper): void => {
-    const burger = document.getElementById("burger");
+    const burger = document.getElementById("goMenu");
     const menu = document.getElementById("sideMenu");
     const overlay = document.getElementById("overlay");
+    const menuBot = document.querySelector<HTMLButtonElement>(".mobile-pagination");
+
 
     if (!burger || !menu || !overlay) return;
 
@@ -90,8 +109,11 @@ const initBurgerMenu = (swiper: Swiper): void => {
         burger.classList.remove("active");
         menu.classList.remove("open");
         overlay.classList.remove("show");
+        menuBot?.classList.remove("skip");
         document.body.classList.remove("lock");
         sliderState.isMenuOpen = false;
+        burger.innerHTML = "Меню";
+
         swiper.enable();
     };
 
@@ -101,8 +123,11 @@ const initBurgerMenu = (swiper: Swiper): void => {
         overlay.classList.add("show");
         document.body.classList.add("lock");
         sliderState.isMenuOpen = true;
+        menuBot?.classList.add("skip");
+
         swiper.disable();
 
+        burger.innerHTML = "Закрыть меню";
         // При открытии меню синхронизируем активный пункт с текущим слайдом
         updateActiveMenuItem(swiper.activeIndex);
     };
@@ -114,6 +139,8 @@ const initBurgerMenu = (swiper: Swiper): void => {
             openMenu();
         }
     };
+
+
 
     burger.addEventListener("click", toggleMenu);
     overlay.addEventListener("click", toggleMenu);
@@ -157,7 +184,6 @@ const initBurgerMenu = (swiper: Swiper): void => {
 const initMobileControls = (swiper: Swiper): void => {
     const prevBtn = document.querySelector<HTMLButtonElement>(".mobile-pagination .prev");
     const nextBtn = document.querySelector<HTMLButtonElement>(".mobile-pagination .next");
-    const homeBtn = document.querySelector<HTMLButtonElement>(".mobile-pagination .home");
     const totalSlidesEl = document.querySelector<HTMLElement>(".total-slides");
 
     // Установка общего количества слайдов
@@ -185,11 +211,7 @@ const initMobileControls = (swiper: Swiper): void => {
         });
     }
 
-    if (homeBtn) {
-        homeBtn.addEventListener("click", () => {
-            swiper.slideTo(0);
-        });
-    }
+
 
     // Начальное состояние
     if (updateControlsState) {
@@ -246,7 +268,6 @@ export const initMobileSlider = () => {
             init: (swiper) => {
                 sliderState.current = swiper.activeIndex;
                 sliderState.total = swiper.slides.length;
-                updateLogo(swiper.activeIndex);
                 initMobileControls(swiper);
                 initBurgerMenu(swiper);
 
@@ -258,7 +279,6 @@ export const initMobileSlider = () => {
             },
             slideChange: (swiper) => {
                 sliderState.current = swiper.activeIndex;
-                updateLogo(swiper.activeIndex);
                 if (updateControlsState) {
                     updateControlsState(swiper.activeIndex);
                 }

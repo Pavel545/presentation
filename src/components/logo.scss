@@ -1,0 +1,135 @@
+/* LOGO */
+.logo {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+
+       min-width: 360px;
+
+    overflow: hidden;
+
+    /* показываем только область иконки */
+    transition: clip-path 0.4s cubic-bezier(.4, 0, .2, 1);
+
+
+     @media (max-width: 500px) {
+        min-width: auto;
+        width: 180px;
+        
+    }
+}
+
+
+.logoImg path {
+    transform-box: fill-box;
+    transform-origin: center;
+    vector-effect: non-scaling-stroke;
+}
+
+.logoImg {
+
+    flex-shrink: 0;
+}
+
+/* начальная позиция */
+.logoImg [data-count="one"] {
+    transform: translateX(96%);
+    transition: 0.4s;
+}
+
+.logoImg [data-count="two"] {
+    transform: translateX(40%);
+    transition: 0.5s;
+}
+
+.logoImg [data-count="three"] {
+    transform: translateX(-10%);
+    transition: 0.6s;
+}
+
+@for $i from 1 through 40 {
+    .logoImg [data-alf]:nth-child(#{$i}) {
+        opacity: 0;
+        filter: blur(10px);
+        transform: translateX(-50px);
+
+        animation: slideFromLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        animation-delay: #{$i * 0.1}s;
+    }
+}
+
+.logoImg [data-alf] {
+    transition: opacity 0.25s ease;
+}
+
+.logo:not(:hover) .logoImg [data-alf] {
+    opacity: 0;
+}
+
+@keyframes slideFromLeft {
+    0% {
+        opacity: 0;
+        filter: blur(10px);
+        transform: translateX(-50px);
+    }
+
+    100% {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateX(0);
+    }
+}
+
+
+/* hover */
+.logo:hover [data-count="one"],
+.logo:hover [data-count="two"],
+.logo:hover [data-count="three"] {
+    transform: translateX(0);
+}
+
+.logo:hover [data-alf="line"] {
+    fill: var(--zelenyy-2-osnovnoy);
+}
+
+
+/* цветовая анимация */
+.logo:hover [data-count="one"] {
+    animation: logoColor 1s infinite 0.6s;
+}
+
+.logo:hover [data-count="two"] {
+    animation: logoColor 1s infinite 0.4s;
+}
+
+.logo:hover [data-count="three"] {
+    animation: logoColor 1s infinite 0.2s;
+}
+
+@keyframes logoColor {
+    0% {
+        fill: var(--zelenyy-2-osnovnoy);
+    }
+
+    50% {
+        fill: var(--siniy);
+    }
+
+    100% {
+        fill: var(--zelenyy-2-osnovnoy);
+    }
+}
+[date-buk="true"]{
+    transition: 600ms;
+}
+
+.logoImg.go [date-buk="true"]{
+    fill: #000;
+}
+
+    @media (max-width: 480px) {
+        .logoImg{
+            height: 40px;
+}
+    }
+

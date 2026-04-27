@@ -6,7 +6,7 @@
     align-items: center;
     gap: 8px;
     padding: 10px 16px;
-    background: var(--belyy);
+    background: #ffffff73;
     backdrop-filter: blur(10px);
     border: none;
     border-radius: var(--br);
@@ -63,12 +63,14 @@
 }
 
 @media (max-width: 480px) {
-    .ai-assistant-btn span {
-        /* display: none; */
+    .typing-text {
+        display: none;
     }
 
     .ai-assistant-btn {
         padding: 10px;
+        width: 100%;
+        justify-content: center;
     }
 
     .ai-assistant-btn svg {
@@ -382,14 +384,16 @@
     right: auto;
     left: 0;
 }
+
 .ai-assistant-label {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: 20px;
     background: rgba(255, 255, 255, 0.5);
     border-radius: var(--br);
-    
+    width: 63%;
+
     /* Адаптация для мобилок */
     @media (max-width: 768px) {
         gap: 10px;
@@ -398,26 +402,27 @@
 
 .typing-placeholder {
     font-weight: 500;
-    font-size: 16px;
+    font-size: 20px;
     line-height: 120%;
-    color: var(--belyy);
+    color: var(--temniy);
     padding: 5px 10px;
-    min-width: 300px;
-    
+    min-width: 100%;
+
     /* Обрезка текста с тремя точками */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    
+
     /* Адаптация для мобилок */
     @media (max-width: 768px) {
         min-width: auto;
-        max-width: 180px; /* Ограничиваем ширину на мобилках */
+        max-width: 180px;
+        /* Ограничиваем ширину на мобилках */
         font-size: 14px;
         padding: 5px 8px;
         display: none;
     }
-    
+
     @media (max-width: 480px) {
         max-width: none;
         width: 100%;

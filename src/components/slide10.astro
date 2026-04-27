@@ -35,12 +35,30 @@ import Decor from "../assets/decor4.svg";
                         ИИ-поисковиках
                     </p>
                 </div>
+                <div class="group">
+                    <p
+                        style="font-style: italic; color:var(--siniy)"
+                        class="t20"
+                    >
+                        <span> Получите чек-лист профессионального корпоративного сайта — лица вашего бренда</span>
+                    </p>
+                    <button
+                        class="but"
+                        data-popup
+                        data-popup-title="Получите чек-лист профессионального корпоративного сайта — лица вашего бренда"
+                    >
+                        <b>Получить</b> бесплатно
+                    </button>
+                </div>
             </div>
 
             <div class="right">
                 <div
                     class="item active"
                     style="--colS:2; --colEnd:1; --rowS:1; --rowEnd:2;"
+                    data-popup
+                    data-popup-title="Корпоративный
+сайт: БИЗНЕС"
                 >
                     <div class="group">
                         <h3 class="t30 tit">БИЗНЕС</h3>
@@ -72,6 +90,8 @@ import Decor from "../assets/decor4.svg";
                 <div
                     class="item"
                     style="--colS:1; --colEnd:1; --rowS:1; --rowEnd:1;"
+                   data-popup data-popup-title="Корпоративный
+сайт: ЭКОНОМ"
                 >
                     <div class="group">
                         <h3 class="t30 tit">ЭКОНОМ</h3>
@@ -102,6 +122,8 @@ import Decor from "../assets/decor4.svg";
                 <div
                     class="item"
                     style="--colS:1; --colEnd:1; --rowS:2; --rowEnd:1;"
+                    data-popup data-popup-title="Корпоративный
+сайт: СТАНДАРТ"
                 >
                     <div class="group">
                         <h3 class="t30 tit">СТАНДАРТ</h3>
@@ -172,6 +194,7 @@ import Decor from "../assets/decor4.svg";
         gap: 3vh;
 
         max-width: 583px;
+        z-index: 3;
     }
 
     .right {
@@ -215,6 +238,45 @@ import Decor from "../assets/decor4.svg";
 
         grid-column: var(--colS) / span var(--colEnd);
         grid-row: var(--rowS) / span var(--rowEnd);
+
+        cursor: pointer;
+    }
+
+    .item.active::after {
+        content: "";
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 30px;
+        height: 30px;
+        background-color: var(--zelenyy-2-osnovnoy);
+        mask-image: url(../assets/link.svg);
+        mask-repeat: no-repeat;
+        mask-size: contain;
+        -webkit-mask-image: url(../assets/link.svg);
+        -webkit-mask-repeat: no-repeat;
+        -webkit-mask-size: contain;
+
+        transition: 300ms;
+    }
+    .item::after {
+        content: "";
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 30px;
+        height: 30px;
+        background-color: var(--siniy);
+        mask-image: url(../assets/link.svg);
+        mask-repeat: no-repeat;
+        mask-size: contain;
+        -webkit-mask-image: url(../assets/link.svg);
+        -webkit-mask-repeat: no-repeat;
+        -webkit-mask-size: contain;
+        transition: 300ms;
+    }
+    .item:hover::after {
+        transform: scale(0.9);
     }
 
     .item.active {

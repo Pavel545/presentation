@@ -1,5 +1,6 @@
 ---
 import slides from "../data/data.json";
+import { sliderState } from "../lib/sliderState";
 ---
 
 <div class="pagination">
@@ -44,7 +45,12 @@ import slides from "../data/data.json";
             </button>
 
             <button class="nav-btn home" aria-label="Главный экран">
-                Хочу услугу
+                <div class="cube">
+                    <div class="cube-face front" id="goMenu">Меню</div>
+                    <div class="cube-face back">
+                        {slides[0]?.name || "Слайд 1"}
+                    </div>
+                </div>
             </button>
 
             <button class="nav-btn next" aria-label="Следующий слайд">
@@ -76,6 +82,52 @@ import slides from "../data/data.json";
 
     .container {
         pointer-events: auto;
+    }
+
+    .nav-btn.home {
+        width: 70%;
+        perspective: 400px;
+        overflow: hidden;
+    }
+
+    .cube {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        transition: transform 0.6s ease;
+    }
+
+    .cube.flipped {
+        transform: rotateX(-180deg);
+    }
+
+    .cube-face {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        backface-visibility: hidden;
+        border-radius: var(--br);
+        /* background: white; */
+        font-weight: 600;
+
+        color: white;
+    mix-blend-mode: difference;
+    }
+    .mobile-pagination .nav-btn {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+    .cube-face.front {
+        transform: translateZ(24px);
+    }
+
+    .cube-face.back {
+        transform: rotateX(180deg) translateZ(24px);
     }
 
     /* ================= ДЕСКТОП ================= */
@@ -118,6 +170,8 @@ import slides from "../data/data.json";
         align-items: center;
         justify-content: center;
     }
+
+   
 
     .track:hover .item {
         height: 20px;
@@ -187,6 +241,18 @@ import slides from "../data/data.json";
                 rgba(0, 0, 0, 0.4),
                 transparent
             );
+            transition: 500ms;
+        }
+        .skip .prev {
+            transform: translateX(-100px);
+        }
+         .skip .next {
+            transform: translateX(100px);
+        }
+
+
+        .mobile-pagination.show{
+            transform: translateY(-100px);
         }
 
         .mobile-controls {
@@ -200,7 +266,8 @@ import slides from "../data/data.json";
             width: 48px;
             height: 48px;
             border-radius: var(--br);
-            background: white;
+            background: #cfcfcf4f;
+            backdrop-filter: blur(10px);
             border: none;
             display: flex;
             align-items: center;
@@ -210,7 +277,6 @@ import slides from "../data/data.json";
         }
 
         .nav-btn:hover {
-            color: white;
             transform: scale(1.05);
         }
 

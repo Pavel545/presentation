@@ -7,39 +7,7 @@ const isMobile = (): boolean => {
         || window.innerWidth <= 768;
 };
 
-// Функция обновления логотипа
-const updateLogo = (newIndex: number) => {
-    const logoImg = document.querySelector<HTMLImageElement>('#logoImage');
-   
-    if (!logoImg) return;
-   
-    const shouldBeLight = newIndex === 0;
-    const currentIsLight = logoImg.src.includes('logo.svg') && !logoImg.src.includes('logoB');
-   
-    if (shouldBeLight === currentIsLight) return;
-   
-    const tl = gsap.timeline();
-   
-    tl.to(logoImg, {
-        scale: 0.8,
-        opacity: 0,
-        rotation: -5,
-        duration: 0.25,
-        ease: "power2.in",
-        onComplete: () => {
-            logoImg.src = shouldBeLight ? "/logo.svg" : "/logoB.svg";
-            logoImg.alt = shouldBeLight ? "Логотип АЦР" : "Логотип АЦР (темный)";
-        }
-    })
-    .to(logoImg, {
-        scale: 1,
-        opacity: 1,
-        rotation: 0,
-        duration: 0.35,
-        ease: "back.out(1.2)",
-        clearProps: "rotation,scale"
-    });
-};
+
 
 export const goToSlide = (index: number) => {
     const slides = document.querySelectorAll<HTMLElement>(".slideSection");
@@ -74,7 +42,6 @@ export const goToSlide = (index: number) => {
                 sliderState.current = index;
                 sliderState.isAnimating = false;
                 updatePagination();
-                updateLogo(index);
             },
         }
     );
