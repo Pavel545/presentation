@@ -11,14 +11,22 @@
             <p class="hPs">Для роста Вашего бизнеса</p>
 
             <div class="servicesList">
-                <div class="servicesItem">Разработка сайта</div>
-                <div class="servicesItem">Чат-боты</div>
+                <div data-id="7" class="servicesItem">Умные чат-боты</div>
+                <div data-id="3" class="servicesItem">Аудит</div>
+                <div data-id="8" class="servicesItem">Мобильное приложение</div>
+                <div data-id="12" class="servicesItem">Политика сайта</div>
+                <div data-id="4" class="servicesItem">Разработка сайта</div>
+                <div data-id="13" class="servicesItem">
+                    Техническая поддержка
+                </div>
+                <div data-id="11" class="servicesItem">Внедрение ИИ</div>
+                <div data-id="9" class="servicesItem">Разработка Mini APP</div>
+            </div>
 
-                <div class="servicesItem">Внедрение ИИ</div>
-
-                <div class="servicesItem">Мобильное приложение</div>
-
-                <div class="servicesItem">Дизайн</div>
+            <div class="butt_box">
+                <a class="butt2" target="_blank" href="/АЦР.pdf">
+                    Скачать презентацию
+                </a>
             </div>
         </div>
     </div>
@@ -30,6 +38,31 @@
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
+    }
+
+    .butt_box {
+        display: flex;
+        gap: 20px;
+
+        margin-top: 1.7rem;
+    }
+
+    .butt2 {
+        background: var(--belyy);
+        border-radius: 5px;
+        padding: 19px 40px;
+
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 110%;
+        text-transform: uppercase;
+        color: var(--temnyy);
+
+        transition: 300ms;
+    }
+
+    .butt2:hover {
+        background: var(--zelenyy-2-osnovnoy);
     }
 
     .content {
@@ -60,7 +93,9 @@
         gap: 10px;
         margin-top: 115px;
         width: 100%;
-        max-width: 800px;
+        max-width: 900px;
+        cursor: pointer;
+        transition: 500ms;
     }
 
     .servicesItem {
@@ -75,10 +110,13 @@
         overflow: hidden;
         border-radius: 5px;
         padding: 10px 30px;
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .servicesItem:hover {
+        background: rgb(255 255 255 / 19%);
     }
 
     .servicesItem::after {
@@ -88,17 +126,17 @@
         border-radius: inherit;
         padding: 1px;
         background: linear-gradient(
-            135deg,
+            332deg,
             rgba(255, 255, 255, 0.4) 0%,
             rgba(255, 255, 255, 0.1) 50%,
             rgba(255, 255, 255, 0.4) 100%
         );
         -webkit-mask:
-            linear-gradient(#fff 0 0) content-box,
-            linear-gradient(#fff 0 0);
+            linear-gradient(#ffffff43 0 0) content-box,
+            linear-gradient(#ffffff56 0 0);
         mask:
-            linear-gradient(#fff 0 0) content-box,
-            linear-gradient(#fff 0 0);
+            linear-gradient(#ffffff47 0 0) content-box,
+            linear-gradient(#ffffff2b 0 0);
         -webkit-mask-composite: xor;
         mask-composite: exclude;
         pointer-events: none;
@@ -133,16 +171,17 @@
     @media (max-width: 768px) {
         .welcome {
             background: url(/fonHeroMob.jpg);
-            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             padding: 0;
         }
+
         .content {
             height: auto;
             min-height: 100vh;
             padding: 100px 16px 60px;
         }
-
-      
 
         .hPs {
             font-size: 24px;
@@ -168,7 +207,7 @@
     /* Маленькие мобильные (до 480px) */
     @media (max-width: 480px) {
         .content {
-            padding: 80px 12px 40px;
+            padding: 80px 12px 80px;
         }
 
         .hPs {

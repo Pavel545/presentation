@@ -11,23 +11,15 @@ import AIChatWrapper from "./chat/AIChatWrapper";
     <div class="container">
         <div class="content">
             <!-- Десктоп логотип -->
-            <a href="/" class="boxLogo desktop-logo">
-                <img
-                    class="imgLogo"
-                    src="/logo.svg"
-                    alt="Логотип АЦР"
-                    id="logoImage"
-                />
-            </a>
-
             <div class="group row">
-                <!-- <button
-                    class="ai-assistant-btn mobile-only"
-                    id="aiAssistantBtn"
-                >
-                    <Brain />
-                    <span>ИИ-ассистент</span>
-                </button> -->
+                <a href="/" class="boxLogo desktop-logo">
+                    <img
+                        class="imgLogo"
+                        src="/logo.svg"
+                        alt="Логотип АЦР"
+                        id="logoImage"
+                    />
+                </a>
                 <AIChatWrapper
                     client:load
                     welcomeMessage="👋 Здравствуйте! Я AI ассистент. Чем могу помочь?"
@@ -37,11 +29,30 @@ import AIChatWrapper from "./chat/AIChatWrapper";
                         "Как связаться с поддержкой?",
                     ]}
                 />
-                <button class="menu" id="burger">
-                    <span></span>
-                    <span></span>
-                </button>
             </div>
+            <!-- <button
+                    class="ai-assistant-btn mobile-only"
+                    id="aiAssistantBtn"
+                >
+                    <Brain />
+                    <span>ИИ-ассистент</span>
+                </button> -->
+
+            <button class="menu" id="burger">
+                <svg
+                    class="menu_decor"
+                    width="92"
+                    height="57"
+                    viewBox="0 0 92 57"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M91.9844 1C91.9844 0.447715 91.5367 0 90.9844 0H32.3183C32.0755 0 31.841 0.0883534 31.6585 0.248572L0.340197 27.7486C-0.113383 28.1469 -0.113382 28.8531 0.340198 29.2514L31.6585 56.7514C31.841 56.9116 32.0755 57 32.3183 57H90.9844C91.5367 57 91.9844 56.5523 91.9844 56V1Z"
+                        fill="#BFEF0A"></path>
+                </svg>
+                <span class="burgerText">Слайды</span>
+            </button>
         </div>
     </div>
 </header>
@@ -52,16 +63,16 @@ import AIChatWrapper from "./chat/AIChatWrapper";
 <!-- MENU PANEL -->
 <aside class="sideMenu" id="sideMenu">
     <div class="menuHeader">
-        <h2 class="menuTitle">Слайды</h2>
+        <h2 class="menuTitle">Содержание</h2>
     </div>
     <div class="menuContent">
         {
             slides.map((item, index) => (
                 <div class={`slide ${index == 0 ? "active" : ""}`}>
                     <span class="id">{item.id}</span>
-                    <div class="imgWrap">
+                    {/* <div class="imgWrap">
                         <img src={item.img} alt={item.name} />
-                    </div>
+                    </div> */}
                     <div class="title">
                         <span>{item.name}</span>
                     </div>
@@ -100,26 +111,54 @@ import AIChatWrapper from "./chat/AIChatWrapper";
     .row {
         flex-direction: row;
         align-items: center;
+        gap: 10vw;
     }
 
     /* ================= BURGER ================= */
 
     .menu {
-        width: 60px;
-        height: 60px;
-        position: relative;
+        width: 200px;
+        padding: 10px 15px;
+        position: absolute;
+        bottom: 10px;
+        right: 0;
+
         background: transparent;
         border: none;
         cursor: pointer;
+
+        background: var(--zelenyy-5);
+        transition: 500ms;
+
+        animation: In 3s;
+        transform: translateX(0);
+
+        font-family: var(--font-family);
+        font-weight: 500;
+        font-size: 22px;
+        line-height: 110%;
+        color: var(--temnyy);
     }
 
+    .menu.go {
+        transform: translateX(160px);
+    }
+
+    .menu:hover {
+        transform: translateX(0);
+    }
     .menu span {
+        position: relative;
+        z-index: 2;
+    }
+
+    .menu_decor {
         position: absolute;
-        left: 10px;
-        width: 40px;
-        height: 2px;
-        background: white;
-        transition: all 0.3s ease;
+        left: -40px;
+        height: 100%;
+
+        top: 0;
+        z-index: 1;
     }
 
     .menuTitle {
@@ -134,16 +173,18 @@ import AIChatWrapper from "./chat/AIChatWrapper";
         color: var(--temnyy);
     }
 
-    .menu span:nth-child(1) {
-        top: 24px;
+    .menu.active {
+        right: 21%;
+        bottom: 45px;
+        transform: translateX(0);
     }
 
-    .menu span:nth-child(2) {
-        top: 34px;
+    .menu.active .menu_decor {
+        left: 151px;
+        transform: rotate(180deg);
     }
 
-    /* hover эффект */
-    .menu:hover span:nth-child(1) {
+    /* .menu:hover span:nth-child(1) {
         transform: translateX(6px);
     }
 
@@ -151,7 +192,6 @@ import AIChatWrapper from "./chat/AIChatWrapper";
         transform: translateX(-6px);
     }
 
-    /* active -> крест */
     .menu.active span:nth-child(1) {
         transform: rotate(45deg);
         top: 30px;
@@ -166,7 +206,6 @@ import AIChatWrapper from "./chat/AIChatWrapper";
         background: black;
     }
 
-    /* hover эффект для крестика */
     .menu.active:hover span:nth-child(1) {
         transform: rotate(45deg) scaleX(1.2);
     }
@@ -175,10 +214,9 @@ import AIChatWrapper from "./chat/AIChatWrapper";
         transform: rotate(-45deg) scaleX(1.2);
     }
 
-    /* лёгкое свечение */
     .menu.active:hover span {
         opacity: 0.7;
-    }
+    } */
 
     /* ================= OVERLAY ================= */
 
@@ -193,7 +231,7 @@ import AIChatWrapper from "./chat/AIChatWrapper";
     }
 
     .overlay.show {
-        backdrop-filter: blur(8px);
+        backdrop-filter: blur(2px);
         background: rgba(0, 0, 0, 0.2);
         pointer-events: all;
     }
@@ -204,7 +242,7 @@ import AIChatWrapper from "./chat/AIChatWrapper";
         position: fixed;
         top: 0;
         right: 0;
-        width: 50%;
+        width: 30%;
         height: 100vh;
         background: white;
         transform: translateX(100%);
@@ -225,7 +263,7 @@ import AIChatWrapper from "./chat/AIChatWrapper";
         overflow-y: auto;
         display: flex;
         flex-direction: column;
-        gap: 30px;
+        /* gap: 30px; */
         background: var(--svetlyy);
     }
 
@@ -256,6 +294,9 @@ import AIChatWrapper from "./chat/AIChatWrapper";
         padding: 22px 30px;
         cursor: pointer;
     }
+    .slide:hover {
+        background: var(--zelenyy-1);
+    }
 
     .slide.active {
         background: var(--zelenyy-3);
@@ -268,7 +309,7 @@ import AIChatWrapper from "./chat/AIChatWrapper";
         height: 0.5px;
         left: 0;
         bottom: 0;
-        width: 90%;
+        width: 100%;
         opacity: 0.7;
     }
 
@@ -305,7 +346,9 @@ import AIChatWrapper from "./chat/AIChatWrapper";
         font-weight: 800;
         font-size: 16px;
         line-height: 110%;
-        color: var(--temnyy);
+
+        color: var(--siniy);
+        margin-right: 20px;
     }
 
     /* ================= BODY LOCK ================= */
@@ -321,6 +364,10 @@ import AIChatWrapper from "./chat/AIChatWrapper";
     } */
 
     @media (max-width: 768px) {
+        .menu {
+            display: none;
+        }
+       
         .header {
             top: 0;
             background: linear-gradient(
@@ -332,7 +379,8 @@ import AIChatWrapper from "./chat/AIChatWrapper";
         }
 
         .desktop-logo {
-            display: none !important;
+            max-width: 140px;
+            overflow: hidden;
         }
 
         .mobile-only {
@@ -374,22 +422,18 @@ import AIChatWrapper from "./chat/AIChatWrapper";
         .id {
             font-size: 14px;
         }
-
-        /* Адаптация бургера для мобилки */
-        .menu span {
-            background: white;
-        }
-
-        .menu.active span {
-            background: black;
-        }
     }
 
     /* Маленькие мобилки */
     @media (max-width: 480px) {
         .menuTitle {
-            padding: 50px 16px 20px;
+            padding: 90px 16px 20px;
             font-size: 24px;
+        }
+
+        .menu {
+            bottom: -30px;
+            height: max-content;
         }
 
         .menuContent {
@@ -404,6 +448,9 @@ import AIChatWrapper from "./chat/AIChatWrapper";
         .imgWrap {
             width: 100px;
             height: 70px;
+        }
+        .menu.go {
+            bottom: 15px;
         }
     }
 

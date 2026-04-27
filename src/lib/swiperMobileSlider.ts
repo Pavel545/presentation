@@ -23,18 +23,18 @@ const updateLogo = (newIndex: number) => {
 
     const tl = gsap.timeline();
     tl.to(logoImg, { scale: 0.8, opacity: 0, rotation: -5, duration: 0.25, ease: "power2.in" })
-      .to(logoImg, { 
-          scale: 1, 
-          opacity: 1, 
-          rotation: 0, 
-          duration: 0.35, 
-          ease: "back.out(1.2)",
-          clearProps: "rotation,scale",
-          onComplete: () => {
-              logoImg.src = shouldBeLight ? "/logo.svg" : "/logoB.svg";
-              logoImg.alt = shouldBeLight ? "Логотип АЦР" : "Логотип АЦР (темный)";
-          }
-      });
+        .to(logoImg, {
+            scale: 1,
+            opacity: 1,
+            rotation: 0,
+            duration: 0.35,
+            ease: "back.out(1.2)",
+            clearProps: "rotation,scale",
+            onComplete: () => {
+                logoImg.src = shouldBeLight ? "/logo.svg" : "/logoB.svg";
+                logoImg.alt = shouldBeLight ? "Логотип АЦР" : "Логотип АЦР (темный)";
+            }
+        });
 };
 
 // Создание функции обновления контролов
@@ -102,7 +102,7 @@ const initBurgerMenu = (swiper: Swiper): void => {
         document.body.classList.add("lock");
         sliderState.isMenuOpen = true;
         swiper.disable();
-        
+
         // При открытии меню синхронизируем активный пункт с текущим слайдом
         updateActiveMenuItem(swiper.activeIndex);
     };
@@ -122,17 +122,17 @@ const initBurgerMenu = (swiper: Swiper): void => {
     menu.addEventListener("click", (e) => {
         const slide = (e.target as HTMLElement).closest(".slide");
         if (!slide) return;
-        
+
         const slides = Array.from(document.querySelectorAll(".sideMenu .slide"));
         const index = slides.indexOf(slide);
-        
+
         if (index !== -1) {
             // Закрываем меню
             closeMenu();
-            
+
             // Переключаем слайд
             swiper.slideTo(index, 800);
-            
+
             // Обновляем активный пункт меню
             updateActiveMenuItem(index);
         }
@@ -149,7 +149,7 @@ const initBurgerMenu = (swiper: Swiper): void => {
     swiper.on('slideChange', () => {
         updateActiveMenuItem(swiper.activeIndex);
     });
-    
+
     // Начальная синхронизация
     updateActiveMenuItem(swiper.activeIndex);
 };
@@ -205,6 +205,21 @@ export const initMobileSlider = () => {
     const swiperEl = document.querySelector('.swiper') as HTMLElement;
     if (!swiperEl) return;
 
+    // ========== ОПРЕДЕЛЯЕМ ФУНКЦИЮ ДО ИСПОЛЬЗОВАНИЯ ==========
+    const toggleMenuAndTypingClasses = (index: number) => {
+        const menuElement = document.querySelector('.menu');
+        const typingPlaceholder = document.querySelector('.typing-placeholder');
+
+        if (index > 0) {
+            menuElement?.classList.add("go");
+            typingPlaceholder?.classList.add("go");
+        } else {
+            menuElement?.classList.remove("go");
+            typingPlaceholder?.classList.remove("go");
+        }
+    };
+    // ====================================================
+
     swiperInstance = new Swiper(swiperEl, {
         modules: [Pagination],
 
@@ -233,7 +248,13 @@ export const initMobileSlider = () => {
                 sliderState.total = swiper.slides.length;
                 updateLogo(swiper.activeIndex);
                 initMobileControls(swiper);
-                initBurgerMenu(swiper); // Добавляем инициализацию бургер-меню
+                initBurgerMenu(swiper);
+
+                // Инициализируем кнопки
+                initWelkomButt();
+
+                // Теперь функция определена и доступна
+                toggleMenuAndTypingClasses(swiper.activeIndex);
             },
             slideChange: (swiper) => {
                 sliderState.current = swiper.activeIndex;
@@ -241,12 +262,15 @@ export const initMobileSlider = () => {
                 if (updateControlsState) {
                     updateControlsState(swiper.activeIndex);
                 }
+
+                // Теперь функция определена и доступна
+                toggleMenuAndTypingClasses(swiper.activeIndex);
             },
-            transitionStart: () => { 
-                sliderState.isAnimating = true; 
+            transitionStart: () => {
+                sliderState.isAnimating = true;
             },
-            transitionEnd: () => { 
-                sliderState.isAnimating = false; 
+            transitionEnd: () => {
+                sliderState.isAnimating = false;
             }
         }
     });
@@ -254,6 +278,7 @@ export const initMobileSlider = () => {
     // Синхронизация goToSlide с Swiper
     (window as any).goToSlide = (index: number) => {
         swiperInstance?.slideTo(index, 800);
+        toggleMenuAndTypingClasses(index);
     };
 };
 
@@ -277,3 +302,18 @@ export const mobileSlidePrev = (): void => {
         swiperInstance.slidePrev();
     }
 };
+
+// ========== НОВАЯ ФУНКЦИЯ ДЛЯ КНОПОК С DATA-ID ==========
+function initWelkomButt() {
+    const a = document.querySelectorAll("[data-id]");
+    console.log(a);
+
+    a.forEach((el, i) => {
+        el.addEventListener("click", () => {
+            const targetIndex = parseInt(el.dataset.id || "0");
+            if (swiperInstance && !isNaN(targetIndex)) {
+                swiperInstance.slideTo(targetIndex, 800);
+            }
+        });
+    });
+}

@@ -6,7 +6,7 @@ import Preloader from "../components/Preloader.astro";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -16,14 +16,13 @@ import Preloader from "../components/Preloader.astro";
 		<title>Astro Basics</title>
 	</head>
 	<body>
-		<Preloader /> <!-- 👈 Первым делом -->
-		
-		<Header />
+		<Preloader />
+		<!-- 👈 Первым делом -->
+
 		<div class="sliderRoot">
 			<slot />
 		</div>
 
-		<SlidesPagination />
 		<div class="cursorProgress">
 			<svg viewBox="0 0 100 100">
 				<circle class="bg" cx="50" cy="50" r="45"></circle>
@@ -38,16 +37,16 @@ import Preloader from "../components/Preloader.astro";
 	body.loading {
 		overflow: hidden;
 	}
-	
+
 	body.loaded {
 		overflow: auto;
 	}
 </style>
 
 <script>
-	document.body.classList.add('loading');
-	window.addEventListener('load', () => {
-		document.body.classList.remove('loading');
-		document.body.classList.add('loaded');
+	document.body.classList.add("loading");
+	window.addEventListener("load", () => {
+		document.body.classList.remove("loading");
+		document.body.classList.add("loaded");
 	});
 </script>

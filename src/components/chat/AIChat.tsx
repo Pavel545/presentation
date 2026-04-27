@@ -99,6 +99,11 @@ const AIChat: React.FC<AIChatProps> = ({
     const [sessionId, setSessionId] = useState<string>('');
     const [unreadCount, setUnreadCount] = useState(0);
 
+    // Состояния для анимации печати
+    const [currentQuestion, setCurrentQuestion] = useState(0);
+    const [displayedText, setDisplayedText] = useState('');
+    const [isDeleting, setIsDeleting] = useState(false);
+
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
     const chatWindowRef = useRef<HTMLDivElement>(null);
@@ -126,6 +131,39 @@ const AIChat: React.FC<AIChatProps> = ({
             }
         }
     }, []);
+
+    // Анимация печати текста в кнопке
+    useEffect(() => {
+        if (isOpen || !suggestedQuestions.length) return;
+
+        const currentFullText = suggestedQuestions[currentQuestion];
+        let timeout: ReturnType<typeof setTimeout>;
+
+        if (!isDeleting) {
+            // Печатаем текст
+            if (displayedText.length < currentFullText.length) {
+                timeout = setTimeout(() => {
+                    setDisplayedText(currentFullText.slice(0, displayedText.length + 1));
+                }, 50 + Math.random() * 50); // Случайная скорость для реалистичности
+            } else {
+                // Пауза перед удалением
+                timeout = setTimeout(() => setIsDeleting(true), 2000);
+            }
+        } else {
+            // Удаляем текст
+            if (displayedText.length > 0) {
+                timeout = setTimeout(() => {
+                    setDisplayedText(displayedText.slice(0, -1));
+                }, 30 + Math.random() * 30);
+            } else {
+                // Переходим к следующему вопросу
+                setIsDeleting(false);
+                setCurrentQuestion((prev) => (prev + 1) % suggestedQuestions.length);
+            }
+        }
+
+        return () => clearTimeout(timeout);
+    }, [displayedText, isDeleting, currentQuestion, isOpen, suggestedQuestions]);
 
     // Сохранение сообщений в localStorage
     useEffect(() => {
@@ -327,93 +365,105 @@ const AIChat: React.FC<AIChatProps> = ({
     return (
         <>
             {/* Кнопка открытия чата */}
-            <button
-                className="ai-assistant-btn mobile-only"
-                id="aiAssistantBtn"
-                onClick={() => setIsOpen(!isOpen)}
-            >
-                <img src="/icons/brain.svg" alt="" />
-                <span>ИИ-ассистент</span>
-               
-            </button>
+            <label htmlFor="aiAssistantInput" className="ai-assistant-label">
+                <button
+                    className={`ai-assistant-btn mobile-only ${isOpen ? 'active' : ''}`}
+                    id="aiAssistantBtn"
+                    onClick={() => setIsOpen(!isOpen)}
+                >
+                    <img src="/icons/brain.svg" alt="" />
+                    <span>ИИ-ассистент</span>
+                </button>
+                {!isOpen && (
+                    <div className="typing-placeholder">
+                        <span className="typing-text">
+                            {displayedText}
+                            <span className="cursor">|</span>
+                        </span>
+                    </div>
+                )}
+
+                {/* Кнопка (всегда видна) */}
+
+            </label>
 
             {/* Окно чата */}
-                    <div className={`ai-chat-window ${isOpen ? 'open' : ''}`} ref={chatWindowRef}>
-                        <div className="ai-chat-header">
-                            <h3> ИИ Ассистент</h3>
-                            <div className="header-actions">
-                                {messages.length > 1 && (
-                                    <button
-                                        onClick={clearHistory}
-                                        className="clear-history-btn but"
-                                        title="Очистить историю"
-                                    >
-                                        Очистить историю
-                                    </button>
-                                )}
-                                <button onClick={() => setIsOpen(false)}>✕</button>
-                            </div>
-                        </div>
-
-                        <div className="ai-chat-messages">
-                            {messages.map((message, index) => (
-                                <div
-                                    key={message.id}
-                                    className={`message ${message.type}`}
-                                >
-                                    <div className="message-content">
-                                        {message.content}
-                                        <span className="message-time">
-                                            {message.timestamp && formatTime(message.timestamp)}
-                                        </span>
-                                    </div>
-                                </div>
-                            ))}
-
-                            {isLoading && (
-                                <div className="message assistant">
-                                    <div className="message-content typing">
-                                        <span>.</span><span>.</span><span>.</span>
-                                    </div>
-                                </div>
-                            )}
-
-                            <div ref={messagesEndRef} />
-                        </div>
-
-                        {/* Подсказки для быстрого старта */}
-                        {messages.length === 1 && suggestedQuestions.length > 0 && (
-                            <div className="suggested-questions">
-                                <p className="suggested-title">💡 Попробуйте спросить:</p>
-                                <div className="questions-grid">
-                                    {suggestedQuestions.map((question, idx) => (
-                                        <button
-                                            key={idx}
-                                            onClick={() => handleSuggestedQuestion(question)}
-                                            className="suggested-question"
-                                            disabled={isLoading}
-                                        >
-                                            {question}
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-
-                        <form onSubmit={handleSubmit} className="ai-chat-input">
-                            <input
-                                ref={inputRef}
-                                type="text"
-                                value={inputValue}
-                                onChange={(e) => setInputValue(e.target.value)}
-                                placeholder={isLoading ? "Пожалуйста, подождите..." : "Введите сообщение..."}
-                                disabled={isLoading}
-                            />
-                            <button type="submit" disabled={isLoading || !inputValue.trim()}>
-                                {isLoading ? '...' : 'Отправить'}
+            <div className={`ai-chat-window ${isOpen ? 'open' : ''}`} ref={chatWindowRef}>
+                <div className="ai-chat-header">
+                    <h3> ИИ Ассистент</h3>
+                    <div className="header-actions">
+                        {messages.length > 1 && (
+                            <button
+                                onClick={clearHistory}
+                                className="clear-history-btn but"
+                                title="Очистить историю"
+                            >
+                                Очистить историю
                             </button>
-                        </form>
+                        )}
+                        <button onClick={() => setIsOpen(false)}>✕</button>
                     </div>
+                </div>
+
+                <div className="ai-chat-messages">
+                    {messages.map((message, index) => (
+                        <div
+                            key={message.id}
+                            className={`message ${message.type}`}
+                        >
+                            <div className="message-content">
+                                {message.content}
+                                <span className="message-time">
+                                    {message.timestamp && formatTime(message.timestamp)}
+                                </span>
+                            </div>
+                        </div>
+                    ))}
+
+                    {isLoading && (
+                        <div className="message assistant">
+                            <div className="message-content typing">
+                                <span>.</span><span>.</span><span>.</span>
+                            </div>
+                        </div>
+                    )}
+
+                    <div ref={messagesEndRef} />
+                </div>
+
+                {/* Подсказки для быстрого старта */}
+                {messages.length === 1 && suggestedQuestions.length > 0 && (
+                    <div className="suggested-questions">
+                        <p className="suggested-title">💡 Попробуйте спросить:</p>
+                        <div className="questions-grid">
+                            {suggestedQuestions.map((question, idx) => (
+                                <button
+                                    key={idx}
+                                    onClick={() => handleSuggestedQuestion(question)}
+                                    className="suggested-question"
+                                    disabled={isLoading}
+                                >
+                                    {question}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
+                <form onSubmit={handleSubmit} className="ai-chat-input">
+                    <input
+                        ref={inputRef}
+                        type="text"
+                        value={inputValue}
+                        onChange={(e) => setInputValue(e.target.value)}
+                        placeholder={isLoading ? "Пожалуйста, подождите..." : "Введите сообщение..."}
+                        disabled={isLoading}
+                    />
+                    <button type="submit" disabled={isLoading || !inputValue.trim()}>
+                        {isLoading ? '...' : 'Отправить'}
+                    </button>
+                </form>
+            </div>
         </>
     );
 };

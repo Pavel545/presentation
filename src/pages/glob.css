@@ -122,7 +122,7 @@
     --belyy-300: rgba(255, 255, 255, 0.3);
     --temnyy-300: rgba(40, 38, 49, 0.1);
 
-    --br: 10px;
+    --br: 5px;
 }
 
 
@@ -291,7 +291,7 @@ a {
 .group {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 0.5rem;
 }
 
 .tGradient {
@@ -359,7 +359,12 @@ circle {
     stroke-dasharray: 283;
     stroke-dashoffset: 283;
 }
-
+.slider-container{
+      width: 1920px;
+    height: 1080px;
+    transform-origin: top left;
+    transition: transform 0.1s ease;
+}
 
 
 
@@ -403,7 +408,7 @@ body {
     position: absolute !important;
     width: 100%;
     height: 100%;
-    
+
     /* overflow-y: auto; */
     -webkit-overflow-scrolling: touch;
     box-sizing: border-box;

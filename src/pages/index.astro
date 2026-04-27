@@ -19,9 +19,13 @@ import End from "../components/end.astro";
 import "swiper/css"; // Основные стили Swiper
 import "swiper/css/pagination"; // Стили для пагинации (если используете)
 import "./glob.css"; // ваши глобальные стили
+import Header from "../components/header.astro";
+import SlidesPagination from "../components/SlidesPagination.astro";
 ---
 
 <Layout>
+		<Header />
+
   <div class="slider-container">
     <div class="swiper">
       <div class="swiper-wrapper">
@@ -87,6 +91,8 @@ import "./glob.css"; // ваши глобальные стили
       <div class="swiper-pagination"></div>
     </div>
   </div>
+		<SlidesPagination />
+
 </Layout>
 
 <!-- Инициализация Swiper + десктоп/мобильная логика -->

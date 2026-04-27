@@ -6,11 +6,10 @@
     align-items: center;
     gap: 8px;
     padding: 10px 16px;
-    background: var(--belyy-100);
+    background: var(--belyy);
     backdrop-filter: blur(10px);
     border: none;
     border-radius: var(--br);
-    color: white;
     font-family: var(--font-family);
     font-weight: 600;
     font-size: 14px;
@@ -49,6 +48,7 @@
     .ai-assistant-btn {
         padding: 8px 14px;
         font-size: 13px;
+        width: 170px;
     }
 
     .ai-assistant-btn span {
@@ -320,7 +320,7 @@
     background: rgba(0, 0, 0, 0.3);
     /* затемнение */
     backdrop-filter: blur(6px);
-    transition:  0.3s all ease;
+    transition: 0.3s all ease;
     display: none;
     opacity: 0;
 }
@@ -353,13 +353,13 @@
 /* Адаптивность для мобильных устройств */
 @media (max-width: 480px) {
     .ai-chat-input {
-    padding-bottom: 66px;
- 
-}
+        padding-bottom: 66px;
 
-.ai-chat-window{
-    z-index: 1050;
-}
+    }
+
+    .ai-chat-window {
+        z-index: 1050;
+    }
 }
 
 /* Время сообщения */
@@ -381,4 +381,50 @@
     color: black;
     right: auto;
     left: 0;
+}
+.ai-assistant-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: var(--br);
+    
+    /* Адаптация для мобилок */
+    @media (max-width: 768px) {
+        gap: 10px;
+    }
+}
+
+.typing-placeholder {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 120%;
+    color: var(--belyy);
+    padding: 5px 10px;
+    min-width: 300px;
+    
+    /* Обрезка текста с тремя точками */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+    /* Адаптация для мобилок */
+    @media (max-width: 768px) {
+        min-width: auto;
+        max-width: 180px; /* Ограничиваем ширину на мобилках */
+        font-size: 14px;
+        padding: 5px 8px;
+        display: none;
+    }
+    
+    @media (max-width: 480px) {
+        max-width: none;
+        width: 100%;
+        font-size: 13px;
+    }
+}
+
+.typing-placeholder.go {
+    display: none;
 }

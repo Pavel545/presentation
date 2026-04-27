@@ -1,6 +1,5 @@
 ---
 import Decor from "../assets/decor4.svg";
-
 ---
 
 <section id="slide10" class="slide">
@@ -130,11 +129,7 @@ import Decor from "../assets/decor4.svg";
                     </div>
                 </div>
                 <div class="decor">
-                    <img
-                        class="decorImg"
-                        src={Decor.src}
-                        alt="Декор"
-                    />
+                    <img class="decorImg" src={Decor.src} alt="Декор" />
                 </div>
             </div>
         </div>
@@ -144,12 +139,12 @@ import Decor from "../assets/decor4.svg";
 <style>
     .content {
         display: grid;
-        grid-template-columns: 0.9fr 1.1fr;
+        grid-template-columns: 0.8fr 1.2fr;
 
         height: 100%;
     }
     .cont {
-        height: 90%;
+        height: 100%;
     }
 
     .grup2 {
@@ -174,18 +169,18 @@ import Decor from "../assets/decor4.svg";
 
         display: flex;
         flex-direction: column;
-        gap: 60px;
+        gap: 3vh;
 
         max-width: 583px;
     }
 
     .right {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
-
+        grid-template-rows: 30vh 30vh;
         gap: 12px;
-        padding-top: 60px;
+        padding-top: 3vh;
+        height: fit-content;
+        z-index: 2;
     }
 
     .decor {
@@ -247,7 +242,7 @@ import Decor from "../assets/decor4.svg";
 
     .list {
         padding-left: 20px;
-        margin-top: 30px;
+        margin-top: auto;
     }
 
     /* Адаптация для мобильных устройств */
@@ -358,7 +353,7 @@ import Decor from "../assets/decor4.svg";
         }
 
         .group {
-            gap: 10px;
+            gap: 0.5rem;
         }
 
         .grup2 {

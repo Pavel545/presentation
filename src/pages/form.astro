@@ -1,0 +1,247 @@
+---
+import Layout from "../layouts/Layout.astro";
+import "./glob.css"; // ваши глобальные стили
+---
+
+<Layout>
+   <div class="box ">
+     <div class="form-card">
+        <h2 class="title">Бесплатный аудит</h2>
+
+        <form id="botOrderForm" class="form">
+            <input type="text" name="name" placeholder="Ваше имя" />
+
+            <input type="email" name="email" placeholder="E-mail" />
+
+            <input
+                type="tel"
+                name="phone"
+                placeholder="+7 (___) ___-__-__"
+                required
+            />
+
+            <textarea name="service" placeholder="Комментарий к обращению"
+            ></textarea>
+
+            <button type="submit">ОТПРАВИТЬ</button>
+
+            <label class="checkbox">
+                <input type="checkbox" name="privacy_policy" />
+                <span>
+                    Нажимая кнопку “Отправить”, Вы подтверждаете что
+                    ознакомились с
+                    <a href="#">Правилами обработки персональных данных</a>
+                </span>
+            </label>
+        </form>
+    </div>
+   </div>
+</Layout>
+
+<style>
+    .box{
+        display: flex;
+        height: 100%;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+    .form-card {
+        max-width: 520px;
+        margin: 0 auto;
+        padding: 24px;
+        background: #f5f5f5;
+        border-radius: 12px;
+    }
+
+    .title {
+        font-size: 36px;
+        font-weight: 800;
+        margin-bottom: 20px;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    input,
+    textarea {
+        padding: 16px;
+        border-radius: 10px;
+        border: none;
+        background: #e5e5e5;
+        font-size: 16px;
+    }
+
+    textarea {
+        min-height: 120px;
+        resize: none;
+    }
+
+    button {
+        background: #c7f046;
+        border: none;
+        padding: 16px;
+        font-weight: 700;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    .checkbox {
+        display: flex;
+        gap: 10px;
+        font-size: 14px;
+        color: #6b7280;
+    }
+
+    .checkbox input {
+        width: 18px;
+        height: 18px;
+    }
+</style>
+
+<script is:inline>
+(function () {
+  const form = document.getElementById('botOrderForm');
+  if (!form) return;
+
+  const submitBtn = form.querySelector('button[type="submit"]');
+
+  const nameInput = form.querySelector('input[name="name"]');
+  const phoneInput = form.querySelector('input[name="phone"]');
+  const emailInput = form.querySelector('input[name="email"]');
+  const serviceInput = form.querySelector('textarea[name="service"]');
+  const privacyInput = form.querySelector('input[name="privacy_policy"]');
+
+  const endpoint = 'https://bravo.acr-agency.ru/api/send-form-universal';
+
+  function validateName(value) {
+    return value.trim().length >= 2;
+  }
+
+  function validatePhone(value) {
+    const digits = value.replace(/\D/g, '');
+    return digits.length >= 10;
+  }
+
+  function validateEmail(value) {
+    if (!value) return true;
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+  }
+
+  function validateCheckbox(input) {
+    return input.checked;
+  }
+
+  function setError(input, isValid) {
+    input.style.border = isValid ? 'none' : '2px solid red';
+  }
+
+  function validateField(input) {
+    if (!input) return true;
+
+    let valid = true;
+
+    if (input === nameInput) {
+      valid = validateName(input.value);
+    }
+
+    if (input === phoneInput) {
+      valid = validatePhone(input.value);
+    }
+
+    if (input === emailInput) {
+      valid = validateEmail(input.value);
+    }
+
+    if (input === privacyInput) {
+      valid = validateCheckbox(input);
+    }
+
+    if (input !== privacyInput) {
+      setError(input, valid);
+    }
+
+    return valid;
+  }
+
+  function validateForm() {
+    return [
+      validateField(nameInput),
+      validateField(phoneInput),
+      validateField(emailInput),
+      validateField(privacyInput)
+    ].every(Boolean);
+  }
+
+  function showThankYou() {
+    const card = form.closest('.form-card');
+    if (!card) return;
+
+    card.innerHTML = `
+      <div style="text-align:center;padding:40px 20px;">
+        <div style="font-size:64px;">✅</div>
+        <h2>Спасибо за заявку!</h2>
+        <p>Мы свяжемся с вами в ближайшее время</p>
+      </div>
+    `;
+  }
+
+  [nameInput, phoneInput, emailInput].forEach((input) => {
+    if (!input) return;
+
+    input.addEventListener('input', () => validateField(input));
+    input.addEventListener('blur', () => validateField(input));
+  });
+
+  if (privacyInput) {
+    privacyInput.addEventListener('change', () => validateField(privacyInput));
+  }
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    if (!validateForm()) return;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Отправка...';
+
+    try {
+      const formData = new FormData(form);
+      const data = {};
+
+      formData.forEach((value, key) => {
+        data[key] = value;
+      });
+
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      });
+
+      if (!response.ok) throw new Error();
+
+      showThankYou();
+
+    } catch (error) {
+      alert('Ошибка отправки. Попробуйте позже');
+    } finally {
+      submitBtn.textContent = 'ОТПРАВИТЬ';
+      submitBtn.disabled = false;
+    }
+  });
+})();
+</script>
+
+<!-- Инициализация Swiper + десктоп/мобильная логика -->
+<script>
+  import { initSlider } from "../lib/sliderInit";
+  document.addEventListener("DOMContentLoaded", () => {
+    initSlider();
+  });
+</script>

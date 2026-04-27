@@ -24,14 +24,14 @@ const updateLogo = (newIndex: number) => {
             logoImg.alt = shouldBeLight ? "Логотип АЦР" : "Логотип АЦР (темный)";
         }
     })
-    .to(logoImg, {
-        scale: 1,
-        opacity: 1,
-        rotation: 0,
-        duration: 0.35,
-        ease: "back.out(1.2)",
-        clearProps: "rotation,scale"
-    });
+        .to(logoImg, {
+            scale: 1,
+            opacity: 1,
+            rotation: 0,
+            duration: 0.35,
+            ease: "back.out(1.2)",
+            clearProps: "rotation,scale"
+        });
 };
 
 // ==================== ПАГИНАЦИЯ ====================
@@ -44,7 +44,14 @@ const updatePagination = () => {
 
 export const goToSlide = (index: number) => {
     const slides = document.querySelectorAll<HTMLElement>(".slideSection");
+    if (index > 0 && index < 14) {
+        document.querySelector('.menu')?.classList.add("go");
+        document.querySelector('.typing-placeholder')?.classList.add("go");
 
+    } else {
+        document.querySelector('.menu')?.classList.remove("go");
+        document.querySelector('.typing-placeholder')?.classList.remove("go");
+    }
     index = Math.max(0, Math.min(index, slides.length - 1));
     if (sliderState.isAnimating || index === sliderState.current) return;
 
@@ -78,8 +85,6 @@ export const goToSlide = (index: number) => {
 
 // ==================== ДЕСКТОП ИНИЦИАЛИЗАЦИЯ ====================
 export const initDesktopSlider = () => {
-
-    scaleContentForDesktop();
     const slides = document.querySelectorAll<HTMLElement>(".slideSection");
     sliderState.total = slides.length;
 
@@ -94,7 +99,9 @@ export const initDesktopSlider = () => {
     initCursor();
     initPagination();
     initPaginationMenu();
-    // initTouch() — полностью удалён
+    initKeyboard();
+
+    WelkomButt();
 };
 
 let scrollProgress = 0;
@@ -118,6 +125,16 @@ const initWheel = () => {
         }
     });
 };
+
+
+function WelkomButt() {
+    const a = document.querySelectorAll("[data-id]")
+    console.log(a);
+    
+    a.forEach((el, i) => {
+        el.addEventListener("click", () => goToSlide(el.dataset.id));
+    });
+}
 
 let progressCircle: SVGCircleElement | null = null;
 
@@ -176,36 +193,16 @@ const initPaginationMenu = () => {
 
 
 
-/**
- * Масштабирует контент презентации под разные размеры десктопных экранов.
- * Вызывается до инициализации десктопного слайдера.
- */
-export const scaleContentForDesktop = () => {
-    // Базовые размеры (например, для 1920px)
-    const baseWidth = 1920;
-    const currentWidth = window.innerWidth;
+// Добавить после initWheel() или в конец файла
 
-    // Масштабный коэффициент (например, 0.8 для 1536px)
-    const scaleFactor = currentWidth / baseWidth;
+const initKeyboard = () => {
+    window.addEventListener("keydown", (e) => {
+        if (sliderState.isAnimating || sliderState.isMenuOpen) return;
 
-    // Масштабируем все элементы внутри слайдера
-    const slides = document.querySelectorAll<HTMLElement>(".slideSection");
-    slides.forEach((slide) => {
-        slide.style.transform = `scale(${scaleFactor})`;
-        slide.style.transformOrigin = "top left";
-    });
-
-    // Масштабируем текст внутри слайдов
-    const textElements = document.querySelectorAll<HTMLElement>(".slideSection p, .slideSection h1, .slideSection h2, .slideSection h3");
-    textElements.forEach((el) => {
-        const baseFontSize = parseFloat(getComputedStyle(el).fontSize);
-        el.style.fontSize = `${baseFontSize * scaleFactor}px`;
-    });
-
-    // Масштабируем изображения (если нужно)
-    const images = document.querySelectorAll<HTMLImageElement>(".slideSection img");
-    images.forEach((img) => {
-        const baseWidth = parseFloat(getComputedStyle(img).width);
-        img.style.width = `${baseWidth * scaleFactor}px`;
+        if (e.key === "ArrowRight") {
+            goToSlide(sliderState.current + 1);
+        } else if (e.key === "ArrowLeft") {
+            goToSlide(sliderState.current - 1);
+        }
     });
 };
