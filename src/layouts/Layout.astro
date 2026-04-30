@@ -1,5 +1,4 @@
 ---
-
 import PopupForm from "../components/PopupForm.astro";
 import Preloader from "../components/Preloader.astro";
 ---
@@ -9,10 +8,36 @@ import Preloader from "../components/Preloader.astro";
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="icon" type="image/png" href="/favicon.png" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<meta
+			property="og:title"
+			content="АЦР - агенство по разработке сайтов и приложений"
+		/>
+		<meta property="og:image" content="/og-image.png" />
+		<meta property="og:image:width" content="600" />
+		<meta property="og:image:height" content="600" />
+		<meta
+			property="og:description"
+			content="АЦР - агенство по разработке сайтов и приложений"
+		/>
+		<meta property="og:image" content="/og-image.png" />
+		<meta property="og:url" content="http://localhost:5173/" />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="АЦР" />
+		<meta property="og:locale" content="ru_RU" />
+		<meta
+			name="twitter:title"
+			content="АЦР - агенство по разработке сайтов и приложений"
+		/>
+		<meta
+			name="twitter:description"
+			content="АЦР - агенство по разработке сайтов и приложений"
+		/>
+		<meta name="twitter:image" content="/src/assets/images/logo1.png" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<title>Разработка цифровых решений</title>
 	</head>
 	<body>
 		<Preloader />
@@ -21,12 +46,18 @@ import Preloader from "../components/Preloader.astro";
 		<div class="sliderRoot">
 			<slot />
 		</div>
-		 <PopupForm id="popup-form" defaultTitle="Бесплатный аудит" />
+		<PopupForm id="popup-form" defaultTitle="Бесплатный аудит" />
 
 		<div class="cursorProgress">
 			<svg viewBox="0 0 100 100">
 				<circle fill="none" class="bg" cx="50" cy="50" r="45"></circle>
-				<circle fill="none" stroke-widht="4" class="progress" cx="50" cy="50" r="45"></circle>
+				<circle
+					fill="none"
+					stroke-widht="4"
+					class="progress"
+					cx="50"
+					cy="50"
+					r="45"></circle>
 			</svg>
 		</div>
 	</body>

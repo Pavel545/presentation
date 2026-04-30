@@ -247,6 +247,57 @@ const { id = "popup-form", defaultTitle = "Бесплатный аудит" } = 
             top: -36px;
         }
     }
+
+    @media (max-width: 380px) {
+        .form-card {
+            padding: 12px; /* было 16px */
+        }
+
+        .title {
+            font-size: 24px; /* было 28px */
+            margin-bottom: 12px;
+        }
+
+        input,
+        textarea {
+            padding: 12px; /* было 16px */
+            font-size: 14px; /* чуть мельче для экономии места */
+        }
+
+        button[type="submit"] {
+            padding: 12px; /* было 16px */
+        }
+
+        .checkbox {
+            font-size: 12px; /* было 14px */
+            gap: 8px;
+        }
+
+        .popup-close {
+            top: -32px; /* ближе к попапу */
+        }
+    }
+    @media (max-width: 380px) {
+        input,
+        textarea,
+        button[type="submit"],
+        .checkbox {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Увеличить область нажатия для чекбокса */
+        .checkbox input {
+            width: 22px;
+            height: 22px;
+            min-width: 22px; /* защита от сжатия */
+        }
+
+        /* Сделать крестик больше */
+        .popup-close svg {
+            width: 28px;
+            height: 28px;
+        }
+    }
 </style>
 
 <script>
@@ -317,7 +368,11 @@ const { id = "popup-form", defaultTitle = "Бесплатный аудит" } = 
             });
 
             this.overlay.addEventListener("transitionend", () => {
-                document.body.style.overflow = this.isOpen() ? "hidden" : "";
+                if (this.isOpen()) {
+                    document.body.classList.add("lock");
+                } else {
+                    document.body.classList.remove("lock");
+                }
             });
 
             // Валидация полей при вводе
@@ -739,4 +794,33 @@ const { id = "popup-form", defaultTitle = "Бесплатный аудит" } = 
             }),
         );
     };
+</script>
+<script is:inline>
+    function handlePopupFromURL() {
+        const hash = window.location.hash;
+
+        if (!hash.includes("popup=")) return;
+
+        const params = new URLSearchParams(hash.replace("#", ""));
+        const popupType = params.get("popup");
+
+        if (!popupType) return;
+
+        // небольшая задержка — чтобы DOM и PopupForm точно были готовы
+        setTimeout(() => {
+            window.openPopup?.(
+                popupType === "audit" ? "Бесплатный аудит" : "",
+                popupType,
+            );
+        }, 300);
+
+        // очищаем hash, чтобы не открывался снова при обновлении
+        history.replaceState(null, "", window.location.pathname);
+    }
+
+    // при первой загрузке
+    document.addEventListener("DOMContentLoaded", handlePopupFromURL);
+
+    // если вдруг меняется hash (SPA/навигация)
+    window.addEventListener("hashchange", handlePopupFromURL);
 </script>

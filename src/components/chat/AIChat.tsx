@@ -288,7 +288,7 @@ const AIChat: React.FC<AIChatProps> = ({
         setIsLoading(true);
 
         try {
-            const response = await fetch('http://85.198.97.245:3013/api/chat', {
+            const response = await fetch('/api/chat', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -365,11 +365,11 @@ const AIChat: React.FC<AIChatProps> = ({
     return (
         <>
             {/* Кнопка открытия чата */}
-            <label htmlFor="aiAssistantInput" className="ai-assistant-label">
+            <label onClick={() => setIsOpen(!isOpen)} htmlFor="aiAssistantInput" className="ai-assistant-label">
                 <button
                     className={`ai-assistant-btn mobile-only ${isOpen ? 'active' : ''}`}
                     id="aiAssistantBtn"
-                    onClick={() => setIsOpen(!isOpen)}
+                    
                 >
                     <img src="/icons/brain.svg" alt="" />
                     <span>ИИ-ассистент</span>

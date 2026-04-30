@@ -8,7 +8,7 @@ import decorImage from "../assets/decor.svg";
 
         <div class="content">
             <div class="left">
-                <h3 class="t25 tit">Что мы проверим:</h3>
+                <h3 class="t25 tit">Что предлагаем:</h3>
 
                 <div class="leftContent">
                     <div class="item">
@@ -88,7 +88,7 @@ import decorImage from "../assets/decor.svg";
                     <li>Юридически «чистый» ресурс</li>
                 </ul>
 
-                <div class="group">
+                <div class="group qw">
                     <div class="group grup2">
                         <p class="t16 grey">Сроки:</p>
                         <span class="t20 siniy"> 2 - 5 дней </span>
@@ -96,6 +96,21 @@ import decorImage from "../assets/decor.svg";
                     <div class="group grup2">
                         <p class="t16 grey">Стоимость:</p>
                         <span class="t20 siniy"> от 15 000 ₽</span>
+                    </div>
+                    <div class="group  fosBox">
+                        <p
+                            style="font-style: italic; color:var(--siniy)"
+                            class="t20"
+                        >
+                            <span> Аудит работы сайта и отчёт по ошибкам</span>
+                        </p>
+                        <button
+                            class="but"
+                            data-popup
+                            data-popup-title="Аудит работы сайта и отчёт по ошибкам"
+                        >
+                            <b>Получить</b> бесплатно
+                        </button>
                     </div>
                 </div>
 
@@ -115,6 +130,10 @@ import decorImage from "../assets/decor.svg";
 
     .grup2 {
         gap: 12px;
+    }
+    .qw {
+        position: relative;
+        z-index: 9;
     }
 
     .ps {
@@ -196,8 +215,8 @@ import decorImage from "../assets/decor.svg";
             grid-template-columns: 1fr !important;
             gap: 10px;
         }
-         .slide{
-            padding-top: 60px;
+        .slide {
+            padding-top: 75px;
         }
         .left {
             margin-right: 0;
@@ -306,7 +325,5 @@ import decorImage from "../assets/decor.svg";
             flex-direction: row;
             justify-content: space-between;
         }
-
-       
     }
 </style>

@@ -3,6 +3,7 @@ import { Pagination } from 'swiper/modules';
 import { gsap } from "gsap";
 import { sliderState } from "./sliderState";
 import Sliders from "../data/data.json";
+import { initHeaderScrollLock } from "./headerScrollLock";
 
 let swiperInstance: Swiper | null = null;
 let updateControlsState: ((index: number) => void) | null = null;
@@ -273,7 +274,7 @@ export const initMobileSlider = () => {
 
                 // Инициализируем кнопки
                 initWelkomButt();
-
+                initHeaderScrollLock(swiper);
                 // Теперь функция определена и доступна
                 toggleMenuAndTypingClasses(swiper.activeIndex);
             },
@@ -337,3 +338,5 @@ function initWelkomButt() {
         });
     });
 }
+
+

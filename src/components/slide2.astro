@@ -1,33 +1,39 @@
 ---
 // src/components/slide2.astro
 import ReasonsSwiper from "./ReasonsSwiper.js";
+import Decor from "../assets/decor4.svg";
 ---
 
 <section id="slide02" class="slide">
     <div class="gr2">
         <div class="elGrid left">
             <div class="container2">
-                <h2 class="h2">Почему <br /> выбирают <br /> нас</h2>
+                <h2 class="h2">Нас выбирают за то, что мы</h2>
             </div>
 
             <div class="text">
-                <p class="t25">
-                    Мы предлагаем комплексные цифровые решения, разработанные с
-                    учетом особенностей вашего бизнеса. Наши услуги помогают
-                    ускорить рост компании, повысить эффективность процессов и
-                    укрепить позиции на рынке.
-                </p>
-                <p class="t25">
-                    Создавая индивидуальные стратегии и современные технологии,
-                    мы обеспечиваем стабильное развитие и конкурентные
-                    преимущества
-                </p>
+                <ul class="ulSin t28">
+                    <li>
+                        Быстро разрабатываем и внедряем современные
+                        технологичные сайты.
+                    </li>
+                    <li>
+                        Гарантируем полное сопровождение и продвижение в сети.
+                    </li>
+                    <li>Заводим на сайты трафик посетителей.</li>
+                </ul>
+
+                <p class="ps">С нами быстро и надежно.</p>
+               
             </div>
+               <div class="decorLine">
+                    <img class="decorImg" src={Decor.src} alt="Декор" />
+                </div>
         </div>
 
         <div class="container2 elGrid right">
             <h3 class="rTitle">
-                Мы гарантия успешных <br />и инновационных решений!
+                Мы - гарантия успешных <br />и инновационных решений!
             </h3>
 
             <!-- Десктопная версия -->
@@ -83,10 +89,24 @@ import ReasonsSwiper from "./ReasonsSwiper.js";
                 <ReasonsSwiper client:only="react" />
             </div>
         </div>
+      
     </div>
 </section>
 
 <style>
+    .t28 {
+        font-family: var(--second-family);
+    }
+    .ps {
+        font-family: var(--second-family);
+        font-style: italic;
+        font-size: clamp(1.25rem, 1.021rem + 1.15vw, 1.75rem);
+    }
+    .ulSin li {
+        font-family: var(--second-family);
+        font-size: clamp(1.25rem, 1.021rem + 1.15vw, 1.75rem);
+        margin: 15px 0;
+    }
     .decor {
         position: absolute;
         left: -11px;
@@ -96,7 +116,8 @@ import ReasonsSwiper from "./ReasonsSwiper.js";
         pointer-events: none;
     }
 
-    .d1, .d2 {
+    .d1,
+    .d2 {
         position: absolute;
         width: 100%;
         height: 100%;
@@ -105,8 +126,10 @@ import ReasonsSwiper from "./ReasonsSwiper.js";
         pointer-events: none;
     }
 
-    .d1::after, .d1::before,
-    .d2::before, .d2::after {
+    .d1::after,
+    .d1::before,
+    .d2::before,
+    .d2::after {
         content: "";
         display: block;
         width: 50px;
@@ -116,10 +139,30 @@ import ReasonsSwiper from "./ReasonsSwiper.js";
         pointer-events: none;
     }
 
-    .d1::before { left: 0; top: 0; border-bottom: none; border-right: none; }
-    .d2::before { bottom: 0; left: 0; border-top: none; border-right: none; }
-    .d2::after  { right: 0; bottom: 0; border-top: none; border-left: none; }
-    .d1::after  { right: 0; top: 0; border-bottom: none; border-left: none; }
+    .d1::before {
+        left: 0;
+        top: 0;
+        border-bottom: none;
+        border-right: none;
+    }
+    .d2::before {
+        bottom: 0;
+        left: 0;
+        border-top: none;
+        border-right: none;
+    }
+    .d2::after {
+        right: 0;
+        bottom: 0;
+        border-top: none;
+        border-left: none;
+    }
+    .d1::after {
+        right: 0;
+        top: 0;
+        border-bottom: none;
+        border-left: none;
+    }
 
     .rItem {
         display: flex;
@@ -202,7 +245,7 @@ import ReasonsSwiper from "./ReasonsSwiper.js";
         display: flex;
         flex-direction: column;
         gap: 30px;
-        border-top: 1px solid var(--seryy);
+        /* border-top: 1px solid var(--seryy); */
         padding: 45px 70px;
     }
 
@@ -215,7 +258,27 @@ import ReasonsSwiper from "./ReasonsSwiper.js";
         background: var(--svetlyy);
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        position: relative;
+
+    }
+    .left * {
+        position: relative;
+        z-index: 3;
+    }
+    .decorLine {
+        position: absolute !important;
+
+        bottom: -60px;
+        left: 0;
+        width: 100%;
+        height: 75%;
+        z-index: 2 !important;
+    }
+    .decorImg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        pointer-events: none;
     }
 
     .right {
@@ -231,15 +294,23 @@ import ReasonsSwiper from "./ReasonsSwiper.js";
         display: none;
     }
 
-
-
     /* ==================== Адаптив ==================== */
     @media (max-width: 1024px) {
-        .text { padding: 35px 40px; }
-        .rTitle { font-size: 26px; }
-        .rItem { padding: 30px; }
-        .rItemTitle { font-size: 22px; }
-        .rItemText { font-size: 18px; }
+        .text {
+            padding: 35px 40px;
+        }
+        .rTitle {
+            font-size: 26px;
+        }
+        .rItem {
+            padding: 30px;
+        }
+        .rItemTitle {
+            font-size: 22px;
+        }
+        .rItemText {
+            font-size: 18px;
+        }
     }
 
     @media (max-width: 768px) {
@@ -248,22 +319,29 @@ import ReasonsSwiper from "./ReasonsSwiper.js";
             flex-direction: column;
         }
 
-        .left { min-height: auto; }
+        .left {
+            min-height: auto;
+        }
         .text {
             height: auto;
             padding: 30px 20px;
             gap: 10px;
             border: none;
         }
-        .gr2{
+        .gr2 {
             height: auto;
         }
-        .right { padding-bottom: 100px !important; }
+        .right {
+            padding-bottom: 100px !important;
+        }
         #slide02 {
             padding-bottom: 0;
         }
         .right {
             padding-bottom: 30px;
+        }
+        .decorLine{
+            display: none;
         }
         .rTitle {
             font-size: 22px;
@@ -271,9 +349,11 @@ import ReasonsSwiper from "./ReasonsSwiper.js";
             margin-bottom: 20px;
         }
 
-        .desktop-only { display: none; }
-        .mobile-only { 
-            display: block; 
+        .desktop-only {
+            display: none;
+        }
+        .mobile-only {
+            display: block;
             width: 100%;
             margin-top: 20px;
         }
@@ -287,16 +367,23 @@ import ReasonsSwiper from "./ReasonsSwiper.js";
             min-height: fit-content;
         }
 
-        .container2 { padding: 20px; }
+        .container2 {
+            padding: 20px;
+        }
     }
 
     @media (max-width: 480px) {
-
-        .slide{
-            padding-top: 60px;
+        .slide {
+            padding-top: 75px;
         }
-        .text { padding: 20px 16px; }
-        .rTitle { font-size: 20px; }
-        .container2 { padding: 16px; }
+        .text {
+            padding: 20px 16px;
+        }
+        .rTitle {
+            font-size: 20px;
+        }
+        .container2 {
+            padding: 16px;
+        }
     }
 </style>

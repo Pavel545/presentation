@@ -114,13 +114,13 @@ import { sliderState } from "../lib/sliderState";
         /* background: white; */
         font-weight: 600;
 
-        color: white;
-    mix-blend-mode: difference;
+        color: var(--siniy);
+        mix-blend-mode: difference;
     }
     .mobile-pagination .nav-btn {
-    background: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(10px);
-}
+        background: rgb(255 255 255 / 41%);
+        backdrop-filter: blur(10px);
+    }
 
     .cube-face.front {
         transform: translateZ(24px);
@@ -170,8 +170,6 @@ import { sliderState } from "../lib/sliderState";
         align-items: center;
         justify-content: center;
     }
-
-   
 
     .track:hover .item {
         height: 20px;
@@ -235,7 +233,7 @@ import { sliderState } from "../lib/sliderState";
 
         .mobile-pagination {
             display: block;
-            padding: 16px 20px 20px;
+            padding: 0px 5px;
             background: linear-gradient(
                 to top,
                 rgba(0, 0, 0, 0.4),
@@ -246,12 +244,11 @@ import { sliderState } from "../lib/sliderState";
         .skip .prev {
             transform: translateX(-100px);
         }
-         .skip .next {
+        .skip .next {
             transform: translateX(100px);
         }
 
-
-        .mobile-pagination.show{
+        .mobile-pagination.show {
             transform: translateY(-100px);
         }
 

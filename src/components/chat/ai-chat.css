@@ -388,7 +388,6 @@
 .ai-assistant-label {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: 20px;
     background: rgba(255, 255, 255, 0.5);
     border-radius: var(--br);
@@ -406,7 +405,7 @@
     line-height: 120%;
     color: var(--temniy);
     padding: 5px 10px;
-    min-width: 100%;
+    min-width: 50%;
 
     /* Обрезка текста с тремя точками */
     white-space: nowrap;

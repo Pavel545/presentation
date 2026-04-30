@@ -7,7 +7,7 @@ import Logo from "../assets/logoAnim.svg";
 import MenuIcon from "../assets/menu.svg";
 ---
 
-<header class="header">
+<header class="header" id="header">
     <div class="container">
         <div class="content">
             <!-- Десктоп логотип -->
@@ -25,23 +25,34 @@ import MenuIcon from "../assets/menu.svg";
                     ]}
                 />
             </div>
-            <!-- <button
-                    class="ai-assistant-btn mobile-only"
-                    id="aiAssistantBtn"
-                >
-                    <Brain />
-                    <span>ИИ-ассистент</span>
-                </button> -->
 
             <button class="menu" id="burger">
                 <span class="menu-text">Меню</span>
                 <MenuIcon class="menu-icon" />
 
-
-                <svg class="bac" width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="14.4141" y="44" width="42" height="2" transform="rotate(-45 14.4141 44)" fill="#282631" />
-  <rect x="15.4141" y="14" width="42" height="2" transform="rotate(45 15.4141 14)" fill="#282631" />
-</svg>
+                <svg
+                    class="bac"
+                    width="60"
+                    height="60"
+                    viewBox="0 0 60 60"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <rect
+                        x="14.4141"
+                        y="44"
+                        width="42"
+                        height="2"
+                        transform="rotate(-45 14.4141 44)"
+                        fill="#282631"></rect>
+                    <rect
+                        x="15.4141"
+                        y="14"
+                        width="42"
+                        height="2"
+                        transform="rotate(45 15.4141 14)"
+                        fill="#282631"></rect>
+                </svg>
             </button>
         </div>
     </div>
@@ -60,9 +71,6 @@ import MenuIcon from "../assets/menu.svg";
             slides.map((item, index) => (
                 <div class={`slide ${index == 0 ? "active" : ""}`}>
                     <span class="id">{item.id}</span>
-                    {/* <div class="imgWrap">
-                        <img src={item.img} alt={item.name} />
-                    </div> */}
                     <div class="title">
                         <span>{item.name}</span>
                     </div>
@@ -103,42 +111,33 @@ import MenuIcon from "../assets/menu.svg";
         flex-direction: row;
         align-items: center;
         gap: 1vw;
-        width: 100%;
+        width: 90%;
     }
-
-    /* ================= BURGER ================= */
 
     /* ================= BURGER ================= */
 
     .menu {
         bottom: 10px;
         right: 0;
-
         border-radius: var(--br);
-
         background: transparent;
         border: none;
         cursor: pointer;
-
-        /* background: var(--belyy); */
         transition: 500ms;
-
         animation: In 3s;
         transform: translateX(0);
-
         font-family: var(--font-family);
         font-weight: 500;
         font-size: 22px;
         line-height: 110%;
         color: var(--temnyy);
-
-        /* Для позиционирования иконки и текста */
         display: flex;
         align-items: center;
         gap: 8px;
+        /* min-width: 100px; */
+        justify-content: flex-end;
     }
 
-    /* Стили для SVG иконки */
     .menu-icon {
         width: 45px;
         height: 45px;
@@ -152,7 +151,6 @@ import MenuIcon from "../assets/menu.svg";
         stroke-width: 4;
     }
 
-    /* Текст "Меню" по умолчанию скрыт */
     .menu-text {
         display: inline-block;
         position: relative;
@@ -161,40 +159,35 @@ import MenuIcon from "../assets/menu.svg";
         font-weight: 500;
     }
 
-   
-
-
     .menu:hover {
         transform: translateX(0);
     }
 
-    .menu  span{
+    .menu span {
         position: relative;
         z-index: 2;
         width: 0;
         overflow: hidden;
         transition: 300ms;
     }
-     .menu:hover span {
-       width: 100px;
+    .menu:hover span {
+        width: 100px;
     }
 
     .menu:hover {
         background: var(--zelenyy-3);
     }
 
-     .menu:hover :global([data-it])  {
-      fill: var(--zelenyy-3);
+    .menu:hover :global([data-it]) {
+        fill: var(--zelenyy-3);
     }
 
-      .menu:hover :global([data-it])  {
-      fill: var(--zelenyy-3);
-    }.menu :global([data-fon])  {
-      fill: #282631;
+    .menu :global([data-fon]) {
+        fill: #282631;
     }
 
-     .menu:hover :global([data-fon])  {
-      fill: #282631;
+    .menu:hover :global([data-fon]) {
+        fill: #282631;
     }
 
     .menu_decor {
@@ -204,20 +197,20 @@ import MenuIcon from "../assets/menu.svg";
         top: 0;
         z-index: 1;
     }
-    .bac{
+    .bac {
         display: none;
     }
 
-    .menu.active .bac{
+    .menu.active .bac {
         display: block;
         cursor: pointer;
         fill: var(--siniy);
     }
 
-    .menu.active .menu-text, .menu.active .menu-icon{
+    .menu.active .menu-text,
+    .menu.active .menu-icon {
         display: none;
     }
-
 
     .menuTitle {
         height: 100px;
@@ -287,11 +280,9 @@ import MenuIcon from "../assets/menu.svg";
         overflow-y: auto;
         display: flex;
         flex-direction: column;
-        /* gap: 30px; */
         background: var(--svetlyy);
     }
 
-    /* скролл */
     .menuContent::-webkit-scrollbar {
         width: 6px;
     }
@@ -370,7 +361,6 @@ import MenuIcon from "../assets/menu.svg";
         font-weight: 800;
         font-size: 16px;
         line-height: 110%;
-
         color: var(--siniy);
         margin-right: 20px;
     }
@@ -379,13 +369,10 @@ import MenuIcon from "../assets/menu.svg";
 
     body.lock {
         overflow: hidden;
+        touch-action: none;
     }
 
     /* ================= АДАПТИВ ================= */
-
-    /* .mobile-only {
-        display: none;
-    } */
 
     @media (max-width: 768px) {
         .menu {
@@ -394,12 +381,16 @@ import MenuIcon from "../assets/menu.svg";
 
         .header {
             top: 0;
-            background: linear-gradient(
-                to bottom,
-                rgba(0, 0, 0, 0.5) 0%,
-                transparent 100%
-            );
+            background: #0000001a;
+            backdrop-filter: blur(15px);
             padding: 10px 0;
+            /* Добавляем transition для плавного скрытия/показа */
+            transition: transform 0.3s ease;
+        }
+
+        /* Класс для скрытия шапки */
+        .header.hide {
+            transform: translateY(-100%);
         }
 
         .desktop-logo {
@@ -463,14 +454,15 @@ import MenuIcon from "../assets/menu.svg";
         .menuContent {
             padding: 16px;
             padding-bottom: 50px;
-
-            gap: 16px;
+            gap: 0;
         }
 
         .slide {
             padding: 12px 16px;
         }
-
+        .sideMenu {
+            background: var(--svetlyy);
+        }
         .imgWrap {
             width: 100px;
             height: 70px;
@@ -486,27 +478,41 @@ import MenuIcon from "../assets/menu.svg";
             width: 60%;
         }
     }
+
+    @media (max-width: 768px) {
+        .header {
+            top: 0;
+            background: #0000001a;
+            backdrop-filter: blur(15px);
+            padding: 10px 0;
+            transition: transform 0.3s ease; /* ← убедитесь, что это здесь */
+            will-change: transform; /* ← добавьте для производительности */
+        }
+
+        /* Класс для скрытия шапки */
+        .header.hide {
+            transform: translateY(-100%);
+        }
+    }
 </style>
 
 <script>
-    // Инициализация ИИ-ассистента
+    // Smart header hide/show on scroll
     document.addEventListener("DOMContentLoaded", () => {
+
+        // Инициализация ИИ-ассистента
         const aiBtn = document.getElementById("aiAssistantBtn");
 
         if (aiBtn) {
             aiBtn.addEventListener("click", () => {
-                // Здесь логика открытия ИИ-ассистента
                 console.log("Открыть ИИ-ассистент");
-
-                // Пример: можно открыть модальное окно или чат
-                // openAIAssistant();
             });
         }
 
         // Адаптация цвета бургера в зависимости от слайда
         const updateBurgerColor = () => {
             const burger = document.getElementById("burger");
-            const isFirstSlide = (window as any).sliderState?.current === 0;
+            const isFirstSlide = window.sliderState?.current === 0;
 
             if (burger) {
                 const spans = burger.querySelectorAll("span");

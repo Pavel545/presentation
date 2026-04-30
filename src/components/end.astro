@@ -102,33 +102,6 @@
                     <h3 class="t30">Мы в мессенджерах:</h3>
 
                     <nav class="linkBox">
-                        <!-- <a
-                            href="http://"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            <img
-                                src="/icons/tg.svg"
-                                alt="Mini App в Телеграм"
-                            />
-                        </a>
-                        <a
-                            href="http://"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            <img
-                                src="/icons/vk.svg"
-                                alt="Mini App в Вконтакте"
-                            />
-                        </a>
-                        <a
-                            href="http://"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            <img src="/icons/max.svg" alt="Mini App в MAX" />
-                        </a> -->
                         <a
                             href="https://t.me/+79093587042"
                             target="_blank"
@@ -170,18 +143,38 @@
         <div class="elGrid right">
             <p class="ps">Заказать</p>
             <p class="h2">Бесплатный аудит</p>
-            <a
+            <div
                 class="qr_link"
-                href="/form"
-                target="_blank"
-                rel="noopener noreferrer"
+                data-popup
+                data-popup-title="Заказать Бесплатный аудит"
             >
                 <img
                     class="qr"
                     src="/img/qr.png"
                     alt="Сайт Аналитический центр развитие"
-                /></a
-            >
+                />
+            </div>
+            <div class="linkBox">
+                <!-- <a href="#" class="unsubscribe-link" id="unsubscribeLink">Отписаться от рассылки</a> -->
+                <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://acr-agency.ru/soglasie-obrabotka-pers-dannih"
+                    class="t16 linkBox_item">Политика конфиденциальности</a
+                >
+                <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://acr-agency.ru/personalnoe-soglasie"
+                    class="t16 linkBox_item">Пользовательское соглашение</a
+                >
+                <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://acr-agency.ru/politic-cookis"
+                    class="t16 linkBox_item">Политика в отношении Cookies</a
+                >
+            </div>
         </div>
     </div>
 </section>
@@ -192,6 +185,16 @@
         width: 100%;
     }
 
+    .linkBox{
+        margin-top: auto;
+    }
+    .linkBox_item{
+        color: var(--seryy);
+    }
+
+    .linkBox_item:hover {
+        color: var(--zelenyy-2-osnovnoy);    
+    }
     .right .ps {
         font-weight: 500;
         font-size: 40px;
@@ -217,10 +220,11 @@
     }
     .qr_link {
         margin-top: 2vh;
+        cursor: pointer;
     }
     .qr {
         width: 100%;
-        max-width: 613px;
+        max-width: 300px;
         height: auto;
     }
 
@@ -293,6 +297,7 @@
         flex-direction: column;
         justify-content: center;
         padding: 70px;
+        padding-top: 200px;
     }
 
     .rTitle {
@@ -362,6 +367,7 @@
         .left {
             padding: 80px 20px 40px;
             min-height: auto;
+            gap: 20px;
         }
 
         .list {
@@ -396,7 +402,7 @@
 
     @media (max-width: 480px) {
         .left {
-            padding: 70px 16px 30px;
+            padding: 90px 16px 30px;
         }
 
         .link {
@@ -411,6 +417,14 @@
             padding: 30px 16px;
 
             padding-bottom: 90px;
+            align-items: center;
+            text-align: center;
+        }
+
+        .linkBox img {
+            width: 40px;
+            height: 40px;
+            justify-content: start;
         }
 
         .qr {
@@ -421,9 +435,20 @@
             font-size: 11px;
             margin-top: 20px;
         }
-
-        .linkBox {
-            justify-content: center;
+        .right .ps {
+            text-align: center;
+            width: 100%;
         }
+        .linkBox {
+            justify-content: start;
+            margin-top: 20px;
+        }
+
+        .link svg{
+            width: 20px;
+            height: 20px    ;
+        }
+
+        
     }
 </style>
